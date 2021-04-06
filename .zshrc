@@ -1,4 +1,4 @@
-export ZSH="/home/epereira/.oh-my-zsh"
+export ZSH="/home/eangelim/.oh-my-zsh"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -27,17 +27,11 @@ POWERLEVEL9K_TIME_FOREGROUND=16
 POWERLEVEL9K_TIME_BACKGROUND=28
 
 plugins=(
-	git
-	zsh-autosuggestions
-	zsh-interactive-cd
-	dirhistory
-	)
-
-function mkcd
-{
-  dir="$*";
-  mkdir -p "$dir" && cd "$dir";
-}
+		git
+		zsh-autosuggestions
+		zsh-interactive-cd
+		dirhistory
+		)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -47,9 +41,28 @@ source $ZSH/oh-my-zsh.sh
 
 setopt rm_star_silent
 
-alias motorola-vpn='f() { echo $1 | sudo openconnect --protocol=pulse --no-dtls https://br-partnervpn.motorola.com/7119-otp --user eangelim --passwd-on-stdin };f'
+alias motorola-vpn='f() { echo $1 | sudo openconnect --protocol=nc --no-dtls https://partnervpn.motorola.com/7119-otp --user eangelim --passwd-on-stdin };f'
 
-export PATH="$PATH:/home/epereira/Android/flutter/bin"
-export PATH="$PATH:/home/epereira/Android/Sdk/platform-tools/"
-export PATH="$PATH:/opt/getlogs/"
-export PATH="$PATH:/home/epereira/Android/Sdk/build-tools/30.0.2/"
+mkcd(){
+	dir="$*";
+	mkdir -p "$dir" && cd "$dir";
+}
+
+mservman03(){
+	ssh -t eangelim@100.66.32.53 "cd /localrepo/eangelim; bash --login"
+}
+
+battery-historian(){
+        echo "Historian available at http://localhost:3636"
+        sudo docker -- run -p 3636:9999 gcr.io/android-battery-historian/stable:3.0 --port 9999
+}
+
+gpload(){
+        FILE="$1"
+        rclone copy --progress $FILE remote:Shared\ files
+}
+
+export PATH="$PATH:/opt/getlogs"
+export PATH="$PATH:/opt/platform-tools"
+export PATH="$PATH:/home/eangelim/Android/flutter/bin"
+
