@@ -32,6 +32,8 @@ highlight! link SignColumn LineNr
 Plug 'https://github.com/frazrepo/vim-rainbow'
 let g:rainbow_active = 1
 
+Plug 'https://github.com/ntpeters/vim-better-whitespace'
+
 " Initialize plugin system
 call plug#end()
 
@@ -43,6 +45,7 @@ set number
 set hlsearch
 set incsearch
 set ignorecase
+set redrawtime=10000
 set backspace=indent,eol,start
 colorscheme aurora
 
