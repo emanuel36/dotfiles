@@ -142,7 +142,7 @@ gpload(){
 
 gdownload(){
         FILE="$1"
-        rclone copy --progress remote:$FILE .
+	rclone copy --progress remote:Shared\ files/$FILE .
 }
 
 dwbuild(){
@@ -157,6 +157,11 @@ rc(){
         rm -rf *
         rm -rf .repo
         ls -a
+}
+
+repom(){
+	PATTERN="$1"
+	repo manifest | rg "$PATTERN"
 }
 
 mservman_gsync(){

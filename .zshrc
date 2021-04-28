@@ -49,7 +49,7 @@ mkcd(){
 }
 
 mservman03(){
-	ssh -t eangelim@100.66.32.53 "cd /localrepo/eangelim; bash --login"
+	ssh -t @eangelim@mservman03.corp.eldorado.org.br "cd /localrepo/eangelim; bash --login"
 }
 
 battery-historian(){
@@ -59,7 +59,17 @@ battery-historian(){
 
 gpload(){
         FILE="$1"
-        rclone copy --progress $FILE remote:Shared\ files
+        rclone copy --progress $FILE drive:Shared\ files
+}
+
+aplogd(){
+	adb root
+	adb pull /data/vendor/aplogd /home/eangelim/Downloads/
+}
+
+bug2go(){
+	adb root
+	adb pull /data/vendor/bug2go /home/eangelim/Downloads/
 }
 
 export PATH="$PATH:/opt/getlogs"
