@@ -56,7 +56,17 @@ battery-historian(){
 
 gpload(){
         FILE="$1"
-        rclone copy --progress $FILE remote:Shared\ files
+        rclone copy --progress $FILE drive:Shared\ files
+}
+
+aplogd(){
+	adb root
+	adb pull /data/vendor/aplogd /home/eangelim/Downloads/
+}
+
+bug2go(){
+	adb root
+	adb pull /data/vendor/bug2go /home/eangelim/Downloads/
 }
 
 export PATH="$PATH:/opt/getlogs"

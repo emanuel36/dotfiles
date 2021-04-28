@@ -1,0 +1,154 @@
+# Recent settings file for Wireshark 3.4.2.
+#
+# This file is regenerated each time Wireshark is quit
+# and when changing configuration profile.
+# So be careful, if you want to make manual changes here.
+
+
+# Main Toolbar show (hide).
+# TRUE or FALSE (case-insensitive).
+gui.toolbar_main_show: TRUE
+
+# Filter Toolbar show (hide).
+# TRUE or FALSE (case-insensitive).
+gui.filter_toolbar_show: TRUE
+
+# Wireless Settings Toolbar show (hide).
+# TRUE or FALSE (case-insensitive).
+gui.wireless_toolbar_show: TRUE
+
+# Packet list show (hide).
+# TRUE or FALSE (case-insensitive).
+gui.packet_list_show: TRUE
+
+# Tree view show (hide).
+# TRUE or FALSE (case-insensitive).
+gui.tree_view_show: TRUE
+
+# Byte view show (hide).
+# TRUE or FALSE (case-insensitive).
+gui.byte_view_show: TRUE
+
+# Packet diagram show (hide).
+# TRUE or FALSE (case-insensitive).
+gui.packet_diagram_show: TRUE
+
+# Statusbar show (hide).
+# TRUE or FALSE (case-insensitive).
+gui.statusbar_show: TRUE
+
+# Packet list colorize (hide).
+# TRUE or FALSE (case-insensitive).
+gui.packet_list_colorize: TRUE
+
+# Timestamp display format.
+# One of: RELATIVE, ABSOLUTE, ABSOLUTE_WITH_YMD, ABSOLUTE_WITH_YDOY, ABSOLUTE_WITH_DATE, DELTA, DELTA_DIS, EPOCH, UTC, UTC_WITH_YMD, UTC_WITH_YDOY, UTC_WITH_DATE
+gui.time_format: UTC
+
+# Timestamp display precision.
+# One of: AUTO, SEC, DSEC, CSEC, MSEC, USEC, NSEC
+gui.time_precision: MSEC
+
+# Seconds display format.
+# One of: SECONDS, HOUR_MIN_SEC
+gui.seconds_format: SECONDS
+
+# Zoom level.
+# A decimal number.
+gui.zoom_level: -1
+
+# Bytes view display type.
+# One of: HEX, BITS
+gui.bytes_view: HEX
+
+# Bytes view text encoding.
+# One of: FROM_PACKET, ASCII, EBCDIC
+gui.bytes_encoding: FROM_PACKET
+
+# Packet diagram field values show (hide).
+# TRUE or FALSE (case-insensitive).
+gui.packet_diagram_field_values: FALSE
+
+# Main window upper (or leftmost) pane size.
+# Decimal number.
+gui.geometry_main_upper_pane: 583
+
+# Main window middle pane size.
+# Decimal number.
+gui.geometry_main_lower_pane: 1230
+
+# Packet list column pixel widths.
+# Each pair of strings consists of a column format and its pixel width.
+column.width:
+        %m, 93:L,
+        %t, 121,
+        %Tt, 0,
+        "%Cus:frame.comment", 0,
+        %s, 151:L,
+        "%Cus:wlan.ta", 146:C,
+        "%Cus:wlan.ra", 139,
+        %d, 153:L,
+        "%Cus:wlan_radio.phy", 58,
+        "%Cus:wlan_radio.channel", 57:C,
+        "%Cus:radiotap.channel.freq", 90:C,
+        "%Cus:radiotap.vht.mcs.0", 90:C,
+        %x, 81:C,
+        "%Cus:radiotap.vht.nss.0", 0:C,
+        "%Cus:wlan.vs.aruba.ap_name", 90,
+        "%Cus:wlan_radio.data_rate", 71:C,
+        "%Cus:frame.len", 57:C,
+        "%Cus:wlan_radio.duration", 0:C,
+        "%Cus:radiotap.present.ampdu", 0:C,
+        "%Cus:wlan_aggregate.a_mdsu.length", 0:C,
+        %p, 75,
+        "%Cus:wlan.fc.type_subtype", 149,
+        "%Cus:wlan_radio.11ac.bandwidth", 203,
+        "%Cus:frame.coloring_rule.name", 112:C,
+        "%Cus:tcp.dstport", 57,
+        "%Cus:wlan.ssid", 187:L,
+        "%Cus:wlan.qos.priority", 66,
+        %e, 66:C,
+        "%Cus:wlan_radio.noise_dbm", 90,
+        "%Cus:wlan.fc.retry.expert", 57:C,
+        "%Cus:wlan_radio.duration", 0:C,
+        "%Cus:wlan_mgt.rsn.gcs.type", 0,
+        "%Cus:wlan_mgt.rsn.pcs.type", 0,
+        "%Cus:wlan.fc.pwrmgt", 0,
+        "%Cus:wlan.tim.dtim_period", 0:L,
+        "%Cus:radiotap.flags.frag", 0:C,
+        "%Cus:wlan.tim.dtim_period", 0:L,
+        "%Cus:tcp.window_size", 0,
+        "%Cus:wlan.country_info.code", 0,
+        "%Cus:wlan.fc.pwrmgt", 0,
+        "%Cus:udp.stream || tcp.stream", 63:C,
+        "%Cus:wlan.seq", 127:C,
+        "%Cus:wlan.fixed.ssc.sequence", 190:C,
+        "%Cus:wlan.ba.bm", 134:C,
+        "%Cus:wlan.tim.dtim_period", 0:L,
+        "%Cus:wlan.tim.aid", 130:C,
+        "%Cus:wlan.tim.bmapctl.multicast", 158:C,
+        %i, 580:L,
+        "%Cus:awdl.type", 0
+
+# Open conversation dialog tabs.
+# List of conversation names, e.g. "TCP", "IPv6".
+gui.conversation_tabs: 
+	"IPv4", "Ethernet",
+	"IPv6", "TCP",
+	"UDP"
+
+# Open endpoint dialog tabs.
+# List of endpoint names, e.g. "TCP", "IPv6".
+gui.endpoint_tabs: 
+
+# For RLC stats, whether to use RLC PDUs found inside MAC frames.
+# TRUE or FALSE (case-insensitive).
+gui.rlc_pdus_from_mac_frames: FALSE
+
+# Additional Toolbars shown
+# List of additional toolbars to show.
+gui.additional_toolbar_show: 
+
+# Interface Toolbars show.
+# List of interface toolbars to show.
+gui.interface_toolbar_show: 

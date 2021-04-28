@@ -1,0 +1,30 @@
+"SEARCH SSID" wlan.ssid == 
+"DEVICE > AP-224" wlan.addr == 18:64:72:e0:2c:b4
+"DEVICE > CISCO 7925G" wlan.addr == 78:da:6e:f5:f2:95
+"DEVICE > CISCO 8211" wlan.fc.retry eq 1 and wlan.qos.priority eq 6 and wlan.addr == 28:52:61:3A:61:BE
+"DEVICE > FIREFLY" wlan.addr == 38:53:9C:A6:86:2A
+"DEVICE > JAYNE" wlan.addr == 3C:15:C2:E5:4E:E8
+"DEVICE > VERA" wlan.addr == 08:E6:89:B2:95:C9
+"------------------------------------" ------------------------------------
+"[ASSOC REQ/RESP]" wlan.fc.type_subtype eq 0 or wlan.fc.type_subtype eq 1
+"[BEACONS]" wlan.fc.type_subtype eq 8
+"[DATA]" wlan.fc.type eq 2
+"[DEAUTHS]" wlan.fc.type_subtype eq 12
+"[DISAASSOCIATION]" wlan.fc.type_subtype eq 10
+"[PROBES]" wlan.fc.type_subtype == 4 or wlan.fc.type_subtype == 5
+"[PWR MGMT]" wlan.fc.type_subtype == 0x0024
+"[QOS]" wlan.qos.priority eq 
+"[RETRIES]" wlan.fc.retry eq 1
+"[RTS/CTS]" wlan.fc.type_subtype eq 27 or wlan.fc.type_subtype eq 28 
+"------------------------------------" ------------------------------------
+"Ethernet type 0x0806 (ARP)" eth.type == 0x0806
+"Ethernet broadcast" eth.addr == ff:ff:ff:ff:ff:ff
+"No ARP" not arp
+"IPv4 only" ip
+"IPv6 only" ipv6
+"IPv6 address 2001:db8::1" ipv6.addr == 2001:db8::1
+"TCP only" tcp
+"UDP only" udp
+"Non-DNS" !(udp.port == 53 || tcp.port == 53)
+"TCP or UDP port is 80 (HTTP)" tcp.port == 80 || udp.port == 80
+"HTTP" http
