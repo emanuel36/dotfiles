@@ -49,7 +49,7 @@ mkcd(){
 }
 
 mservman03(){
-	ssh -t @eangelim@mservman03.corp.eldorado.org.br "cd /localrepo/eangelim; bash --login"
+	ssh -t eangelim@100.66.32.53 "cd /localrepo/eangelim; bash --login"
 }
 
 battery-historian(){
