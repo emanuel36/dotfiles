@@ -44,44 +44,61 @@ setopt rm_star_silent
 alias motorola-vpn='f() { echo $1 | sudo openconnect --protocol=nc --no-dtls https://partnervpn.motorola.com/7119-otp --user eangelim --passwd-on-stdin };f'
 
 mkcd(){
-	dir="$*";
-	mkdir -p "$dir" && cd "$dir";
+	DIR="$*";
+	mkdir -p "$DIR" && cd "$DIR";
 }
 
-mservman03(){
-	ssh -t eangelim@100.66.32.53 "cd /localrepo/eangelim; bash --login"
-}
-
-battery-historian(){
-        echo "Historian available at http://localhost:3636"
-        sudo docker -- run -p 3636:9999 gcr.io/android-battery-historian/stable:3.0 --port 9999
+mservman04(){
+	ssh -t eangelim@100.66.32.54 "cd /localrepo/eangelim; bash --login"
 }
 
 gpload(){
         FILE="$1"
-        rclone copy --progress $FILE drive:Shared\ files
+        rclone copy --progress $FILE gdrive:Shared\ files
 }
 
-aplogd(){
-	adb root
-	adb pull /data/vendor/aplogd /home/eangelim/Downloads/
+dwbuild(){
+	LINK="$1"
+	$HOME/Documents/.scripts/dwbuild.sh "$LINK"
 }
 
-bug2go(){
-	adb root
-	adb pull /data/vendor/bug2go /home/eangelim/Downloads/
+getlogs(){
+	$HOME/Documents/.scripts/getlogs.sh
 }
 
-entrada(){
-	$HOME/Documents/.scrips/horario.sh -n
-	vim $HOME/Documents/horario.txt
+adbconnect(){
+	adb disconnect
+	adb tcpip 5555
+	sleep 3
+	IP=$(adb shell ip addr show wlan0  | grep 'inet ' | cut -d' ' -f6| cut -d/ -f1)
+	adb connect $IP
 }
 
-saida(){
-	$HOME/Documents/.scrips/horario.sh -s
+flash(){
+	FILE="$1"
+	FOLDER=$( echo $FILE | cut --complement -f 1 -d "_" | sed -r 's/\.[[:alnum:]]+\.[[:alnum:]]+$//' )
+	sudo systemctl stop ModemManager
+	sudo systemctl stop fwupd.service
+	adb reboot bootloader
+	fastboot erase cache
+	fastboot erase userdata
+	tar -xf $FILE
+	rm -rf $FILE
+        cd $FOLDER
+	if [[ $FILE == *"_12_"* ]]; then
+		fastboot oem  ssm_test 3
+		fastboot reboot fastboot
+		fastboot flash system system.img
+		fastboot flash product product.img
+		if [[ $FILE != *"_sofiap_"* ]]; then
+			fastboot flash system_ext system_ext.img
+		fi
+		fastboot reboot
+	else
+		./flashall.sh
+	fi
+	cd ..
 }
 
-export PATH="$PATH:/opt/getlogs"
-export PATH="$PATH:/opt/platform-tools"
-export PATH="$PATH:/home/eangelim/Android/flutter/bin"
-
+export PATH="/home/eangelim/Android/flutter/bin:$PATH"
+export PATH="/home/eangelim/Android/Sdk/platform-tools:$PATH"
