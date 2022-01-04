@@ -41,26 +41,18 @@ source $ZSH/oh-my-zsh.sh
 setopt rm_star_silent
 
 
+
 mkcd(){
 	DIR="$*";
 	mkdir -p "$DIR" && cd "$DIR";
 }
 
-mservman04(){
+mservman08(){
 }
 
 gpload(){
         FILE="$1"
         rclone copy --progress $FILE gdrive:Shared\ files
-}
-
-dwbuild(){
-	LINK="$1"
-	$HOME/Documents/.scripts/dwbuild.sh "$LINK"
-}
-
-getlogs(){
-	$HOME/Documents/.scripts/getlogs.sh
 }
 
 adbconnect(){
@@ -72,30 +64,39 @@ adbconnect(){
 }
 
 flash(){
-	FILE="$1"
-	FOLDER=$( echo $FILE | cut --complement -f 1 -d "_" | sed -r 's/\.[[:alnum:]]+\.[[:alnum:]]+$//' )
-	sudo systemctl stop ModemManager
-	sudo systemctl stop fwupd.service
-	adb reboot bootloader
-	fastboot erase cache
-	fastboot erase userdata
-	tar -xf $FILE
-	rm -rf $FILE
+        sudo systemctl stop ModemManager
+        sudo systemctl stop fwupd.service
+        if [[ "$1" == *"tar.gz" ]]; then
+		FILE="$1"
+                FOLDER=$(echo $FILE | cut --complement -f 1 -d "_" | sed -r 's/\.[[:alnum:]]+\.[[:alnum:]]+$//' )
+		tar -xvf $FILE
+                rm -rf $FILE
+        else
+                FOLDER="$1"
+        fi
+        adb reboot bootloader
+        fastboot erase cache
+        fastboot erase userdata
         cd $FOLDER
-	if [[ $FILE == *"_12_"* ]]; then
-		fastboot oem  ssm_test 3
-		fastboot reboot fastboot
-		fastboot flash system system.img
-		fastboot flash product product.img
-		if [[ $FILE != *"_sofiap_"* ]]; then
-			fastboot flash system_ext system_ext.img
-		fi
-		fastboot reboot
+        if [[ -f flash-msi.sh ]]; then
+		./flash-msi.sh
 	else
 		./flashall.sh
 	fi
-	cd ..
+        cd ..
+}
+
+b2g(){
+	FILE="$1"
+	DIR="$2"
+	unzip $FILE -d $DIR
+	rm -rf $FILE
+	cd $DIR
+	lnav aplogcat-main.txt
 }
 
 export PATH="/home/eangelim/Android/flutter/bin:$PATH"
 export PATH="/home/eangelim/Android/Sdk/platform-tools:$PATH"
+export PATH="/home/eangelim/.local/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+export PATH="/home/eangelim/Documents/scripts:$PATH"
