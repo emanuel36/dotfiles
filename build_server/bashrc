@@ -137,20 +137,15 @@ mkcd(){
 
 gpload(){
         FILE="$1"
-        rclone copy --progress $FILE remote:Customized\ builds/
-}
-
-gdownload(){
-        FILE="$1"
-	rclone copy --progress remote:Shared\ files/$FILE .
+        rclone copy --progress $FILE gdrive:Customized\ builds/
 }
 
 dwbuild(){
         URL="$1"
         FILE=$(echo "$URL" | cut -f 11 -d "/")
-        superBuildDownload.py $URL
-        rclone copy --progress /localrepo/eangelim/.artifactsBuilds/$FILE remote:Artifacts
-	rm -rf .artifactsBuilds
+        wget $URL -P /localrepo/eangelim/.artifacts
+        rclone copy --progress /localrepo/eangelim/.artifacts/$FILE gdrive:artifacts
+	rm -rf .artifacts
 }
 
 rc(){
@@ -161,16 +156,21 @@ rc(){
 
 repom(){
 	PATTERN="$1"
-	repo manifest | rg "$PATTERN"
+	repo manifest | grep "$PATTERN"
 }
 
-mservman_gsync(){
+gsyncm(){
         gsync --force-broken --force-sync --site zbr05em "$1"
 }
 
-alias gsync='mservman_gsync'
+alias gsync='gsyncm'
 
-rv(){
-	REPO="$1"
-	repo manifest | grep "$REPO"
+tmuxa(){
+	tmux attach-session -t "$1"
 }
+
+pse(){
+	ps -ef | grep "$1"
+}
+
+alias rm='rm -rf'

@@ -28,7 +28,7 @@ highlight GitGutterDelete ctermfg=1
 highlight GitGutterChangeDelete ctermfg=4
 highlight! link SignColumn LineNr
 
-"vim-rainbow
+"vim-rainbow"
 Plug 'https://github.com/frazrepo/vim-rainbow'
 let g:rainbow_active = 1
 
@@ -47,6 +47,7 @@ set incsearch
 set ignorecase
 set redrawtime=10000
 set backspace=indent,eol,start
+set expandtab
 colorscheme aurora
 
 "Start from last line
