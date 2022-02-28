@@ -1,321 +1,3 @@
-: 1597931681:0;rm -rf .oh-my-zsh
-: 1597931683:0;sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-: 1597932080:0;ZSH_THEME="agnoster"
-: 1597932419:0;echo "\ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699"
-: 1597932457:0;upgrade_oh_my_zsh
-: 1597932510:0;git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-: 1597932517:0;plugins=(zsh-autosuggestions)
-: 1597932902:0;snap install gotop-cjbassi
-: 1597932989:0;gtop
-: 1597933062:0;gotop
-: 1597933085:0;gotop -help
-: 1597933095:0;gotop -l battery
-: 1597933102:0;go
-: 1597933136:0;cat \].pub
-: 1597933151:0;rm \].pub
-: 1597933168:0;rm .ssh
-: 1597933172:0;rm -rf .ssh
-: 1597933175:0;ssh
-: 1597933479:0;cp .gitconfig ../../
-: 1597933570:0;killall chrome
-: 1597933634:0;sudo usermod -l eangelim epereira
-: 1597934023:0;git chckout main
-: 1597934033:0;cd lbs_app
-: 1597934668:0;git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-: 1597934672:0;echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
-: 1597934677:0;source ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-: 1597934691:0;subl .z
-: 1597934886:0;cd Ambiente\ de\ Trabalho
-: 1597934895:0;quit[
-: 1597934986:0;cd Downloads/Ambiente\ de\ Trabalho
-: 1597934990:0;cd teste
-: 1597935002:0;ls Ambiente\ de\ Trabalho
-: 1597935053:0;cd Ambiente\ de\ Trabalho/
-: 1597937427:0;sudo apt install android-tools-adb android-tools-fastboot
-: 1597938532:0;POWERLEVEL9K_OS_ICON_BACKGROUND=024 #navyblue
-: 1597938648:0;POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon context dir dir_writable vcs)
-: 1597939178:0;q
-: 1597939223:0;cd themes
-: 1597939278:0;ls agnoster.zsh-theme 
-: 1597939465:0;wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
-: 1597939492:0;rm -rf zsh-syntax-highlighting
-: 1597939514:0;mv -rf PowerlineSymbols.otf ~/.local/share/fonts/
-: 1597939528:0;mv -r PowerlineSymbols.otf ~/.local/share/fonts/
-: 1597939532:0;cp -r PowerlineSymbols.otf ~/.local/share/fonts/
-: 1597939603:0;ls ~/.local/share/
-: 1597939616:0;mkdir ~/.local/share/fonts
-: 1597939621:0;mv PowerlineSymbols.otf ~/.local/share/fonts/
-: 1597939630:0;mv 10-powerline-symbols.conf ~/.local/share/fonts/
-: 1597939638:0;fc-cache -vf ~/.local/share/fonts/
-: 1597939668:0;wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
-: 1597939682:0;rm -rf .local/share/fonts/10-powerline-symbols.conf
-: 1597939687:0;mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
-: 1597939989:0;sudo apt-get install fonts-powerline
-: 1597942391:0;adb logcat -b all | rg -i "wpa_supplicant"
-: 1597942394:0;adb logcat -b all | rg -i "wpa_supplicanT"
-: 1597942400:0;adb logcat -b all | rg "wpa_supplicanT"
-: 1597942426:0;rm 10-powerline-symbols.conf
-: 1597943245:0;cd lbs-test-suite/[
-: 1597943350:0;git remote -rm origin
-: 1597943358:0;git remote rm origin
-: 1597943574:0;sudo dpkg-reconfigure resolvconf
-: 1597943607:0;sudo systemctl restart network-manager
-: 1597943839:0;git remote add origin ssh://gerrit.mot.com:29418/
-: 1597943841:0;git remote -v
-: 1597943965:0;ls .ssh
-: 1597944212:0;de lbs-test-suite
-: 1597944216:0;cd lbs-test-suite
-: 1597944243:0;echo "test" > README.md
-: 1597944256:0;git add lbs_app/README.md
-: 1597944395:0;git clone ssh://eangelim@gerrit.mot.com:29418/ssw_bz/wisl/lbs-test-suite && scp -p -P 29418 eangelim@gerrit.mot.com:hooks/commit-msg lbs-test-suite/.git/hooks/cd
-: 1597944415:0;rm -rf Downloads/lbs-test-suite
-: 1597945506:0;git commit --amecd
-: 1597945560:0;adb logcat -b all | rg "wpa_supplicant"
-: 1597945660:0;cp Downloads/Ambiente\ de\ Trabalho/android-logcat.json .lnav/formats/installed/android-logcat.json
-: 1597945666:0;adb logcat -b all | lnav 
-: 1597946580:0;sudo add-apt-repository ppa:starlabs/ppa 
-: 1597947125:0;sudo add-apt-repository ppa:starlabs/ppa && sudo apt update
-: 1597948347:0;rm -rf examples.desktop snap Modelo
-: 1597948352:0;cd Pictures/
-: 1597948355:0;cd Wallpapers/
-: 1597948468:0;ls /usr/share/themes
-: 1597948491:0;cd StarLabs
-: 1597948497:0;cd gtk-3.0/
-: 1597948502:0;cd assets/
-: 1597948513:0;lscd..
-: 1597952725:0;POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir)
-: 1597952730:0;POWERLEVEL9K_LEFT_PROMPT_ELEMENTS dir
-: 1597952734:0;POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=dir
-: 1597952871:0;POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="âƒ¶¶ "
-: 1597952896:0;POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status ssh dir dir_writable )
-: 1597953145:0;POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
-: 1597953185:0;POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon)
-: 1597953518:0;ls .
-: 1597953524:0;ls .gitconfig
-: 1597953538:0;cd /usr/share/themes
-: 1597953596:0;cd .oh-my-zsh/custom/themes/
-: 1597953823:0;RPROMPT="[%D{%f/%m/%y} | %D{%L:%M:%S}]"
-: 1597953978:0;RPROMPT="%{$fg[blue]%}) %{$fg[yellow]%}âƒ¼ƒ·%{$reset_color%}"
-: 1597953994:0;RPROMPT=""
-: 1597954021:0;PROMPT='[%T] %n ~ %d %%'
-: 1597954333:0;tar -xfv qualcommpackagemanager.lnx.2.0_installer_20019.4.tar
-: 1597954397:0;sudo dpkg -i QualcommPackageManager.2.0.19.4.Linux-x86.deb
-: 1597954551:0;xkill 
-: 1597954666:0;killall qpm
-: 1597957780:0;sudo apt install gir1.2-gtop-2.0 gir1.2-nm-1.0 gir1.2-clutter-1.0
-: 1597957872:0;sudo apt install gir1.2-gtop-2.0 gir1.2-networkmanager-1.0
-: 1597957956:0;sudo apt libgtop
-: 1597958035:0;sudo apt-get install gir1.2-gtop-2.0
-: 1597958069:0;sudo apt-get install gir1.2-networkmanager-1.0
-: 1598011217:0;ls .lnav/formats/installed
-: 1598012833:0;sudo apt-get install openconnect
-: 1598014016:0;POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=ram
-: 1598014073:0;git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
-: 1598014293:0;ls .oh-my-zsh
-: 1598014298:0;cd .oh-my-zsh/
-: 1598014668:0;sudo apt-get update && sudo apt-get install android-studio
-: 1598014707:0;rm -rf .oh-my-zsh/custom/themes/*
-: 1598014721:0;git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-: 1598014788:0;POWERLEVEL9K_LEFT_PROMPT_ELEMENTS-=ram
-: 1598015202:0;asdfASF
-: 1598015204:0;ASD
-: 1598015301:0;sleep 2
-: 1598015598:0;echo \uF30C
-: 1598015605:0;echo "\uF30C"
-: 1598015610:0;echo "\uF30D"
-: 1598015788:0;git clone https://github.com/ryanoasis/nerd-fonts\#option-3-install-script
-: 1598016063:0;echo '\u276F'
-: 1598016641:0;git clone https://github.com/ryanoasis/nerd-fonts
-: 1598017094:0;echo "\uF303"
-: 1598017164:0;echo "\uF301"
-: 1598017166:0;echo "\uF302"
-: 1598017171:0;echo "\uF304"
-: 1598017173:0;echo "\uF305"
-: 1598017175:0;echo "\uF306"
-: 1598017178:0;echo "\uF307"
-: 1598017180:0;echo "\uF308"
-: 1598017182:0;echo "\uF309"
-: 1598017185:0;echo "\uF310"
-: 1598017188:0;echo "\uF311"
-: 1598017190:0;echo "\uF312"
-: 1598017192:0;echo "\uF313"
-: 1598017194:0;echo "\uF314"
-: 1598017196:0;echo "\uF315"
-: 1598017198:0;echo "\uF316"
-: 1598017200:0;echo "\uF317"
-: 1598017203:0;echo "\uF318"
-: 1598017204:0;echo "\uF319"
-: 1598017207:0;echo "\uF320"
-: 1598017210:0;echo "\uF321"
-: 1598017212:0;echo "\uF322"
-: 1598017214:0;echo "\uF323"
-: 1598017216:0;echo "\uF324"
-: 1598017219:0;echo "\uF325"
-: 1598017286:0;echo "\ufb32"
-: 1598017953:0;echo "\uF306" 
-: 1598017968:0;echo "\uE271" 
-: 1598017972:0;echo "\uE270" 
-: 1598017977:0;echo "\uE272" 
-: 1598017979:0;echo "\uE273" 
-: 1598018253:0;echo '\uE271
-: 1598018255:0;echo '\uE271'
-: 1598018266:0;print_icon 'LINUX_ICON'
-: 1598018272:0;print_icon 'UBUNTU_ICON'
-: 1598018300:0;echo '\uf300'
-: 1598020031:0;rm -rf nerd-fonts
-: 1598020073:0;echo echo $1 | sudo openconnect --juniper --no-dtls https://br-partnervpn.motorola.com/7119-otp --user eangelim --passwd-on-stdin & > motorola-vps.sh
-: 1598020091:0;subl motorola-vps.sh
-: 1598020099:0;cat motorola-vps.sh
-: 1598020112:0;chmod +x motorola-vps.sh 
-: 1598020191:0;./motorola-vps.sh 729726
-: 1598020219:0;./motorola-vps.sh 616115
-: 1598020280:0;mv motorola-vps.sh motorola-vpn.sh
-: 1598020376:0;dfgf
-: 1598020391:0;nano motorola-vpn.sh
-: 1598020416:0;./motorola-vpn.sh 066517 &
-: 1598020429:0;./motorola-vpn.sh 066517
-: 1598020461:0;rm -rf motorola-vpn.sh
-: 1598020499:0;echo 542327 | sudo openconnect --juniper --no-dtls https://br-partnervpn.motorola.com/7119-otp --user eangelim --passwd-on-stdin
-: 1598020832:0;echo 777188 | sudo openconnect --juniper --no-dtls https://br-partnervpn.motorola.com/7119-otp --user eangelim --passwd-on-stdin
-: 1598020965:0;mkdir crs
-: 1598021023:0;mkdir IKSWQ-128015
-: 1598021244:0;unzip NQTL4F0004_311033403_Battery_Discharge_Summary@2020-08-13_01_15_38_+0200.zip -d ../crs/IKSWQ-128015/12-08
-: 1598021253:0;cd ../crs/IKSWQ-128015/12-08/
-: 1598022605:0;echo 161794 | sudo openconnect --juniper --no-dtls https://br-partnervpn.motorola.com/7119-otp --user eangelim --passwd-on-stdin
-: 1598022710:0;unzip ~/Downloads/NQTL4F0004_311033403_Battery_Discharge_Summary@2020-08-13_01_15_38_+0200.zip -d ../crs/IKSWQ-128015/13-08
-: 1598022731:0;unzip ~/Downloads/NQTL4F0004_311052815_Battery_Discharge_Summary@2020-08-14_19_11_09_+0200.zip -d ../crs/IKSWQ-128015/14-08
-: 1598022738:0;unzip ~/Downloads/NQTL4F0004_311052815_Battery_Discharge_Summary@2020-08-14_19_11_09_+0200.zip -d ../crs/IKSWQ-128015/14-08/
-: 1598022754:0;unzip ~/Downloads/NQTL4F0004_311052815_Battery_Discharge_Summary@2020-08-14_19_11_09_+0200.zip -d 14-08/
-: 1598022764:0;cd 14-08/
-: 1598023167:0;rm ~/Downloads/NQTL4F0004_311052815_Battery_Discharge_Summary@2020-08-14_19_11_09_+0200.zip
-: 1598023235:0;unzip ~/Downloads/NQTL4F0004_311080894_Battery_Discharge_Summary@2020-08-17_00_13_46_+0200.zip -d 17-08/
-: 1598023351:0;cd ../12-08/
-: 1598024320:0;echo $date
-: 1598024324:0;echo date
-: 1598024392:0;date | echo horatio.txt
-: 1598024398:0;date | echo horario.txt
-: 1598024538:0;date > horario.txt
-: 1598024546:0;cat horario.txt; echo horario.txt
-: 1598024562:0;cat horario.txt; cat horario.txt
-: 1598024574:0;date > horario.txt; cat horario.txt
-: 1598024935:0;date >> horario.txt; cat horario.txt
-: 1598025011:0;date | cut -f '1-3'
-: 1598025017:0;date | cut -f '1'
-: 1598025022:0;date | cut -f 1
-: 1598025024:0;date | cut -f 2
-: 1598025032:0;date | cut -d' ' -f1
-: 1598025036:0;date | cut -d' ' -f12
-: 1598025039:0;date | cut -d' ' -f2
-: 1598025042:0;date | cut -d' ' -f1-2
-: 1598025053:0;date | cut -d' ' -f1,3
-: 1598025057:0;date | cut -d' ' -f1,4
-: 1598025079:0;date | cut -d' ' -f1,4 > horario.txt; cat horario.txt
-: 1598025094:0;date | cut -d' ' -f1,4 > horario.txt; cat horario_semanal.txt
-: 1598025113:0;rm s
-: 1598025170:0;date | cut -d' ' -f1,4 > horario_semanal.txt; cat horario_semanal.txt
-: 1598025229:0;date | "cut -d' ' -f1,4 entrada" >> horario_semanal.txt; cat horario_semanal.txt
-: 1598025240:0;date | "cut -d' ' -f1,4 'entrada'" >> horario_semanal.txt; cat horario_semanal.txt
-: 1598025256:0;date | cut -d' ' -f1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598025290:0;date | cut -d 'Entrada ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598025297:0;date | cut -d 'Entrada' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598025303:0;date | cut -d '' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598025348:0;echo  >> horario_semanal.txt
-: 1598025370:0;echo " " > horario_semanal.txt
-: 1598031312:0;example
-: 1598031315:0;example 1
-: 1598031327:0;example 1123123
-: 1598031465:0;motorola-vpn
-: 1598031488:0;motorola-vpn 964833
-: 1598031693:0;date | cut -d'' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598031704:0;date | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598031829:0;echo Entrada: $date | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598031842:0;echo Entrada: ./date | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598031847:0;./date[
-: 1598031849:0;./date
-: 1598031852:0;$date
-: 1598031938:0;date +"%m-%d-%y"
-: 1598031949:0;%date
-: 1598031967:0;echo Entrada: | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598031993:0;echo Entrada: | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt;echo date | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598032008:0;echo Entrada: | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt;date | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598032072:0;echo Entrada >> horario_semanal.txt; cat horario_semanal.txt;date | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598032130:0;echo Entrada >> horario_semanal.txt; date | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598032153:0;echo Saida: >> horario_semanal.txt; date | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598032252:0;horario-entrada\
-quit\
-exit
-: 1598032645:0;$(date +"%m_%d_%Y")
-: 1598032675:0;$(date +"%H_%M")
-: 1598032679:0;$(date +"%H:%M")
-: 1598032710:0;echo Entrada: >> horario_semanal.txt; date | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598032759:0;echo "$(date +"%H:%M")" | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598032767:0;echo "$(Entrada: date +"%H:%M")" | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598032782:0;echo "Entrada: $(date +"%H:%M")" | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598032811:0;echo Entrada: $(date +"%H:%M") | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598032842:0;now=$(date +"%m_%d_%Y")\
-echo "Filename : /nas/backup_$now.sql"
-: 1598032849:0;\
-echo "Filename : /nas/backup_$now.sql"
-: 1598032853:0;now = 121312
-: 1598032879:0;echo Entrada: $now | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598032894:0;now=12323
-: 1598032895:0;echo "Entrada: $now" | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598032914:0;now=23423; echo "Entrada: $now" | cut -d' ' -f 1,4 >> horario_semanal.txt; cat horario_semanal.txt
-: 1598032927:0;now=121312
-: 1598032937:0;now=121312weqw
-: 1598032938:0;echo $now
-: 1598032969:0;echo "Entrada: $now" >> horario_semanal.txt; cat horario_semanal.txt
-: 1598033197:0;now=$(date +"%H:%M"); echo "Entrada: $now" >> horario_semanal.txt; cat horario_semanal.txt
-: 1598033274:0;now=$(date +"%H:%M"); echo 'Entrada: $now' >> horario_semanal.txt; cat horario_semanal.txt
-: 1598033350:0;cat horario_semanal.txt
-: 1598033364:0;now=$(date +%H:%M); echo "Entrada: $now" >> horario_semanal.txt; cat horario_semanal.txt
-: 1598033418:0;zsh;entrada
-: 1598033444:0;$now
-: 1598033574:0;ls Android
-: 1598033578:0;ls Android/Sdk
-: 1598033632:0;dart --version
-: 1598033985:0;ls .flutter
-: 1598034038:0;flutter ==packages
-: 1598034048:0;flutter -help
-: 1598034107:0;flutter -d --packages
-: 1598034112:0;flutter --packages
-: 1598034120:0;flutter --packages -d
-: 1598034144:0;ls /
-: 1598034154:0;ls /opt/android-studio
-: 1598034330:0;now=$(date +%H:%M); echo Entrada: $now >> horario_semanal.txt; cat horario_semanal.txt
-: 1598035461:0;echo $PATH
-: 1598035531:0;[200~  $ which flutter dart
-: 1598035531:0;~
-: 1598036478:0;ls flutter
-: 1598036727:0;motorola-vpn 716887
-: 1598036777:0;sudo apt purge sublime-text
-: 1598036810:0;sudo apt purge subl
-: 1598036842:0;vscode
-: 1598036849:0;nano .zshrc
-: 1598036897:0;build-server
-: 1598038054:0;adn 
-: 1598038110:0;adb reboot bootloader 
-: 1598038270:0;tar -xfv fastboot_doha_oem_userdebug_10_QPI30.28-Q3-28-29_eng.eangelim.200821.142817_intcfg-test-keys.tar.gz
-: 1598038334:0;subl
-: 1598038444:0;rm -rf doha_oem_userdebug_10_QPI30.28-Q3-28-29_eng.eangelim.200821.142817_intcfg-test-keys
-: 1598038447:0;tar zxvf fastboot_doha_oem_userdebug_10_QPI30.28-Q3-28-29_eng.eangelim.200821.142817_intcfg-test-keys.tar.gz
-: 1598039616:0;unzip blankflash.zip
-: 1598039666:0;unzip blankflash.zip -d blankflash
-: 1598039982:0;sudo blankflash.sh
-: 1598039988:0;sudo ./blankflash.sh
-: 1598040113:0;chmod +x blank-flash.sh
-: 1598040622:0;sudo apt-get --purge remove modemmanager
-: 1598041456:0;cd doha_oem_userdebug_10_QPI30.28-Q3-28-29_eng.eangelim.200821.142817_intcfg-test-keys/
-: 1598042456:0;adb reboot recovery
-: 1598268788:0;echo +x horario.sh
-: 1598269124:0;motorola-vpn 322139
-: 1598269222:0;rm horario_semanal.txt
-: 1598269261:0;cat teste_ponto.txt
-: 1598269274:0;em teste_ponto.txt
-: 1598269279:0;rm teste_ponto.txt
-: 1598272334:0;lnav adsasda
-: 1598274512:0;cd crs/IKSWQ-128015/
-: 1598274516:0;cd 17-08/
 : 1598274676:0;sudo apt install pbcopy
 : 1598274721:0;ls ~/.
 : 1598274728:0;ls ~/.zshrc
@@ -1151,7 +833,6 @@ cd
 : 1600959352:0;mkdir first_logs
 : 1600959357:0;cd first_logs/]
 : 1600959360:0;cd first_logs/
-: 1600959371:0;mv ../* .
 : 1600959388:0;mkdir test_logs
 : 1600959416:0;unzip ~/Downloads/user@2020-09-24_08-51-59.168-0500.zip
 : 1600959426:0;mkdir dut
@@ -1845,7 +1526,6 @@ cd
 : 1603917303:2;unzip user@2020-10-28_16-29-02.223-0400.zip -d user@2020-10-28_16-29-02.223-0400/
 : 1603918163:0;cd ../../../doha/
 : 1603918183:0;cd user@2020-10-28_16-30-27.958-0400/
-: 1603918269:0;adb shell ls /data/vendor/wifi/wlan_logs
 : 1603898557:0;mv sofiap_retail_userdebug_11_RPR31.72_eng.eangelim.201026.125456_intcfg_test-keys_retail_US/ ~/Work/crs/IKSWR-9261
 : 1603898874:41;tar -xvf fastboot_sofiap_retail_userdebug_11_RPR31.Q4U-11_eng.eangelim.201028.102727_intcfg_test-keys_retail_US.tar.gz
 : 1603898998:0;cd sofiap_retail_userdebug_11_RPR31.Q4U-11_eng.eangelim.201028.102727_intcfg_test-keys_retail_US/
@@ -2114,7 +1794,6 @@ cd
 : 1605278932:0;mv ../*.isf ../*txt .
 : 1605279025:0;qxdm
 : 1605280036:0;motorola-vpn 101693
-: 1605280370:0;cd Documents/cr
 : 1605280398:0;mv ~/Downloads/NR1R150417_312246166_USER@2020-11-11_14_48_40_-0300_IKUT-1483417.zip .
 : 1605280413:0;unzip NR1R150417_312246166_USER@2020-11-11_14_48_40_-0300_IKUT-1483417.zip -d NR1R150417_312246166_USER@2020-11-11_14_48_40_-0300_IKUT-1483417
 : 1605280424:0;rm *.zi
@@ -2252,7 +1931,6 @@ sudo apt-get install -y alacarte
 : 1605789541:0;rg -il "wlan_process:0x1:WLAN RT:0x1089:PC=0x0"
 : 1605789557:0;rg -il "RT:0x1089:PC=0x0"
 : 1605789571:0;rg -il "PDR Reason"
-: 1605789624:0;rg -il "PD_ERR"
 : 1605789659:0;rg -il "wlan_process:0x1"
 : 1605789961:0;unzip N5RRB50012_312328051_WLAN_Silent_Panic@2020-11-18_01_10_42_+0100.zip
 : 1605794207:0;motorola-vpn 954632
@@ -2524,7 +2202,6 @@ sudo apt-get install -y alacarte
 : 1606918400:0;mv aplogd ;;/
 : 1606918403:0;mv aplogd ../
 : 1606918422:0;rg -i AP-ENABLED 
-: 1606918435:0;cd Boot-0000000009/
 : 1606919200:0;unzip bugreport-sofiap_ao-RPR31.Q4U-20-11-2020-12-02-10-07-35.zip
 : 1606919213:0;lnav bugreport-sofiap_ao-RPR31.Q4U-20-11-2020-12-02-10-07-35.txt
 : 1606920543:0;unzip bugreport-sofiap_ao-RPR31.Q4U-20-11-2020-12-02-10-30-32.zip -d bugreport
@@ -2598,7 +2275,6 @@ sudo apt-get install -y alacarte
 : 1607007385:0;rg -il wcnss subsystem failure reason
 : 1607007409:0;cd IKSWR-16853/
 : 1607007415:0;ls bug2go
-: 1607007444:0;mkcd logs
 : 1607007554:0;unzip N5RR480058_312447063_USER@2020-11-27_06_17_22_-0300.zip
 : 1607007680:0;rg -il "wcnss subsystem failure reason"
 : 1607007684:0;rg -il restart_level
@@ -2861,7 +2537,6 @@ sudo apt-get install -y alacarte
 : 1607971723:0;rg -il 423270ms
 : 1607971971:0;cd ../3
 : 1607972246:0;cd 4
-: 1607972492:0;cd 5
 : 1607973945:0;rg -il "service_id=111"
 : 1607973954:0;rg -i "service_id=111"
 : 1607976966:0;rg -il "service_id"
@@ -4330,7 +4005,6 @@ motorola/doha/doha:10/QPI30.28-Q3-28-26/20e48:userdebug/intcfg,test-keys
 : 1615810944:0;motorola-vpn 601590
 : 1615840457:0;motorola-vpn 530209
 : 1615894604:0;motorola-vpn 517901
-: 1615905376:0;lsl
 : 1615906369:0;witch bash
 : 1615906382:0;witch
 : 1615906444:0;flutter build
@@ -4483,7 +4157,6 @@ motorola/doha/doha:10/QPI30.28-Q3-28-26/20e48:userdebug/intcfg,test-keys
 : 1617199784:0;sudo dpkg -i teams_1.4.00.7556_amd64.deb
 : 1617199806:0;rm teams_1.4.00.7556_amd64.deb
 : 1617201998:0;adb shell getprop vendor.hw.fingerprint.status
-: 1617202549:0;fastboot erase data
 : 1617202561:0;fastboot erase misc
 : 1617202572:0;fastboot erase frp
 : 1617202761:0;adb push 01\ -\ Chord\ Left.mp3 sdcard/music
@@ -4527,7 +4200,6 @@ motorola/doha/doha:10/QPI30.28-Q3-28-26/20e48:userdebug/intcfg,test-keys
 : 1617285369:0;cd logs1/settings_files/data
 : 1617285379:0;cd guamp_retail_userdebug_11_RPX31.22_eng.eangelim.210326.154200_intcfg-test-keys_retail_US/
 : 1617285386:0;rg -i "fingerprint
-: 1617285387:0;rg -i "fingerprint"
 : 1617285460:0;cd odessa_retail_userdebug_10_QPAS30.19-Q3-32-50-5_5fc71_intcfg_test-keys_retail_US/
 : 1617285465:0;rg -i "odessa"
 : 1617286321:0;adb exec-out screencap -p > test1.png
@@ -4543,7 +4215,6 @@ motorola/doha/doha:10/QPI30.28-Q3-28-26/20e48:userdebug/intcfg,test-keys
 : 1617299340:0;gpload user@2021-04-01_11-16-11.053-0400.zip
 : 1617299783:0;motorola-vpn 244783
 : 1617301918:0;rg -il ""cnss-daemon"
-: 1617301920:0;rg -il "cnss-daemon"
 : 1617301932:0;lnav Boot-0000000006/aplogcat-main.txt
 : 1617301973:0;rg "avc: denied.*cnss-daemon"
 : 1617301999:0;rg "avc: denied.*wlan.firmware.version"
@@ -4570,7 +4241,6 @@ motorola/doha/doha:10/QPI30.28-Q3-28-26/20e48:userdebug/intcfg,test-keys
 : 1617640300:0;rm fastboot_odessa_retail_userdebug_11_RPA31.Q2-3_fc600_intcfg_test-keys_retail_US.tar.gz
 : 1617641426:0;/ec
 : 1617641456:0;fastboot erase userdata
-: 1617641473:0;fastboot erase cache
 : 1617641565:0;adb shell "getprop |grep sensors"
 : 1617641907:0;adb shell ls /vendor/etc/sensors/config
 : 1617642722:0;tar -xvf fastboot_astro_retail_userdebug_11_RPL31.Q2-19_6eeae_intcfg_test-keys_retail_US.tar.gz
@@ -4871,7 +4541,6 @@ motorola/doha/doha:10/QPI30.28-Q3-28-26/20e48:userdebug/intcfg,test-keys
 : 1618488712:0;motorola-vpn 316311
 : 1618494176:0;rm -rf lts logs
 : 1618494187:0;rm -rf results
-: 1618494196:0;cat README
 : 1618495879:0;cd 2021.04.15_09.43.47/
 : 1618506219:0;lnav /tmp/tradefed_global_log_6925869614110608932.txt
 : 1618506244:0;cd inv_8165956066127861156/
@@ -4969,7 +4638,6 @@ motorola/doha/doha:10/QPI30.28-Q3-28-26/20e48:userdebug/intcfg,test-keys
 : 1618848307:0;cd FITLATAM-1324171
 : 1618855090:0;cd tmp/
 : 1618855093:0;lnav main.txt
-: 1618862861:0;rm -rf QCAT
 : 1618863033:0;motorola-vpn 331671
 : 1618863198:0;rm Avantica\ -\ Presentation\ ENG.pdf
 : 1618863208:0;rm -rf FITLATAM-1324171 FITLATAM-1324171.zip
@@ -4994,7 +4662,6 @@ motorola/doha/doha:10/QPI30.28-Q3-28-26/20e48:userdebug/intcfg,test-keys
 : 1618920793:0;rm -rf catalog.json QPMUI_20210419_160843_05.log QXDM MBN snap Templates
 : 1618920856:0;rm -rf astro_retail_user_11_RPL31.Q2-31_eng.eangelim.210416.125509_test-keys_retail_US astro_retail_user_11_RPL31.Q2-33_9a349_test-keys_retail_US gsi.zip
 : 1618920860:0;rm -rf android-gts
-: 1618920870:0;cd /opt/qcom/
 : 1618920909:0;rm -rf QCAT QXDM qik Shared
 : 1618923298:0;rm -rf qcom
 : 1618923303:0;sudo rm -rf qcom
@@ -5127,7 +4794,6 @@ motorola/doha/doha:10/QPI30.28-Q3-28-26/20e48:userdebug/intcfg,test-keys
 : 1619185031:0;cd packet_capture/
 : 1619185043:0;rm -rf packet_capture
 : 1619185489:0;mv WifiConfigStore.xml WifiConfigStore_MINSK-Q.xml
-: 1619185497:0;adb root[
 : 1619185535:0;mv WifiConfigStore.xml WifiConfigStore_ODESSA_R.xml
 : 1619185607:0;mkcd IKSWR-71233
 : 1619185616:0;mv *.xml IKSWR-71233
@@ -5198,7 +4864,6 @@ motorola/doha/doha:10/QPI30.28-Q3-28-26/20e48:userdebug/intcfg,test-keys
 : 1619199119:0;mv bdwlan_minsk_epa.bin firmware_mnt_Q/image
 : 1619199136:0;cp bdwlan_minsk_epa.bin ../../
 : 1619199172:0;mv bdwlan_minsk_epa.bin bdwlan.bin
-: 1619199188:0;adb shell mount -o remount,rw /vendor/firmware_mnt
 : 1619199189:0;adb push bdwlan.bin /vendor/firmware_mnt/image/
 : 1619199631:0;iperf3 -c 192.168.0.137 -w 2M -i 1 -t 30 -R
 : 1619199651:0;iperf3 -c 192.168.0.137 -w 2M -i 1 -t 30
@@ -5270,7 +4935,6 @@ motorola/doha/doha:10/QPI30.28-Q3-28-26/20e48:userdebug/intcfg,test-keys
 : 1619629871:0;rm -rf drive-download-20210428T171028Z-001.zip
 : 1619629881:0;rm -rf odessa_retail_userdebug_11_RPA31.Q2-6_afcba8_intcfg_test-keys_retail_US odessa_retail_userdebug_11_RPA31.Q2-6_eng.vinisch.210423.002452_intcfg_test-keys_retail_US
 : 1619630685:0;rm tmux.conf
-: 1619630742:0;vim bashrc
 : 1619630759:0;mv bashrc .bashrc
 : 1619630767:0;mv tmux.conf .tmux.conf
 : 1619630773:0;mv vimrc .vimrc
@@ -5283,7 +4947,6 @@ motorola/doha/doha:10/QPI30.28-Q3-28-26/20e48:userdebug/intcfg,test-keys
 : 1619631006:0;git add build_server/
 : 1619631028:0;git rm .vimrc
 : 1619631116:0;ssh eangelim@mservman03.corp.eldorado.org.br 
-: 1619631640:0;echo teste > test.txt
 : 1619631859:0;rclone copy --progress test.txt onedrive:Shared\ files
 : 1619631902:0;rclone copy --progress test.txt onedrive:shared\ files
 : 1619635463:0;lnav logcat.kernel.txt
@@ -5332,7 +4995,6 @@ motorola/doha/doha:10/QPI30.28-Q3-28-26/20e48:userdebug/intcfg,test-keys
 : 1619789050:0;rm fastboot_borneo_retail_userdebug_11_RZB31.Q2-59_c2f7f_intcfg-test-keys_retail_US.tar.gz
 : 1619789054:0;rm  -rf odessa_retail_userdebug_11_RPA31.Q2-13_83cb_intcfg_test-keys_retail_US
 : 1619789796:0;cd borneo_retail_userdebug_11_RZB31.Q2-59_c2f7f_intcfg-test-keys_retail_US/
-: 1619791876:0;srcpy
 : 1619792089:0;cd borneo_retail_userdebug_11_RZB31.Q2-58_eng.eangelim.210429.102545_intcfg-test-keys_retail_US/
 : 1619792209:0;unzip NR1A4B0113_311442068_USER@2020-09-15_09_30_52_-0400.zip -d logs
 : 1619793674:0;rm NR1A4B0113_311442068_USER@2020-09-15_09_30_52_-0400.zip
@@ -5465,7 +5127,6 @@ asd
 : 1620157980:0;adn root
 : 1620158041:0;unzip dropbox-MODEM_SILENT_PANIC@2021-05-04_03-22-16.009+0000.zip
 : 1620158053:0;rm dropbox-MODEM_SILENT_PANIC@2021-05-04_03-22-16.009+0000.zip
-: 1620158147:0;lnav aplogcat-main.txt aplogcat-kernel.txt
 : 1620159033:0;rm -rf bug2go aplogd
 : 1620159088:0;unzip dropbox-MODEM_SILENT_PANIC@2021-05-04_03-22-16.009+0000.zip -d logs1
 : 1620159100:0;unzip dropbox-MODEM_SILENT_PANIC@2021-05-04_03-39-25.902+0000.zip -d logs 2
@@ -5506,7 +5167,6 @@ asd
 : 1620234811:0;rm android-cts-11_r3-linux_x86-arm.zip
 : 1620234833:0;mv android-cts-11_r3-linux_x86-arm ../Documents
 : 1620234842:0;mv android-cts-11_r3-linux_x86-arm tests
-: 1620234975:0;mkdir cts
 : 1620234985:0;mv android-cts-11_r3-linux_x86-arm android-cts-verifier-11_r3-linux_x86-arm cts
 : 1620235236:0;gpload user@2021-05-05_13-14-29.196-0400.zip
 : 1620235264:0;unzip user@2021-05-05_13-14-29.196-0400.zip -d logs
@@ -5560,7 +5220,6 @@ asd
 : 1620323400:0;mv android-gts GTS\ 8.0_r3
 : 1620323411:0;rm android-gts-8-R3\(11\)-7133222.zip
 : 1620323432:0;cd GTS\ 8.0_r3/
-: 1620323442:0;cd testcases/
 : 1620323651:0;mv ~/Downloads/Copy\ of\ signed-aosp_arm64-img-7244771.zip signed-aosp_arm64-img-7244771.zip
 : 1620324093:0;./tradefed 
 : 1620324096:0;./tradefed
@@ -5593,7 +5252,6 @@ asd
 : 1620398824:0;cd 2021.05.07_09.24.07
 : 1620398833:0;cd testcases/2021.05.07_09.24.07
 : 1620398839:0;cd results/2021.05.07_09.24.07
-: 1620398847:0;lnav invocation_summary.txt
 : 1620398863:0;vim invocation_summary.txt
 : 1620406019:0;sudo dpkg -i code_1.56.0-1620166262_amd64.deb
 : 1620407090:0;sudo apt install pip
@@ -5829,7 +5487,6 @@ asd
 : 1620995259:0;cd R/b2g/
 : 1620995330:0;rg -il "CONNECTIVITY_ACTION"
 : 1620995339:0;lnav R/b2g/aplogcat-main.txt
-: 1620995370:0;cd R/
 : 1620995382:0;lnav B2G\ Dut.txt
 : 1620995407:0;cd Q
 : 1620995424:0;unzip N0NAEE0172_314465687_USER@2021-04-28_09_06_00_-0500.zip -d logs
@@ -5978,7 +5635,6 @@ asd
 : 1621883972:0;d ..
 : 1621883981:0;tar -xvf fastboot_sofiap_retail_user_11_RPR31.Q1-56-5_85c67_release-keys_retail_US.tar.gz
 : 1621884229:0;adb roott
-: 1621884588:0;fastboot oem bp-tools-on
 : 1621884785:0;rm *.gz
 : 1621885070:0;unzip N0PL4M0314_314784657_Modem_Silent_Panic@2021-05-18_12_27_30_-0300.zip -d logs
 : 1621944233:0;motorola-vpn 112979
@@ -6302,7 +5958,6 @@ asd
 : 1623760842:0;ln cd -
 : 1623760863:0;sudo apt install xclip
 : 1623762244:0;cp ~/.zshrc ../myWorkSpace/
-: 1623762271:0;mv .zsh_history zsh_history
 : 1623762614:0;lnav entry.txt
 : 1623770711:0;motorola-vpn 815078
 : 1623771197:0;mkcd crs
@@ -6377,7 +6032,6 @@ asd
 : 1624109998:0;set -g default-terminal "screen-256color"
 : 1624110036:0;export TERM=screen-256color
 : 1624110151:0;rm -rf vim-aurora
-: 1624110182:0;cd build_server/
 : 1624110192:0;cp tmux.conf ~/.tmux.conf
 : 1624110275:0;tmux -2
 : 1624110279:0;vim .tmux.conf
@@ -6405,7 +6059,6 @@ asd
 : 1625244064:0;unzip ~/Downloads/ND3E4F0040_315470464_USER@2021-06-30_22_14_45_+0100_IKUT-1562012.zip -d 2
 : 1625244076:0;rm -rf ~/Downloads/ND3E4F0040_315470464_USER@2021-06-30_22_14_45_+0100_IKUT-1562012.zip
 : 1625244102:0;unzip ~/Downloads/ND3E4F0040_315482255_USER@2021-07-01_13_36_50_+0100_IKUT-1562326.zip -d 3
-: 1625244128:0;rg -i "wpa_supplicant"
 : 1625244566:0;rg -i "90:02:18:f6:ae:6a|3c:89:94:69:26:7d|3c:89:94:69:26:7a"
 : 1625244848:0;lnav --version
 : 1625245025:0;tar -xvf lnav-0.8.5.tar.gz
@@ -6545,7 +6198,6 @@ asd
 : 1625760191:0;mm .scrips .scripts
 : 1625760196:0;mv .scrips .scripts
 : 1625760200:0;cd Downloads/aplogd/
-: 1625760218:0;chmod +x getlogs.sh
 : 1625769234:0;sudo apt-get install linssid
 : 1625770634:0;cd ../Boot-0000000001
 : 1625771121:0;mkdir IKSWS-1122
@@ -6667,7 +6319,6 @@ asd
 : 1626177130:0;motorola-vpn 240904
 : 1626184648:0;unzip NM0A4K0179_315574456_USER@2021-07-08_09_00_05_-0400_IKUT-1564351.zip -d logs
 : 1626185130:0;adb install Audible\ audiobooks\ podcasts\ audio\ stories_v3.8.0_apkpure.com.apk
-: 1626185464:0;cd dpw
 : 1626185904:0;sudo apt install openconnect
 : 1626195780:0;motorola-vpn 959180
 : 1626199324:0;motorola-vpn 198616
@@ -6832,7 +6483,6 @@ asd
 : 1626467820:0;rg "fingerprint.*sre"
 : 1626467826:0;rg -i "fingerprint.*sre"
 : 1626467828:0;rg -i "fingerprint.*rre"
-: 1626467873:0;cd ../../../
 : 1626467886:0;cd IKSWR-110910
 : 1626696092:0;motorola-vpn 463586
 : 1626696404:0;git clone -v ssh://eangelim@gerrit.mot.com:29418/ssw_bz/wisl/lbs-test-suite
@@ -7045,7 +6695,6 @@ asd
 : 1627504662:0;cd Boot-0000000017/
 : 1627505081:0;rm -rf logs.txt
 : 1627560098:0;motorola-vpn 235452
-: 1627565592:0;git rebase -i HEAD~3
 : 1627570462:0;adb disconnect]
 : 1627584779:0;git rebase -i HEAD~4
 : 1627585210:0;nautilus build/app/outputs/flutter-apk
@@ -7091,8 +6740,6 @@ asd
 : 1628090896:0;git add lib/screens/home/components/location_panel/location_panel_controller.dart
 : 1628090901:0;git add lib/screens/home/components/location_panel/location_panel_controller.g.dart
 : 1628091225:0;tar -xvf fastboot_sofiap_retail_userdebug_11_RPR31.Q1-56-9-2-11_cd8c57_intcfg_test-keys_retail_US.tar.gz
-: 1628091276:0;git rebase --abort
-: 1628106425:0;git rebase -i HEAD~2
 : 1628106755:0;git rebase --continue
 : 1628108264:0;rm -rf .gz
 : 1628109708:0;motorola-vpn 031810
@@ -7174,7 +6821,6 @@ asd
 : 1628602929:0;adb pull /sdcard/Documents/2021-08-10_09.42.00.csv
 : 1628603044:0;git add lib/screens/home/tabs/test/test_controller.dart
 : 1628603423:0;git add pubspec.yaml
-: 1628603505:0;git commit --amend
 : 1628604758:0;unzip ND3B4J0116_315325442_USER@2021-06-21_20_38_56_-0300_IKUT-1558460.zip -d logs
 : 1628605890:0;rm -rf ND3B4J0116_315325442_USER@2021-06-21_20_38_56_-0300_IKUT-1558460.zip
 : 1628605937:0;unzip ND3B4J0116_315938130_USER@2021-08-02_19_52_58_-0300_IKUT-1571600.zip -d logs
@@ -7239,7 +6885,6 @@ asd
 : 1628770220:0;unzip NBOA4T0127_316049804_USER@2021-08-10_08_31_24_-0500_IKUT-1573862.zip -d logs
 : 1628773748:0;adb install build/app/outputs/flutter-apk/app-release.apk
 : 1628776955:0;motorola-vpn 171906
-: 1628777586:0;flutter build apk
 : 1628777655:0;nautilus build/app/outputs/flutter-apk/app-release.apk
 : 1628780826:0;adb pull /sdcard/Download/2021-08-12_11.04.58.csv
 : 1628783786:0;adb pull /sdcard/Download/2021-08-12_11.56.10.csv
@@ -7469,23 +7114,15 @@ asd
 : 1629808431:0;rm -rf sofiap_ao_userdebug_12_SPR32M.3_7ed57_intcfg-test-keys_ret_US
 : 1629808436:0;flash fastboot_minsk_retail_userdebug_11_RPC31.Q2-143_9800d5_intcfg_test-keys_retail_US.tar.gz
 : 1629808754:0;cp builds/fastboot_sofiap_ao_userdebug_12_SPR32M.3_7ed57_intcfg-test-keys_ret_US.tar.gz .
-: 1629810690:0;git clone https://github.com/emanuel36/myWorkSpace
-: 1629811475:0;cd myWorkSpace/
-: 1629811485:0;cp ~/.zshrc .
 : 1629811635:0;git rm bookmarks_6_2_21.html
 : 1629811660:0;git add .zshrc
 : 1629811703:0;git mv .zshrc zshrc
 : 1629811720:0;rm zshrc
-: 1629811727:0;mv .zshrc zshrc
 : 1629811740:0;git rm .zsh_history zsh_history
-: 1629811748:0;cp ~/.zsh_history .
 : 1629811772:0;cp .zsh_history zsh_history
 : 1629811782:0;rm .zsh_history
 : 1629811800:0;git rm .zshrc
 : 1629811831:0;git rm horario.sh
-: 1629811867:0;git push origin HEAD:refs/for/main
-: 1629811891:0;git commit --signoff -v
-: 1629811903:0;git push origin master
 : 1629811918:0;rm -rf myWorkSpace
 : 1629812064:0;rg -il "etNetworkSelectionStatus"
 : 1629812088:0;rg -il "setNetworkSelectionStatus"
@@ -7524,10 +7161,6 @@ asd
 : 1629894008:0;sudo locate libcrypto.so.1.0.0
 : 1629894048:0;sudo apt-get install libssl1.0.0
 : 1629894056:0;sudo apt-get install libssl1.0.0 libssl-dev --reinstall
-: 1629894167:0;cd Data
-: 1629894170:0;cd Doc
-: 1629894174:0;cd Script
-: 1629894178:0;cd Workspaces
 : 1629894182:0;cd QCATDefault
 : 1629897597:0;sudo rm -rf /opt/qcom/qik /opt/qcom/qpm /opt/qcom/Shared
 : 1629897691:0;sudo rm -rf /opt/qcom
@@ -7581,8 +7214,6 @@ asd
 : 1630007958:0;rg -i -uuu "disconn.*reason" bugreport.txt
 : 1630008132:0;rg -i "24:f5:a2:03:d8:e4.*rssi"
 : 1630008282:0;motorola-vpn 159043
-: 1630008384:0;mkdir logs
-: 1630008391:0;mv * logs
 : 1630008401:0;mkcd afterReboot
 : 1630008410:0;rm -rf ~/Downloads/ZY22BWWJ3D_316293507_USER@2021-08-26_08_08_36_-0500_IKUT-1578525.zip
 : 1630008427:0;unzip ~/Downloads/ZY22BWWJ3D_316293583_USER@2021-08-26_08_17_42_-0500_IKUT-1578526.zip -d .
@@ -7612,7 +7243,6 @@ asd
 : 1630071911:0;./dwbuild.sh http://artifacts.mot.com/artifactory/guamp/11/RPX31.Q2-76/guamp_retail/user/release-keys/fastboot_guamp_retail_user_11_RPX31.Q2-76_e2d4f_release-keys_retail_US.tar.g
 : 1630071917:0;./dwbuild.sh ttp://artifacts.mot.com/artifactory/guamp/11/RPX31.Q2-76/guamp_retail/user/release-keys/fastboot_guamp_retail_user_11_RPX31.Q2-76_e2d4f_release-keys_retail_US.tar.gz
 : 1630071923:0;./dwbuild.sh 2-76/guamp_retail/user/release-keys/fastboot_guamp_retail_user_11_RPX31.Q2-76_e2d4f_release-keys_retail_US.tar.gz
-: 1630071993:0;./dwbuild.sh http://artifacts.mot.com/artifactory/guamp/11/RPX31.Q2-76/guamp_retail/user/release-keys/fastboot_guamp_retail_user_11_RPX31.Q2-76_e2d4f_release-keys_retail_US.tar.gz
 : 1630087298:0;c
 : 1630087302:0;cd Downloads/minsk_retail_userdebug_11_RPC31.Q2-143_9800d5_intcfg_test-keys_retail_US/
 : 1630087306:0;./fastboot oem config cmdl ""
@@ -7635,7 +7265,6 @@ asd
 : 1630326844:0;vim modemr.jsn
 : 1630326910:0;adb push modemr.jsn /vendor/firmware_mnt/image/
 : 1630327240:0;adb wait-for-device shell mount -o rw,remount /vendor/firmware_mnt/image/modemr.jsn
-: 1630327246:0;adb wait-for-device shell mount -o rw,remount /vendor/firmware_mnt/image/
 : 1630327276:0;adb wait-for-device shell mount -o rw,remount /vendor/firmware_mnt
 : 1630327333:0;adb shell setprop persist.sys.ssr.restart_level ALL_DISABLE
 : 1630327445:0;adb logcat -b all | lnav[
@@ -7656,12 +7285,10 @@ asd
 : 1630338669:0;unzip dropbox-MODEM_SILENT_PANIC@2021-08-30_11-49-37.380-0400.zip
 : 1630345750:0;flash fastboot_sofiap_retail_userdebug_11_RPR31.Q1-56-9-2-11_cd8c57_intcfg_test-keys_retail_US.tar.gz
 : 1630346112:0;lsls
-: 1630346113:0;sls
 : 1630346458:0;adb pull sdcard/DCIM/Camera/VID_20210830_133919606.mp4
 : 1630347347:0;adb root; adb remount; adb shell cp /system/lib/libstdc++.so /vendor/lib
 : 1630347405:0;adn shell ls
 : 1630347409:0;adb shell ls /data/vendor/bug2go/
-: 1630347426:0;adb pull /data/vendor/bug2go/
 : 1630347441:0;unzip dropbox-MODEM_SILENT_PANIC@2021-07-23_22-37-16.150+0000.zip -d logs
 : 1630347731:0;asb shell ls /vendor/rfs/msm/mpss/ramdumps/
 : 1630347734:0;adb shell ls /vendor/rfs/msm/mpss/ramdumps/
@@ -7673,7 +7300,6 @@ asd
 : 1630443380:0;motorola-vpn 035253
 : 1630497740:0;motorola-vpn 725621
 : 1630516062:0;adb getprop
-: 1630516069:0;adb shell getprop
 : 1630516137:0;adb shell getprop | grep "pronto"
 : 1630516139:0;adb shell getprop | grep "helium"
 : 1630516516:0;adb shell getprop | grep "arch"
@@ -7699,7 +7325,6 @@ asd
 : 1631106068:0;flash fastboot_berlin_global_userdebug_11_RRGS31.Q3-23-25-1-2_04921_intcfg-test-keys_global_US.tar.gz
 : 1631106579:0;adb install CPU\ Z_v1.41_apkpure.com.apk
 : 1631107564:0;unzip NBOA4J0104_316402866_USER@2021-09-02_18_51_43_-0400_IKUT-1580156.zip -d logs
-: 1631108180:0;cd .
 : 1631109377:0;rg -i tdls
 : 1631111147:0;adb pull /data/vendor/bug2go/user@2021-09-08_10-17-29.233-0400.zip
 : 1631111390:0;dwbuild https://artifacts.mot.com/artifactory/minsk/11/RPC31.Q2-109-10/minsk_retail/user/release-keys/fastboot_minsk_retail_user_11_RPC31.Q2-109-10_fbabc0_release-keys_retail_US.tar.gz
@@ -7740,7 +7365,6 @@ asd
 : 1631207251:0;rg -i SARCTRL
 : 1631207265:0;rm -rf bug bugreport-sofiap_ao-RPR31.Q4U-20-26-2-2021-09-09-11-54-53.zip
 : 1631213291:0;motorola-vpn 971818
-: 1631215254:0;adb shell ps -e | grep -i sarcontrol
 : 1631216629:0;dwbuild https://artifacts.mot.com/artifactory/minsk/10/QPCS30.Q4-31-26-6-19/minsk_retail/userdebug/intcfg_test-keys/fastboot_minsk_retail_userdebug_10_QPCS30.Q4-31-26-6-19_41357_intcfg_test-keys_retail_US.tar.gz
 : 1631218204:0;flash fastboot_minsk_retail_userdebug_10_QPCS30.Q4-31-26-6-19_41357_intcfg_test-keys_retail_US.tar.gz
 : 1631275590:0;motorola-vpn 424625
@@ -7758,7 +7382,6 @@ asd
 : 1631290410:0;cd s
 : 1631290414:0;cd S
 : 1631290415:0;rg -i com.motorola.sarcontrol
-: 1631290449:0;lnav aplogcat-system.txt
 : 1631291334:0;rg -i sarcontrol
 : 1631534616:0;motorola-vpn 919989
 : 1631534648:0;motorola-vpn 332835
@@ -7771,7 +7394,6 @@ asd
 : 1631549769:0;rm GCam_7.3.018_Urnyx05-v2.5.apk
 : 1631549772:0;rm -rf berlna_global_userdebug_11_RRM31.Q3-23-54_14f55_intcfg-test-keys_global_US
 : 1631550245:0;unzip ~/Downloads/NBOA4J0104_316525447_USER@2021-09-10_17_58_38_-0400_IKUT-1582310.zip -d 2
-: 1631550443:0;lnav logcat.main.txt
 : 1631550660:0;rg -il tdls bugreport.txt
 : 1631550664:0;rg -i tdls bugreport.txt
 : 1631559846:0;flash fastboot_saipan_retail_userdebug_12_SRS32.1_eng.eangelim.210913.103354_intcfg-test-keys_retail_US.tar.gz
@@ -7809,15 +7431,11 @@ asd
 : 1631624100:0;lnav bugreport-saipan_retail-SRS32.1-2021-09-14-08-52-22.txt
 : 1631624118:0;rm bugreport-saipan_retail-SRS32.1-2021-09-14-08-52-22.txt
 : 1631624130:0;rm -rf bugreport bugreport-saipan_retail-SRS32.1-2021-09-14-08-52-22.zip
-: 1631628564:0;unzip ND3B4J0116_316508943_USER@2021-09-09_11_53_36_-0300_IKUT-1581904.zip -d logs
 : 1631628658:0;rm -rf ND3B4J0116_316508943_USER@2021-09-09_11_53_36_-0300_IKUT-1581904.zip logs
 : 1631628681:0;unzip ND3B4J0116_316495437_USER@2021-09-08_07_32_00_-0300_IKUT-1581414.zip -d logs
 : 1631629022:0;rm ND3B4J0116_316495437_USER@2021-09-08_07_32_00_-0300_IKUT-1581414.zip
-: 1631629883:0;perl gpsTestApp_parser_P.pl logs/aplogcat-main.txt
 : 1631629922:0;ls .kml
 : 1631629936:0;cp aplogcat-main.txt ../
-: 1631629946:0;perl gpsTestApp_parser_P.pl aplogcat-main.txt
-: 1631631030:0;lnav aplogcat-events.txt
 : 1631631623:0;cp logs2/aplogcat-main.txt aplogcat-main2.txt
 : 1631631629:0;perl gpsTestApp_parser_P.pl aplogcat-main2.txt
 : 1631631671:0;vim aplogcat-main2.txt.kml
@@ -7885,7 +7503,6 @@ asd
 : 1631891716:0;iperf -s -u
 : 1631891720:0;iperf3 -s -u
 : 1632139449:0;motorola-vpn 453610
-: 1632140095:0;rm *
 : 1632141128:0;tar -xvf fastboot_saipan_retail_userdebug_12_SRS32.1_eng.eangelim.210917.105416_intcfg-test-keys_retail_US.tar.gz
 : 1632141182:0;cd saipan_retail_userdebug_12_SRS32.1_eng.eangelim.210917.105416_intcfg-test-keys_retail_US/
 : 1632141964:0;rm fastboot_saipan_retail_userdebug_12_SRS32.1_eng.eangelim.210917.105416_intcfg-test-keys_retail_US.tar.gz
@@ -7928,14 +7545,11 @@ asd
 : 1632231854:0;adb getprop | grep persist.radio.ctbk_log
 : 1632233912:0;adb shell getprop | grep "persist.radio.ctbk_log"
 : 1632234014:0;rm fastboot_saipan_retail_userdebug_11_RRS31.Q2-54-60_92eed7_intcfg_test-keys_retail_US.tar.gz
-: 1632234024:0;cd Boot-0000000002/
-: 1632234041:0;cd ../Boot-0000000001/
 : 1632234103:0;rg -i "Denial: receiving Intent"
 : 1632234127:0;rg -i "Denial: receiving Intent.*sar"
 : 1632248543:0;unzip bugreport-saipan_retail-RRS31.Q2-54-60-2021-09-21-18-19-09.zip -d bugreport
 : 1632248691:0;rg -i com.google.android.wifi.apex
 : 1632249166:0;rg -i "apex.*wi"
-: 1632249172:0;rg -i "apex.*wifi"
 : 1632249284:0;lnav bugreport-saipan_retail-RRS31.Q2-54-60-2021-09-21-18-19-09.txt
 : 1632253806:0;motorola-vpn 380019
 : 1632255998:0;motorola-vpn 626369
@@ -7967,7 +7581,6 @@ asd
 : 1632418788:0;rg -i "No-Beacons"
 : 1632418825:0;lnav ucc/P2P-7.1.3_Sep-23-2021__10-56-13/log_P2P-7.1.3.log
 : 1632418913:0;cd 11n_Sniffer/
-: 1632418917:0;cd b2g/
 : 1632418923:0;cd ucc/
 : 1632418927:0;cd P2P-7.1.3_Sep-23-2021__10-56-13/
 : 1632422323:0;motorola-vpn 667221
@@ -7991,7 +7604,6 @@ asd
 : 1632487104:0;09-24 08:31:54.749  2213  4468 E AndroidRuntime: at android.os.Handler.dispatchMessage(Handler.java:106)
 : 1632487104:0;09-24 08:31:54.749  2213  4468 E AndroidRuntime: at android.os.Looper.loopOnce(Looper.java:226)
 : 1632487104:0;09-24 08:31:54.749  2213  4468 E AndroidRuntime: at android.os.Looper.loop(Looper.java:329)
-: 1632487553:0;adb remount
 : 1632487557:0;adb push ctbk_cfg.xml /system/etc/motorola/mdmctbk/ctbk_cfg.xml
 : 1632487575:0;adb reboot 
 : 1632487952:0;unzip bugreport-saipan_retail-SRS32.1-2021-09-24-08-49-55.zip -d bugreport
@@ -8017,14 +7629,12 @@ asd
 : 1632763665:0;cd dow
 : 1632764003:0;tar -xvf fastboot_saipan_retail_userdebug_12_SRS32.1_eng.gntutui.210927.082652_intcfg-test-keys_retail_US.tar.gz
 : 1632764047:0;cd saipan_retail_userdebug_12_SRS32.1_eng.gntutui.210927.082652_intcfg-test-keys_retail_US/
-: 1632764908:0;tar -czvf aplogd.tar.gz aplogd
 : 1632764916:0;gpload aplogd.tar.gz
 : 1632765271:0;rg -i "FATAL EXCEPTION"
 : 1632765625:0;rm aplogd.tar.gz
 : 1632765633:0;unzip bugreport-saipan_retail-SRS32.1-2021-09-27-17-41-42.zip =d bugreport
 : 1632765637:0;unzip bugreport-saipan_retail-SRS32.1-2021-09-27-17-41-42.zip -d bugreport
 : 1632765648:0;lnav bugreport-saipan_retail-SRS32.1-2021-09-27-17-41-42.txt
-: 1632766491:0;lnav aplogcat-main.txt aplogcat-crash.txt
 : 1632767110:0;lnav aplogcat-main.txt aplogcat-events.txt aplogcat-system.txt aplogcat-crash.txt aplogcat-crash.txt
 : 1632769324:0;rm bugreport-saipan_retail-SRS32.1-2021-09-27-17-41-42.zip fastboot_saipan_retail_userdebug_12_SRS32.1_eng.gntutui.210927.082652_intcfg-test-keys_retail_US.tar.gz
 : 1632771466:0;rm -rf saipan_retail_userdebug_12_SRS32.1_eng.gntutui.210927.082652_intcfg-test-keys_retail_US
@@ -8042,7 +7652,6 @@ asd
 : 1632774994:0;scp 0001-fix-build-errors.patch eangelim@100.66.32.54:/localrepo/eangelim/
 : 1632775010:0;scp 0001-deps.patch eangelim@100.66.32.54:/localrepo/eangelim/
 : 1632830523:0;motorola-vpn 054306
-: 1632841792:0;ld
 : 1632851303:0;rm *.oatch
 : 1632851306:0;rm *.patch
 : 1632851308:0;rm supplicant-changes..diff
@@ -8171,7 +7780,6 @@ asd
 : 1633033249:0;/usr/lib/jvm/java-11-openjdk-amd64/bin/
 : 1633033275:0;update-java-alternatives -l
 : 1633033342:0;cd /etc/alternatives
-: 1633033346:0;ll 
 : 1633033360:0;cd Documents/tests/android-vts/
 : 1633033434:0;motorola-vpn 159761
 : 1633033559:0;./vts-tradefed
@@ -8201,7 +7809,6 @@ asd
 : 1633093839:0;sudo rm -rf /var/cache/oracle-jdk11-installer-local
 : 1633093861:0;cd /opt/qcom/QXDM
 : 1633093898:0;sudo ./QXDM
-: 1633093946:0;cd QCAT
 : 1633093953:0;./QCAT
 : 1633094060:0;rm -rf libgstreamer0.10-0_0.10.36-1.5ubuntu1_amd64.deb
 : 1633094465:0;rm libgstreamer-plugins-base0.10-0_0.10.36-2ubuntu0.2_amd64.deb
@@ -8321,7 +7928,6 @@ asd
 : 1633540697:0;motorola-vpn 308869
 : 1633608291:0;motorola-vpn 663161
 : 1633608734:0;rm Regulamento-XFIX11.pdf
-: 1633608786:0;cd Documents/
 : 1633608792:0;cp .scripts scripts
 : 1633608801:0;mv .scripts scripts
 : 1633608918:0;chmod +x gpsTestApp_parser_P.pl
@@ -8332,10 +7938,8 @@ asd
 : 1633612346:0;lnav bugreport.txt[
 : 1633625341:0;motorola-vpn 575812
 : 1633637670:0;unzip ZY22D63JN4_316817849_USER@2021-09-28_16_37_01_-0400_IKUT-1589040.zip -d logs
-: 1633637810:0;cd wl
 : 1633637821:0;rg -i "disconn.*reason"
 : 1633637937:0;rg -i "disconn.*reason" aplogcat-kernel.txt
-: 1633638986:0;lnav aplogcat-kernel.txt
 : 1633639254:0;sudo dpkg -i google-chrome-stable_current_amd64.deb
 : 1633694400:0;motorola-vpn 256056
 : 1633699562:0;rm recibo.png
@@ -8379,7 +7983,6 @@ asd
 : 1634242784:0;mkcd IKSWR-134848
 : 1634242816:0;unzip ~/Downloads/ND3B4J0116_316508943_USER@2021-09-09_11_53_36_-0300_IKUT-1581904.zip -d logs
 : 1634242825:0;take test
-: 1634242925:0;vim gpsTestApp_parser_P.pl
 : 1634243070:0;unzip ~/Downloads/ND3B4J0116_316508943_USER@2021-09-09_11_53_36_-0300_IKUT-1581904.zip -d logs2
 : 1634243211:0;rm -rf logs2
 : 1634243212:0;unzip ~/Downloads/ND3B4J0116_316851658_USER@2021-09-30_12_58_18_-0300_IKUT-1589920.zip -d logs2
@@ -8466,7 +8069,6 @@ asd
 : 1635272013:0;which perl
 : 1635272043:0;perl ~/Documents/scripts/gpsTestApp_parser_P.pl bugreport.txt
 : 1635272108:0;vim bugreport.txt.kml
-: 1635272150:0;perl ~/Documents/scripts/gpsTestApp_parser_P.pl aplogcat-main.txt
 : 1635272159:0;vim aplogcat-main.txt.kml
 : 1635334894:0;motorola-vpn 716595
 : 1635335103:0;motorola-vpn 823848
@@ -8474,7 +8076,6 @@ asd
 : 1635361447:0;motorola-vpn 197068
 : 1635362945:0;unzip N2PR430032_317040347_App_Not_Responding_\(Google\)@2021-10-13_10_18_59_-0300.zip -d logs
 : 1635362947:0;rm N2PR430032_317040347_App_Not_Responding_\(Google\)@2021-10-13_10_18_59_-0300.zip
-: 1635362986:0;rm -rf bugreport.zip
 : 1635363263:0;rg -il "/apex/com.android.runtime/lib64/bionic/libc.so"
 : 1635363278:0;lnav aplogcat-crash.txt aplogcat-main.txt
 : 1635363313:0;rg -i "group="main" sCount=1 ucsCount=0 flags=1 obj=0x6ff68b70 self=0xb4000074d9d97380"
@@ -8538,7 +8139,6 @@ asd
 : 1636389940:0;ssh eangelim@mserv028
 : 1636390018:0;ssg eangelim@10.181.194.170
 : 1636390022:0;ssh eangelim@10.181.194.170
-: 1636390230:0;/opt/qcom/QXDM/QXDM
 : 1636391629:0;ssh -vvv eangelim@10.181.194.170
 : 1636391715:0;ssh -vvv eangelim@mserv028
 : 1636391795:0;eangelim@mservman04
@@ -8558,7 +8158,6 @@ asd
 : 1636460633:0;rg -i "non-protected broadcast com.motorola.location.instrumentation"
 : 1636461340:0;adb exec-out screencap -p > screenshot2.png
 : 1636461866:0;rm aplogd.zip
-: 1636464932:0;getlogs
 : 1636470902:0;rm -rf IKSWS-11613
 : 1636470912:0;rm -rf IKSWS-10413
 : 1636470923:0;rm -rf IKSWR-134848
@@ -8569,7 +8168,6 @@ asd
 : 1636470965:0;cd lshal-debug/
 : 1636475578:0;flash fastboot_saipan_retail_userdebug_12_SRS32.1_eng.eangelim.211103.154548_intcfg-test-keys_retail_US.tar.gz
 : 1636488325:0;motorola-vpn 654756
-: 1636488424:0;cd Documents/scripts/
 : 1636544028:0;motorola-vpn 244677
 : 1636544519:0;cd Documents/crs/IKSWS-11613/
 : 1636544532:0;mkdir 1
@@ -8603,7 +8201,6 @@ asd
 : 1636561957:0;unzip ~/Downloads/VHT-4.2.5_Nov-08-2021__10-02-53.zip -d .
 : 1636561982:0;cd VHT-4.2.5_Nov-08-2021__10-02-53/
 : 1636561993:0;lnav sniffer_log_VHT-4.2.5.log
-: 1636562024:0;cd 1/
 : 1636565495:0;sudo apt-get install build-essential linux-headers-`uname -r`
 : 1636565509:0;uname -m
 : 1636565553:0;cd dwo
@@ -8660,7 +8257,6 @@ asd
 : 1636733593:0;cd caprip_retail_userdebug_11_RRC31.Q1-3-68_cd1c2_intcfg-test-keys_retail_US/
 : 1636733824:0;ls -l
 : 1636733841:0;rm -rf .cc3ea2c4360cb8c7b03a29840533e25407413206.parts .txt
-: 1636733851:0;ll -a
 : 1636734479:0;fastboot flash system system.img
 : 1636734519:0;fastboot flash system_ext system_ext.img
 : 1636734531:0;fastboot flash product product.img
@@ -8669,12 +8265,9 @@ asd
 : 1636740786:0;tar -xvf fastboot_caprip_retail_userdebug_12_S0RC32.23_a54822-32057_intcfg-test-keys_retail_US.tar.gz
 : 1636740869:0;cd caprip_retail_userdebug_12_S0RC32.23_a54822-32057_intcfg-test-keys_retail_US/
 : 1636741132:0;rm fastboot_caprip_retail_userdebug_12_S0RC32.23_a54822-32057_intcfg-test-keys_retail_US.tar.gz
-: 1636741387:0;cd tests/
-: 1636741465:0;cd lbs-test-suite/
 : 1636742773:0;motorola-vpn 455422
 : 1636743876:0;cd docu
 : 1637059201:0;motorola-vpn 234828
-: 1637062670:0;adb shell
 : 1637062797:0;adb pull /sdcard/Download/2021-11-16_07.39.44.csv
 : 1637063143:0;mv ~/Downloads/* .
 : 1637063150:0;mv 2021-11-16_07.39.44.csv ../
@@ -8697,7 +8290,6 @@ asd
 : 1637077743:0;adb pull /data/vendor/bug2go/user@2021-11-16_11-43-45.149-0400.zip
 : 1637077761:0;unzip user@2021-11-16_11-43-45.149-0400.zip -d logs
 : 1637077766:0;rm user@2021-11-16_11-43-45.149-0400.zip
-: 1637082646:0;cd Documents/lbs-test-suite/lbs_app/
 : 1637082650:0;adb install build/app/outputs/flutter-apk/LBSTestApp_1.1.6.apk 
 : 1637089017:0;motorola-vpn 695785
 : 1637145273:0;motorola-vpn 074250
@@ -8712,16 +8304,12 @@ asd
 : 1637167530:0;unzip N5PL440300_317565058_USER@2021-11-17_11_47_58_-0300.zip -d r
 : 1637167708:0;unzip N5PLD50179_317565045_USER@2021-11-17_11_49_28_-0300.zip -d s
 : 1637167712:0;cd s/
-: 1637168320:0;cd crs/
 : 1637172534:0;tm -tg *
 : 1637172908:0;unzip ~/Downloads/N5PLD50179_317565045_USER@2021-11-17_11_49_28_-0300.zip -d dut
-: 1637172964:0;rm -rf ~/Downloads/*
 : 1637173044:0;unzip ~/Downloads/N5PL440300_317565058_USER@2021-11-17_11_47_58_-0300.zip -d ref
-: 1637173052:0;cd ref/
 : 1637173069:0;cd ../dut/
 : 1637173441:0;cd /opt/qcom
 : 1637173443:0;cd qpm/
-: 1637173445:0;cd bin/
 : 1637173450:0;./qpm
 : 1637173530:0;lnav /home/eangelim/Documents/QCAT/Log/QCAT01.00.0020211117142520000_0000F3B9.log
 : 1637173792:0;vim group_deam.xml 
@@ -8739,7 +8327,6 @@ asd
 : 1637176369:0;ssh -vvv eangelim@100.66.32.58
 : 1637176617:0;adb rm -rf /data/vendor/diag_mdlog/logs/*
 : 1637176623:0;adb shell rm -rf /data/vendor/diag_mdlog/logs/*
-: 1637176633:0;adb shell 
 : 1637176783:0;scp bashrc eangelim@100.66.32.58
 : 1637176789:0;scp bashrc eangelim@100.66.32.58:/~
 : 1637177009:0;scp bashrc eangelim@100.66.32.58:/
@@ -8808,7 +8395,6 @@ asd
 : 1637587787:0;./install.sh
 : 1637588335:0;cd Treinamento
 : 1637588403:0;lnav vmware-1.log
-: 1637588473:0;tmux 
 : 1637588512:0;motorola-vpn 673165
 : 1637593175:0;lnav lab.txt
 : 1637593867:0;lnav XTRA download request
@@ -8850,7 +8436,6 @@ asd
 : 1637782292:0;adb pull /data/vendor/bug2go/user@2021-11-24_15-18-47.093-0400.zip
 : 1637838375:0;motorola-vpn 817022
 : 1637838486:0;ssh eangelim@100.66.32.59
-: 1637838586:0;ssh eangelim@100.66.32.58
 : 1637853307:0;mservman04
 : 1637868892:0;motorola-vpn 122273
 : 1637868938:0;ssh eangelim@100.66.32.54
@@ -8874,7 +8459,6 @@ asd
 : 1638206145:0;cd ../ref/
 : 1638214396:0;motorola-vpn 892708
 : 1638214681:0;rg -i "diag_log"
-: 1638214726:0;rg -i diag_mdlog
 : 1638214836:0;unzip N5PLD50179_317763255_USER@2021-11-29_16_11_59_-0300.zip -d caprip_r
 : 1638214846:0;rm N5PLD50179_317763255_USER@2021-11-29_16_11_59_-0300.zip
 : 1638215021:0;vim getlogs.log
@@ -8887,7 +8471,6 @@ asd
 : 1638298904:0;cd caprip_retail_userdebug_12_SRC32M.67_eng.eangelim.211130.132145_intcfg-test-keys_retail_US/
 : 1638298919:0;rm -rf caprip_retail_userdebug_12_SRC32M.67_eng.eangelim.211130.132145_intcfg-test-keys_retail_US
 : 1638298952:0;flash fastboot_caprip_retail_userdebug_12_SRC32M.67_eng.eangelim.211130.132145_intcfg-test-keys_retail_US.tar.gz
-: 1638299314:0;rm *.jpg
 : 1638299326:0;rm *.zip Emanuel\ Angelim\ Pereira.pdf
 : 1638305014:0;flash fastboot_caprip_retail_userdebug_12_S0RC32M.40_eng.eangelim.211130.155256_intcfg-test-keys_retail_US.tar.gz
 : 1638305392:0;motorola-vpn 609445
@@ -8908,7 +8491,6 @@ asd
 : 1638386695:0;~/Documents/scripts/getlogs.sh 
 : 1638386762:0;rg 10:35:00
 : 1638386767:0;rg -il 10:35:00
-: 1638386787:0;cd Boot-0000000003/
 : 1638386907:0;cd ../Boot-000000000
 : 1638386909:0;cd ../Boot-0000000004/
 : 1638387451:0;df -h
@@ -8933,7 +8515,6 @@ asd
 : 1638445619:0;motorola-vpn 808699
 : 1638446156:0;rm aplod-20211201T191337Z-001.zip wlan_logs-20211201T200135Z-001.zip
 : 1638446455:0;cd ../Documents
-: 1638446460:0;vim dwbuild.sh
 : 1638446626:0;dwbuild.sh https://artifacts.mot.com/artifactory/caprip/12/S0RC32.40/caprip_retail/userdebug/intcfg_test-keys/fastboot_caprip_retail_userdebug_12_S0RC32.40_76cfc-78978_intcfg-test-keys_retail_US.tar.gz
 : 1638447079:0;rg -i "failed to start scan"
 : 1638448482:0;rg -i "failed to start scan|ViewRootImpl: java.lang.Throwable"
@@ -8961,7 +8542,6 @@ asd
 : 1638467540:0;unzip bugreport-caprip_retail-S0RC32.29-2021-12-02-13-48-37.zip -d bugreport2
 : 1638467549:0;lnav bugreport2/bugreport-caprip_retail-S0RC32.29-2021-12-02-13-48-37.txt
 : 1638467684:0;mv ~/Downloads/GPS\ Super\ Test.apk .
-: 1638467700:0;rm -rf *.zip
 : 1638467858:0;rl -rf N5PLD50179_317587425_USER@2021-11-18_11_55_19_-0300.zip
 : 1638467861:0;rm N5PLD50179_317587425_USER@2021-11-18_11_55_19_-0300.zip
 : 1638468008:0;tar -xvf fastboot_caprip_retail_userdebug_12_S0RC32M.40_eng.eangelim.211201.124832_intcfg-test-keys_retail_US.tar.gz
@@ -8976,7 +8556,6 @@ asd
 : 1638470245:0;lnav bugreport-caprip_retail-S0RC32.29-2021-12-02-13-48-37.txt
 : 1638470389:0;rm -rf bugreport bugreport2
 : 1638472570:0;adb install GPS\ Super\ Test.apk
-: 1638473259:0;adb shell dumpsys location
 : 1638473277:0;adb shell dumpsys location | lnav
 : 1638474918:0;flash fastboot_caprip_retail_userdebug_12_S0RC32M.40_eng.eangelim.211202.151112_intcfg-test-keys_retail_US.tar.gz
 : 1638475337:0;motorola-vpn 030387
@@ -8996,12 +8575,9 @@ asd
 : 1638532656:0;unzip N2PR430095_317815821_USER@2021-12-02_17_30_31_-0300.zip -d sofiap_s
 : 1638532708:0;unzip N2PR430167_317815818_USER@2021-12-02_17_31_39_-0300.zip -d sofiap_r
 : 1638532789:0;cd sofiap_s/
-: 1638532879:0;unzip bugreport.txt
-: 1638532903:0;ls mod
 : 1638534361:0;cd Documents/crs/IKSWS-19915/
 : 1638534362:0;s
 : 1638534367:0;adb install LBSTestApp_1.1.6.apk
-: 1638535487:0;rm screenshot.png
 : 1638535654:0;flash fastboot_caprip_retail_userdebug_12_S0RC32M.40_eng.eangelim.211203.075357_intcfg-test-keys_retail_US.tar.gz
 : 1638536576:0;unzip N2PR430167_317827090_USER@2021-12-03_09_38_42_-0300.zip -d testLogs
 : 1638536581:0;cd testLogs/
@@ -9034,7 +8610,6 @@ asd
 : 1638555415:0;sudo modprobe btusb
 : 1638555437:0;sudo apt install blueman
 : 1638555461:0;sudo add-apt-repository ppa:blaze/rtbth-dkms
-: 1638555526:0;sudo apt-get update
 : 1638555539:0;sudo apt-get install rtbth-dkms
 : 1638556143:0;sudo vim /etc/modules
 : 1638556158:0;sudo blueman-manager
@@ -9066,8 +8641,6 @@ asd
 : 1638814058:0;cd folder/
 : 1638814271:0;rg -i "FILE_RF_WCDMA_NV_C:WCDMA"
 : 1638819042:0;unzip N2PR430167_317876833_USER@2021-12-06_16_26_48_-0300.zip -d logs
-: 1638819304:0;cd modem/
-: 1638819311:0;/opt/qcom/QCAT/bin/QCAT
 : 1638820565:0;mv bugreport-sofiap_retail-RPRS31.Q1-56-9-2-11-5-2021-12-06-16-32-12.zip logs
 : 1638820569:0;unzip bugreport-sofiap_retail-RPRS31.Q1-56-9-2-11-5-2021-12-06-16-32-12.zip
 : 1638821902:0;rm -rf bugreport bugreport-sofiap_retail-RPRS31.Q1-56-9-2-11-5-2021-12-06-17-10-49.zip
@@ -9080,7 +8653,6 @@ asd
 : 1638879309:0;cd caprip_r/]
 : 1638879982:0;cd caprip_r/
 : 1638880107:0;lnav group_deam.xml
-: 1638880116:0;lnav report_info.txt
 : 1638881054:0;cd racer_r/
 : 1638882113:0;lnav bugreport-sofiap_retail-RPRS31.Q1-56-9-2-11-5-2021-12-06-16-32-12.
 : 1638882116:0;lnav bugreport-sofiap_retail-RPRS31.Q1-56-9-2-11-5-2021-12-06-16-32-12.txt
@@ -9161,7 +8733,6 @@ asd
 : 1639079192:0;mv * test
 : 1639079198:0;mkcd retest
 : 1639079205:0;mv ~/Downloads/IKSWS-28642/* .
-: 1639079213:0;rm -rf IKSWS-28642
 : 1639079224:0;cd Documents/crs/IKSWS-28642/retest/
 : 1639080772:0;motorola-vpn 677025
 : 1639138520:0;motorola-vpn 197702
@@ -9209,11 +8780,9 @@ asd
 : 1639400386:0;rg -i "WifiThreadRunner.call() timed out"
 : 1639400522:0;cd ../../retest/aplogd/
 : 1639401548:0;ping 8.8.8.8
-: 1639407255:0;mkcd test
 : 1639407259:0;mv ../logs.tar.gz .
 : 1639407267:0;tar -xvf logs.tar.gz
 : 1639411972:0;lnav txrx_pktlog_000.dat
-: 1639412006:0;lnav cnss_fw_logs_current.txt
 : 1639416398:0;cd ../wlan_logs_57/
 : 1639416458:0;cd ../wlan_logs_94/
 : 1639416792:0;rm N9BA110112_317759631_USER@2021-11-29_13_09_45_+0000.zip
@@ -9269,7 +8838,6 @@ asd
 : 1639594200:0;motorola-vpn 577253
 : 1639594215:0;motorola-vpn 527253
 : 1639594413:0;dmesg
-: 1639595479:0;fastboot -w
 : 1639655908:0;motorola-vpn 708072
 : 1639656965:0;cd crs/IKSWS-28642/
 : 1639657028:0;rg -i "12-08 14:37:01.584 2084 5495 E WifiThreadRunner: WifiThreadRunner.call() timed out
@@ -9278,7 +8846,6 @@ asd
 : 1639657471:0;tar -xvf logcat.tar.gz
 : 1639657479:0;cd logcat/
 : 1639658637:0;adb install MGC_8.1.101_A9_GV1x_MGC.apk
-: 1639660491:0;adb bugreport
 : 1639661401:0;gelogs
 : 1639664201:0;adb pull /sdcard/Pictures/
 : 1639664212:0;cd Pictures
@@ -9290,12 +8857,9 @@ asd
 : 1639664478:0;cd user@2021-12-16_10-13-23.728-0400/
 : 1639664495:0;rm -rf user@2021-12-16_10-13-23.728-0400
 : 1639664525:0;rm -rf berlna_global_userdebug_12_S1RM32.20_aa41e-19826_intcfg-test-keys_global_US
-: 1639664530:0;fastboot reboot
 : 1639665465:0;flash fastboot_berlna_global_userdebug_12_S1RM32.20_aa41e-19826_intcfg-test-keys_global_US.tar.gz
 : 1639665588:0;unzip N9BA420541_318044648_USER@2021-12-16_10_31_07_-0400.zip -d logs_r
 : 1639665596:0;crm N9BA420541_318044648_USER@2021-12-16_10_31_07_-0400.zip
-: 1639667448:0;adb shell pm list packages --apex-only --show-versioncode
-: 1639667604:0;adb shell getprop | grep "ro.boot.hardware.sku"
 : 1639672038:0;rm N9BA420541_318044648_USER@2021-12-16_10_31_07_-0400.zip
 : 1639672060:0;unzip N9BA420541_318045163_USER@2021-12-16_11_14_57_-0400.zip -d logs_s
 : 1639672075:0;rm N9BA420541_318045163_USER@2021-12-16_11_14_57_-0400.zip
@@ -9303,7 +8867,6 @@ asd
 : 1639672280:0;unzip bugreport-berlna_global-S1RM32.20-2021-12-16-11-15-03.txt
 : 1639672291:0;lnav bugreport-berlna_global-S1RM32.20-2021-12-16-11-15-03.txt
 : 1639672554:0;mv bugreport/bugreport-berlna_global-S1RM32.20-2021-12-16-11-15-03.txt bugreport.txt
-: 1639672559:0;rm -rf bugreport
 : 1639672565:0;lnav wlan_logs/host_driver_logs_current.txt
 : 1639672826:0;sudo spkg -i ps-pulse-ubuntu-debian.deb
 : 1639672891:0;sudo apt-get install libnss3-tools
@@ -9354,11 +8917,9 @@ asd
 : 1639679761:0;unzip bugreport-sofiap_ao-S0PR32.44-3-2021-12-15-20-53-14.zip -d bugreport
 : 1639742835:0;motorola-vpn 144537
 : 1639743595:0;cd Documents/crs/IKSWS-28642/
-: 1639743613:0;cd Boot-0000000005/
 : 1639743714:0;rg -il "WifiThreadRunner.*PackageManagerService"
 : 1639743966:0;lnav retest-bt/aplogd/Boot-0000000005/aplogcat-main.txt
 : 1639744442:0;cd aplod/
-: 1639744447:0;cd Boot-0000000004/
 : 1639746785:0;cd ../cd ../
 : 1639746792:0;cd retest-bt/
 : 1639746802:0;cd Boot-0000000005
@@ -9366,7 +8927,6 @@ asd
 : 1639747394:0;cd Downloads/bugreport/
 : 1639747398:0;lnav bugreport-sofiap_ao-S0PR32.44-3-2021-12-15-20-53-14.txt
 : 1639749767:0;rm *.ziá¹ƒµ
-: 1639749769:0;rm *.zip
 : 1639749779:0;rm -rf aplogd bugreport Camera
 : 1639749804:0;mv * ~/Documents/crs/IKSWS-27891
 : 1639753157:0;cd ../logs_r/
@@ -9388,17 +8948,12 @@ asd
 : 1639764749:0;adb pull /data/vendor/bug2go/user@2021-12-17_14-08-32.395-0400.zip
 : 1639764783:0;unzip user@2021-12-17_14-08-32.395-0400.zip -d bug2go
 : 1639764803:0;rm user@2021-12-17_14-08-32.395-0400.zip
-: 1639764820:0;rm bugreport
-: 1639769463:0;cd staging/
-: 1639769468:0;cd wisl/
 : 1639769981:0;cd logs_s/
 : 1639769985:0;cd ../
 : 1639770559:0;mv sniffer_hellium.sh ../../../
-: 1639770568:0;rm -rf scripts
 : 1639770575:0;rm -rf packet_capture bug2go
 : 1639770581:0;mkcd builds
 : 1639770598:0;mv ../berlna_global_userdebug_11_RRM31.Q3-23-77-2_e55f1_intcfg-test-keys_global_US ../berlna_global_userdebug_12_S1RM32.20_aa41e-19826_intcfg-test-keys_global_US .
-: 1639770674:0;rm -rf aplogd
 : 1639771012:0;rm -rf capture.pcap00 sniffer.tar.gz
 : 1639771085:0;adb shell ifconfig
 : 1639771191:0;adb shell wlan0 iwpriv setMonChan 5560 2
@@ -9418,7 +8973,6 @@ asd
 : 1640005329:0;tar -xvf sniffer.tar.gz
 : 1640005349:0;mv capture.pcap00 sniffer_r.pcap00
 : 1640005353:0;rm sniffer.tar.gz
-: 1640016471:0;ccd ..
 : 1640017595:0;rm -rf wlan_logs
 : 1640024115:0;adb pull /sdcard/DCIM/Camera/
 : 1640024177:0;cd Camera
@@ -9434,9 +8988,7 @@ asd
 : 1640028233:0;rm NB0R120443_318012132_USER@2021-12-14_10_08_22_-0300.zip wireshark_802.11_filters_-_reference_sheet.pdf
 : 1640028241:0;rm camera.tar.gz EMANUEL-ANGELIM-PEREIRA-pdf.zip
 : 1640028294:0;unzip NB0R120443_317997773_USER@2021-12-13_11_39_34_-0300.zip -d logs
-: 1640028323:0;rm -rf logs
 : 1640028327:0;rm NB0R120443_317997773_USER@2021-12-13_11_39_34_-0300.zip
-: 1640028383:0;cd Boot-0000000001
 : 1640029731:0;unzip NB0R420258_317901680_USER@2021-12-07_22_46_22_-0300.zip -d logs
 : 1640029801:0;lnav bugreport-berlin_global-S1RG32.15-2021-12-07-22-46-25.txt
 : 1640029877:0;rm -rf NB0R420258_317901680_USER@2021-12-07_22_46_22_-0300.zip logs
@@ -9453,7 +9005,6 @@ asd
 : 1640094165:0;rm *.apk
 : 1640094170:0;unzip N9BA420541_318118786_USER@2021-12-21_09_37_29_-0400.zip -d bug2go
 : 1640094273:0;rm -rf bug2go N9BA420541_318118786_USER@2021-12-21_09_37_29_-0400.zip
-: 1640094286:0;adb root; adb shell logcat -b all -c; adb shell rm -rf data/vendor/aplogd/ /data/vendor/wifi/wlan_logs/ /data/vendor/bug2go; /data/vendor/diag_mdlog/logs/; adb reboot
 : 1640095012:0;rm com.app.floatingapptimer.com-3.9.2-free-www.apkgit.com.apk
 : 1640095016:0;tar -xvf fastboot_sofiap_retail_userdebug_12_S0PR32M.58_eng.eangelim.211221.084958_intcfg-test-keys_retail_US.tar.gz
 : 1640095115:0;cd sofiap_retail_userdebug_12_S0PR32M.58_eng.eangelim.211221.084958_intcfg-test-keys_retail_US/
@@ -9484,7 +9035,6 @@ asd
 : 1640107715:0;gpload user@2021-12-21_13-22-51.727-0400.zip
 : 1640107750:0;gpload VID_20211221_131752.mp4
 : 1640108772:0;fastboot oem ssm_test 3
-: 1640108784:0;fastboot reboot fastboot
 : 1640109586:0;cd test/
 : 1640110267:0;cd retest/S1RM32.8/
 : 1640110273:0;cd S1RM32.18/
@@ -9504,10 +9054,8 @@ asd
 : 1640113382:0;cd S1RM32.8/
 : 1640113389:0;rg -il "18:9c:27:4f:9c:2b.*freq"
 : 1640113404:0;cd ../S1RM32.18/
-: 1640113420:0;l
 : 1640113436:0;rg -i "18:9c:27:4f:9c:2b.*freq"
 : 1640113442:0;rg -i "c0:3d:d9:91:94:bf.*freq"
-: 1640113462:0;cd 2/
 : 1640113471:0;lnav bugreport-berlin_global-S1RG32.30-2021-12-21-15-40-06.txt
 : 1640113478:0;lnav bugreport-berlin_global-S1RG32.22-2021-12-14-10-08-27.txt
 : 1640115388:0;cd ../builds/
@@ -9536,7 +9084,6 @@ asd
 : 1640183709:0;java -version
 : 1640183872:0;lsa
 : 1640183878:0;unzip android-cts-verifier-12_r2-linux_x86-arm.zip -d cts
-: 1640183881:0;cd cts/
 : 1640183892:0;rm -rf cts android-cts-verifier-12_r2-linux_x86-arm.zip
 : 1640183900:0;cd android-vts/
 : 1640184005:0;motorola-vpn 910811
@@ -9546,22 +9093,15 @@ asd
 : 1640184411:0;unzip android-cts-12_r2-linux_x86-arm.zip
 : 1640184588:0;mv android-cts ../Documents/tests
 : 1640186532:0;tar -xvf fastboot_berlna_global_user_12_S1RM32.25_738e3-d2a6f_release-keys_global_US.tar.gz
-: 1640186672:0;adb reboot bootloader
-: 1640187088:0;adb reboot
-: 1640187382:0;cd Documents
 : 1640187914:0;dwbuild.sh http://artifacts.mot.com/artifactory/berlna/12/msi_only/S1RM32M.26/berlna_global/userdebug/intcfg_test-keys/fastboot_berlna_global_userdebug_12_S1RM32M.26_9ccb1_intcfg-test-keys_global_US.tar.gz
 : 1640188787:0;cd latest/
 : 1640188836:0;flash berlna_global_userdebug_11_RRM31.Q3-23-77-2_e55f1_intcfg-test-keys_global_US
 : 1640188882:0;rg -i "android.net.cts.ConnectivityManagerTest#testFactoryReset"
 : 1640189112:0;cd berlna_global_userdebug_12_S1RM32.20_aa41e-19826_intcfg-test-keys_global_US/
 : 1640189126:0;rm fastboot_berlna_global_user_12_S1RM32.25_738e3-d2a6f_release-keys_global_US.tar.gz
-: 1640189132:0;unzip CTS_Berlin-NA_retus_S1RM32.18.zip
 : 1640189364:0;rg -il "berlna"
 : 1640194430:0;fastboot -w; fastboot reboot
-: 1640195044:0;unzip android-cts.zip
-: 1640195166:0;fastboot devices
 : 1640195199:0;sudo systemctl stop ModemManager;sudo systemctl stop fwupd.service
-: 1640195321:0;cd ../../
 : 1640195325:0;rg -i "12_r3"
 : 1640195389:0;rg -i "12_r2"
 : 1640195739:0;./cts-tradefed]
@@ -9570,16 +9110,12 @@ asd
 : 1640195811:0;./flashall.sh
 : 1640195828:0;rm -rf android-cts
 : 1640195839:0;mv ~/Downloads/android-cts .
-: 1640195842:0;cd android-cts/
 : 1640195858:0;rm -rf berlna_global_user_12_S1RM32.25_738e3-d2a6f_release-keys_global_US android-cts.zip CTS_Berlin-NA_retus_S1RM32.18
-: 1640196488:0;adb shell "getprop ro.build.fingerprint"
 : 1640196535:0;adb reboot && adb wait-for-device root && adb wait-for-device && adb logcat -b all | grep -i thermal | egrep " E | W "
 : 1640198587:0;rm out.txt
 : 1640198638:0;rm -rf berlna_global_user_12_S1RM32.25_738e3-d2a6f_release-keys_global_US
 : 1640199343:0;flash fastboot_berlna_global_user_12_S1RM32.25_738e3-d2a6f_release-keys_global_US.tar.gz
 : 1640199422:0;cd berlna_global_user_12_S1RM32.25_738e3-d2a6f_release-keys_global_US/
-: 1640200097:0;cd tools/
-: 1640200106:0;./cts-tradefed
 : 1640200451:0;motorola-vpn 394242
 : 1640201718:0;cd 2021.12.22_15.08.42/
 : 1640201720:0;cd inv_3371997895037612772/
@@ -9588,28 +9124,21 @@ asd
 : 1640201777:0;rg test
 : 1640201782:0;rg -uuu test
 : 1640201789:0;gzip *
-: 1640201811:0;gzip -d *
 : 1640201817:0;rg "java.lang.AssertionError: Did not receive callback after 30000ms"
 : 1640201836:0;lnav device_logcat_test_N9BA420541_7908469589436736047.txt
 : 1640204944:0;adb pull /data/vendor/bug2go/user@2021-12-22_16-25-21.591-0400.zip
-: 1640204981:0;adb shell motsettings put secure privacy_motorola_terms_of_service 1
 : 1640205222:0;adb pull /sdcard/Download/2021-12-22_16-25-21.591-0400.zip
-: 1640205223:0;Ã§s
 : 1640205235:0;unzip 2021-12-22_16-25-21.591-0400.zip -d bug2go
-: 1640205237:0;cd bug2go/
 : 1640205641:0;rm -rf 2021-12-22_16-25-21.591-0400.zip
 : 1640205652:0;mv bug2go android-cts/results/latest
 : 1640205654:0;cd la
 : 1640205659:0;cd android-cts/results/latest/
 : 1640261966:0;motorola-vpn 891264
-: 1640278216:0;ls -a
 : 1640278607:0;hciconfig -a
 : 1640279309:0;sudo vim /etc/sudoers
 : 1640279382:0;sudo visudo -f /etc/sudoers
 : 1640279414:0;which linssid
 : 1640279419:0;ls /usr/sbin
-: 1640280997:0;sudo apt update
-: 1640281133:0;sudo apt upgrade
 : 1640282870:0;sudo apt dist-upgrade
 : 1640282916:0;motorola-vpn 214481
 : 1640283868:0;flash fastboot_berlna_global_userdebug_12_S1RM32M.26_9ccb1_intcfg-test-keys_global_US.tar.gz
@@ -9662,8 +9191,6 @@ asd
 : 1640291646:0;flash fastboot_berlna_global_userdebug_12_S1RM32.27_705da-caf1a_intcfg-test-keys_global_US.tar.gz
 : 1640603356:0;motorola-vpn 899722
 : 1640603519:0;motorola-vpn 649609
-: 1640605251:0;git clone ssh://eangelim@gerrit.mot.com:29418/ssw_bz/scripts
-: 1640605277:0;cd scripts/
 : 1640605290:0;cd staging/wisl/
 : 1640605949:0;gpload sniffer_hellium.sh
 : 1640608305:0;gpload sniffer_hellium.py
@@ -9673,17 +9200,12 @@ asd
 : 1640629236:0;motorola-vpn 579847
 : 1640629303:0;unzip NB0R120443_318206366_USER@2021-12-27_14_55_49_+0000.zip -d logs
 : 1640629393:0;unzip bugcd lo
-: 1640629399:0;unzip bugreport.zip -d bugreport
-: 1640629401:0;cd bugreport/
 : 1640629408:0;lnav bugreport-berlin_global-S1RG32.36-2021-12-27-11-55-55.txt
 : 1640629538:0;tar -xvf 12-27-21_12.01.19_sniffer.tar.gz
-: 1640630388:0;cd lo
 : 1640691122:0;motorola-vpn 956533
 : 1640692874:0;unzip NB0C2E0121_318072865_USER@2021-12-18_08_10_47_-0300_IKUT-1613866.zip -d logs2
 : 1640692949:0;lnav bugreport-berlin_global-S1RG32.22-2021-12-18-08-10-52.txt
-: 1640693113:0;kls
 : 1640693118:0;unzip NB0C2E0121_318072811_USER@2021-12-18_08_00_01_-0300_IKUT-1613864.zip -d logs
-: 1640693174:0;lnav bugreport-berlin_global-S1RG32.22-2021-12-18-08-00-06.txt
 : 1640697737:0;lnav bugreport-berlin_global-S1RG32.36-2021-12-28-09-57-53.txt
 : 1640702495:0;adb reboot -p
 : 1640709312:0;tar -xvf 12-28-21_10.08.41_sniffer.tar.gz
@@ -9708,527 +9230,907 @@ asd
 : 1640723139:0;rm fastboot_saipan_retail_userdebug_12_S1RS32.8_9dfc28_intcfg-test-keys_retail_US.tar.gz
 : 1640723283:0;bug2go
 : 1640723527:0;bug2go NKYR4E0277_318224185_USER@2021-12-28_15_27_25_-0300.zip test
-: 1640723538:0;cd ..
-: 1640723538:0;ls
-: 1640723543:0;rm -rf *
-: 1640779244:0;tmux
 : 1640779260:0;motorola-vpn 060017
-: 1640779786:0;ls
-: 1640779788:0;cd Downloads
-: 1640779788:0;ls
 : 1640779808:0;unzip Berlin_5.1.10.zip
-: 1640779810:0;ls
 : 1640779812:0;cd Berlin_5.1.10
-: 1640779813:0;ls
-: 1640779818:0;cd aplogd/
-: 1640779818:0;ls
-: 1640779820:0;cd aplogd/
-: 1640779822:0;ll -h
-: 1640779826:0;getlogs.sh
-: 1640779860:0;cd -
-: 1640779862:0;cd ..
-: 1640779865:0;rm -rf *
-: 1640779866:0;ls
 : 1640780750:0;unzip user@2021-12-27_10-55-51.852-0300.zip -d logs
-: 1640780753:0;ls
 : 1640780755:0;rm user@2021-12-27_10-55-51.852-0300.zip
-: 1640780756:0;cd logs/
-: 1640780757:0;ls
-: 1640780770:0;rg -il "mProperties"
-: 1640780775:0;unzip bugreport.zip
-: 1640780777:0;ls
-: 1640780779:0;rm bugreport.zip
-: 1640780780:0;ls
 : 1640780783:0;rg -il "mProperties"
 : 1640780788:0;rg -il "Properties"
-: 1640780843:0;lnav aplogcat-main.txt
 : 1640781210:0;htop
-: 1640783326:0;lnav aplogcat-main.txt
-: 1640783705:0;cd ..
-: 1640783705:0;ls
 : 1640783977:0;bug2go user@2021-12-27_15-26-08.732-0300.zip temp
-: 1640784057:0;cd ..
 : 1640784068:0;rm -rf temp
-: 1640784862:0;mservman08
-: 1640789293:0;cd
-: 1640789295:0;cd Documents/crs/
-: 1640789296:0;ls
-: 1640789356:0;cd ..
-: 1640789356:0;cd
-: 1640789358:0;cd Downloads
-: 1640789358:0;ls
 : 1640789365:0;rm *.java
-: 1640789366:0;ls
 : 1640789395:0;bug2go NB0R120443_318237758_USER@2021-12-29_14_41_56_+0000.zip ~/Documents/crs/IKSWS-27891/changes
-: 1640789490:0;cd
-: 1640789492:0;cd Downloads
-: 1640789492:0;ls
-: 1640789500:0;vim ~/.zshrc
-: 1640789525:0;b2g user@2021-12-29_11-40-43.499-0300.zip sar_r
-: 1640789529:0;zsh
 : 1640789530:0;b2g user@2021-12-29_11-40-43.499-0300.zip sar_r
-: 1640789735:0;cd ..
-: 1640789736:0;ls
 : 1640789739:0;rm -rf sar_r
-: 1640789739:0;ls
-: 1640790801:0;cd
-: 1640790804:0;exit
-: 1640790805:0;ls
 : 1640790830:0;bug2go NB0R120443_318220620_USER@2021-12-28_12_57_49_+0000.zip test
 : 1640790836:0;b2g NB0R120443_318220620_USER@2021-12-28_12_57_49_+0000.zip test
-: 1640790849:0;cd ..
-: 1640790851:0;rm -rf test
-: 1640790852:0;ls
-: 1640791336:0;b2g N2ER1E0108_318223639_USER@2021-12-28_14_31_42_-0300.zip -d sierra
-: 1640791377:0;ls
-: 1640791379:0;cd ..
-: 1640791380:0;ls
-: 1640791384:0;rm -rf -d
-: 1640791384:0;ls
 : 1640791390:0;rm -rf -d
-: 1640791391:0;ls
 : 1640791406:0;rm -rf -ls
-: 1640791407:0;ls
-: 1640791456:0;mkdir test
-: 1640791457:0;ls
-: 1640791460:0;rm test
-: 1640791463:0;vim ~/.zshrc
-: 1640791531:0;ls
-: 1640791545:0;rm -rf test
-: 1640791545:0;ls
 : 1640791574:0;b2g N2ER1E0108_318223639_USER@2021-12-28_14_31_42_-0300.zip -d sierra
-: 1640791580:0;ls
 : 1640791588:0;b2g NB0R120443_318237758_USER@2021-12-29_14_41_56_+0000.zip sierra
-: 1640791598:0;ls
 : 1640791601:0;lnav bugreport.zip
-: 1640791605:0;unzip bugreport.zip
 : 1640791609:0;lnav bugreport-berlin_global-S1RG32.38-2021-12-29-11-42-00.txt
-: 1640791694:0;lnav aplogcat-main.txt
-: 1640796141:0;cd ..
-: 1640796143:0;rm -rf *
-: 1640796158:0;ls
 : 1640796177:0;b2g N2ER1E0108_318223639_USER@2021-12-28_14_31_42_-0300.zip sierra
-: 1640796224:0;unzip bugreport.zip
-: 1640796230:0;lnav bugreport-pstar_retail-S1RA32.29-2021-12-28-14-31-56.txt
 : 1640796306:0;rg -i "p2p.*freq"
-: 1640796316:0;lnav bugreport-pstar_retail-S1RA32.29-2021-12-28-14-31-56.txt
-: 1640796326:0;cd ..
-: 1640796326:0;ls
-: 1640796328:0;rm -rf *
-: 1640796574:0;cd 
-: 1640796578:0;cd Documents/crs/IKSWS-27891/
-: 1640796579:0;ls
 : 1640796607:0;rm -rf aplogd logs_r logs_s retest wlan_logs test sniffer_r.pcap00 sniffer_s.pcap00
-: 1640796608:0;ls
 : 1640796612:0;rm -rf changes
-: 1640796613:0;ls
 : 1640796621:0;mv Floating\ Timer\ clock\ timer\ and\ stopwatch_v1.8.9_apkpure.com.apk timer.apk
-: 1640796622:0;ks
-: 1640796622:0;ls
-: 1640796623:0;cd
-: 1640796625:0;cd Downloads
-: 1640796625:0;ls
 : 1640796644:0;b2g N2ER1E0108_318223639_USER@2021-12-28_14_31_42_-0300.zip ~/Documents/crs/IKSWS-27891/sierra/test
-: 1640796653:0;b2g N2ER1E0108_318223639_USER@2021-12-28_14_31_42_-0300.zip ~/Documents/crs/IKSWS-27891/sierra/
-: 1640796654:0;ls
-: 1640796775:0;cd
-: 1640796777:0;cd Documents/crs/IKSWS-27891/
-: 1640796777:0;ls
-: 1640796780:0;cd
-: 1640796782:0;cd Downloads
-: 1640796782:0;ls
 : 1640796869:0;b2g N2ER1E0108_318223639_USER@2021-12-28_14_31_42_-0300.zip ~/Documents/crs/IKSWS-27891/sierra/
-: 1640796879:0;unzip bugreport.zip
-: 1640796882:0;ls
-: 1640796887:0;lnav bugreport-pstar_retail-S1RA32.29-2021-12-28-14-31-56.txt
-: 1640797200:0;ls
-: 1640797205:0;cd wlan_logs/
-: 1640797205:0;ls
-: 1640797208:0;lnav host_driver_logs_current.txt
-: 1640797677:0;ifconfig
-: 1640798060:0;cd ..
-: 1640798062:0;lnav aplogcat-main.txt
 : 1640798088:0;lnav bugreport-pstar_retail-S1RA32.29-2021-12-28-14-31-56.txt
-: 1640799687:0;exit
-: 1640799690:0;ls
-: 1640799691:0;cd
 : 1640799693:0;cd Documents/crs/IKSWS-27891/
-: 1640799694:0;ls
-: 1640799700:0;cd ..
-: 1640799701:0;ls
 : 1640799709:0;mkcd IKSWS-39635
-: 1640799710:0;ls
-: 1640799713:0;cd
-: 1640799714:0;cd Downloads
-: 1640799714:0;ls
 : 1640799795:0;b2g user@2021-12-27_10-55-51.852-0300.zip ~/Documents/crs/IKSWS-39635/s
-: 1640799809:0;unzip bugreport.zip; rm bugreport.zip
-: 1640799811:0;ls
-: 1640799813:0;cd
-: 1640799814:0;cd Downloads
-: 1640799815:0;ls
 : 1640799831:0;b2g user@2021-12-29_11-40-43.499-0300.zip ~/Documents/crs/IKSWS-39635/r
 : 1640799843:0;unzip bugreport.zip; rm bugreport.zip
-: 1640799847:0;ls
-: 1640799856:0;cd ..
-: 1640799857:0;ls
 : 1640799866:0;rg -il "fingerprint"
 : 1640799882:0;rg -il "mModemTX0SensorIndexBits"
 : 1640799890:0;rg -il "mWifiTX0SensorIndexBits"
-: 1640799921:0;lnav aplogcat-main.txt aplogcat-system.txt aplogcat-kernel.txt aplogcat-crash.txt
 : 1640799925:0;cd r/
-: 1640799927:0;lnav aplogcat-main.txt aplogcat-system.txt aplogcat-kernel.txt aplogcat-crash.txt
-: 1640799955:0;lnav bugreport.txt
 : 1640799967:0;lnav aplogcat-main.txt aplogcat-system.txt aplogcat-kernel.txt aplogcat-crash.txt
-: 1640799984:0;cd ..
 : 1640799987:0;rg -il "Failed to parse number from config file"
 : 1640800029:0;lnav r/aplogcat-main.txt
-: 1640800079:0;adb logcat -b all | lnav
-: 1640800251:0;cd
 : 1640800269:0;dwbuild.sh https://artifacts.mot.com/artifactory/saipan/11/RRS31.Q2-54-65/saipan_retail/userdebug/intcfg_test-keys/fastboot_saipan_retail_userdebug_11_RRS31.Q2-54-65_ee5fb7_intcfg_test-keys_retail_US.tar.gz
-: 1640801173:0;exit
-: 1640801178:0;cd Downloads
-: 1640801179:0;ls
 : 1640801180:0;vim sniffer_hellium.py
 : 1640801229:0;rm sniffer_hellium.py
-: 1640801230:0;ls
-: 1640801686:0;cd Downloads
-: 1640801686:0;ls
 : 1640801692:0;flash fastboot_saipan_retail_userdebug_11_RRS31.Q2-54-65_ee5fb7_intcfg_test-keys_retail_US.tar.gz
-: 1640802113:0;adb devices
-: 1640802116:0;adb logcat -b all | lnav
-: 1640802135:0;adb reboot bootloader; fastboot -w; fastboot reboot
-: 1640802148:0;adb logcat -b all | lnav
-: 1640802872:0;exit
-: 1640803218:0;cd
-: 1640803222:0;cd Documents/lbs-test-suite/
-: 1640803223:0;git status
-: 1640803225:0;tig
-: 1640805091:0;ls
-: 1640805093:0;cd lbs_app/
-: 1640805093:0;ls
-: 1640805129:0;flutter packages pub run build_runner build --delete-conflicting-outputs
-: 1640805410:0;adbconnect
-: 1640808209:0;tmux a
 : 1640808224:0;motorola-vpn 462029
 : 1640808972:0;cdcd 
-: 1640808973:0;cd 
-: 1640808975:0;cd Downloads
-: 1640808976:0;ls
 : 1640808979:0;adb install WiFi\ Channel\ Analyzer_v3.33_apkpure.com.apk
-: 1640809014:0;cd
 : 1640809017:0;cd Documents/tests/
-: 1640809017:0;ls
-: 1640809018:0;cd apps/
-: 1640809019:0;ls
-: 1640809098:0;cd
-: 1640809099:0;cd Downloads
-: 1640809100:0;ls
-: 1640809113:0;adb install WiFi\ Monitor\ analyzer\ of\ Wi\ Fi\ networks_v2.5.9_apkpure.com.apk
-: 1640809238:0;ls
 : 1640809241:0;rm WiFi\ Channel\ Analyzer_v3.33_apkpure.com.apk
-: 1640809280:0;adb install WiFi\ Monitor\ analyzer\ of\ Wi\ Fi\ networks_v2.5.9_apkpure.com.apk
-: 1640809284:0;adb disconnect
 : 1640809286:0;adb install WiFi\ Monitor\ analyzer\ of\ Wi\ Fi\ networks_v2.5.9_apkpure.com.apk
-: 1640809495:0;adbconnect
-: 1640809579:0;ls
 : 1640809587:0;adb install WiFi\ Analyzer\ open\ source_v3.0.4_apkpure.com.apk
-: 1640810491:0;ls
 : 1640810509:0;adb install WiFi\ Monitor\ analyzer\ of\ Wi\ Fi\ networks_v2.5.2_apkpure.com.apk
-: 1640810675:0;ls
 : 1640810714:0;b2g NNIV410166_313696025_USER@2021-03-02_08_12_26_-0600_IKUT-1521663.zip tmp
-: 1640810887:0;cd ..
-: 1640810889:0;rm -rf tmp
-: 1640810889:0;ls
 : 1640810949:0;b2g NBOA4E0113_316322074_USER@2021-08-28_07_20_02_-0400_IKUT-1578954.zip tmp
-: 1640811089:0;lnav bugreport.txt
-: 1640811105:0;cd ..
-: 1640811107:0;rm -rf tmp
-: 1640864119:0;tmux
 : 1640864153:0;motorola-vpn 246570
-: 1640864167:0;mservman08
-: 1640864746:0;cd Downloads
-: 1640864747:0;ls
 : 1640864795:0;b2g NKYR4E0277_318224185_USER@2021-12-28_15_27_25_-0300.zip
-: 1640864799:0;ls
-: 1640864825:0;cd Downloads
-: 1640864825:0;ls
 : 1640864829:0;b2g NKYR4E0277_318224185_USER@2021-12-28_15_27_25_-0300.zip tmp
-: 1640864847:0;cd ..
 : 1640864849:0;rm -rf tmp
-: 1640864905:0;ls
-: 1640865246:0;scrcpy
-: 1640867082:0;adb exec-out screencap -p > screenshot.png
-: 1640870760:0;adbconnect
-: 1640871354:0;cd
-: 1640871361:0;cd Documents/lbs-test-suite/
-: 1640871364:0;git reset --hard
-: 1640871512:0;flutter packages pub run build_runner build --delete-conflicting-outputs
-: 1640871515:0;cd lbs_app/
-: 1640871516:0;flutter packages pub run build_runner build --delete-conflicting-outputs
-: 1640871892:0;git reset --hard
 : 1640871922:0;git reflog
-: 1640873493:0;cd
-: 1640873496:0;adb logcat -b all | lnav
-: 1640873783:0;cd Downloads
-: 1640873783:0;ls
 : 1640873786:0;unzip android-cts-verifier-12_r2-linux_x86-arm.zip
-: 1640873788:0;cd android-cts-verifier/
-: 1640873789:0;ls
 : 1640873810:0;adb install CtsVerifier.apk
-: 1640873822:0;adb logcat -b all | lnav
-: 1640876768:0;cd ..
-: 1640876768:0;ls
 : 1640878546:0;adb pull aplogd
-: 1640878549:0;adb root
-: 1640878552:0;adb pull /data/vendor/aplogd
-: 1640878559:0;cd aplogd/
-: 1640878561:0;getlogs.sh
 : 1640878568:0;cd Boot-0000000008/
-: 1640878573:0;ls
-: 1640878582:0;lnav aplogcat-main.txt
-: 1640878618:0;cd ..
-: 1640878624:0;adb pull /data/vendor/wifi/wlan_logs
-: 1640878634:0;cd wlan_logs/
-: 1640878635:0;ls
-: 1640878638:0;lnav host_driver_logs_current.txt
-: 1640878663:0;cd ..
-: 1640878664:0;ls
-: 1640882835:0;flash fastboot_saipan_retail_userdebug_12_S1RS32.8_9dfc28_intcfg-test-keys_retail_US.tar.gz
-: 1640882842:0;ls
-: 1640882845:0;vim ~/.zshrc
 : 1640882855:0;flash fastboot_saipan_retail_userdebug_12_S1RS32.8_9dfc28_intcfg-test-keys_retail_US.tar.gz
-: 1640883086:0;cd
-: 1640883099:0;cd Documents/tests/android-cts/
-: 1640883101:0;ls
-: 1640883103:0;cd results/
-: 1640883103:0;ls
-: 1640883104:0;nautilus .
-: 1640883143:0;cd
-: 1640883144:0;cd Downloads
-: 1640883144:0;ls
 : 1640883151:0;unzip Berlna_vzw_S1RM32.31_pass.zip -d logs
-: 1640883153:0;cd logs/
-: 1640883154:0;ls
-: 1640883156:0;cd Berlna_vzw_S1RM32.31_pass
-: 1640883156:0;ls
-: 1640883159:0;cd results/
-: 1640883159:0;ls
-: 1640883162:0;cd 2021.12.29_11.18.00/
-: 1640883162:0;ls
-: 1640883163:0;nautilus .
-: 1640883276:0;cd
-: 1640883277:0;cd Downloads
-: 1640883277:0;ls
-: 1640883284:0;unzip retest-S1RM32.24_CtsNetTestCases.zip
-: 1640883286:0;cd retest-S1RM32.24_CtsNetTestCases/
-: 1640883287:0;ls
-: 1640883288:0;cd results/
-: 1640883289:0;ls
-: 1640883291:0;cd 2021.12.20_11.43.00/
-: 1640883291:0;ls
-: 1640883293:0;nautilus .
-: 1640883781:0;cd ..
-: 1640883782:0;ls
-: 1640883783:0;cd ..
-: 1640883783:0;ls
-: 1640883784:0;cd ..
-: 1640883786:0;ls
-: 1640883797:0;unzip Berlna_vzw_S1RM32.31_pass.zip
 : 1640883799:0;cd Berlna_vzw_S1RM32.31_pass
-: 1640883799:0;ls
-: 1640883801:0;cd results/
-: 1640883803:0;ls
 : 1640883805:0;cd 2021.12.29_11.18.00/
-: 1640883806:0;ls
-: 1640883807:0;nautilus .
-: 1640884093:0;cd
-: 1640884098:0;cd Documents/tests/android-cts/
-: 1640884099:0;ls
-: 1640884104:0;cd ..
 : 1640884119:0;tar -czvf cts.tar.gz android-cts
-: 1640885182:0;ll -h
 : 1640885186:0;gpload cts.tar.gz
-: 1640888145:0;adbconnect
-: 1640888686:0;cd
-: 1640888691:0;cd Documents/lbs-test-suite/
-: 1640888691:0;tig
-: 1640889126:0;adb logcat -b all | lnav
-: 1640889722:0;adbconnect
-: 1640889779:0;adb logcat -b all | lnav
-: 1640889781:0;scrcpy
-: 1640889967:0;cd
 : 1640889973:0;cd Do
 : 1640889975:0;cd Downloads/
-: 1640889975:0;ls
 : 1640889984:0;adb pull /sdcard/Download/2021-12-30_14.45.55.csv
 : 1640890255:0;tig lbs_app/lib/screens/home/tabs/test/test_controller.dart
 : 1640890329:0;git log lbs_app/lib/screens/home/tabs/test/test_controller.dart
 : 1640890347:0;git show 5df47047ec29a9f8644c88fef9ecc680168b2bd4
-: 1640890619:0;tig
-: 1640890642:0;git reset --hard
-: 1640890647:0;git revert 5df47047ec29a9f8644c88fef9ecc680168b2bd4
-: 1640890652:0;git status
 : 1640890912:0;git show 5df4704
-: 1640890999:0;git status
-: 1640891002:0;git add *
-: 1640891009:0;git revert --continue
-: 1640891016:0;tig
-: 1640891381:0;git status
-: 1640891383:0;tig
-: 1640891392:0;git diff
-: 1640891482:0;git status
-: 1640891720:0;tig
 : 1640891732:0;git reset --hard f9a0b243806f56105a5ad9a6187517fda2a06587
-: 1640891739:0;tig
 : 1640891748:0;git revert 5df47047ec29a9f8644c88fef9ecc680168b2bd4
-: 1640891751:0;git status
-: 1640891847:0;tig
-: 1640891965:0;git status
 : 1640891979:0;git checkout f9a0b243806f56105a5ad9a6187517fda2a06587 lbs_app/lib/screens/home/components/test_setup_panel/test_setup_panel.dart
-: 1640891982:0;git status
-: 1640891995:0;tig
 : 1640892019:0;git revert --continue
-: 1640892042:0;tig
-: 1640892089:0;git status
-: 1640892089:0;tig
 : 1640892108:0;git reset --hard
-: 1640893081:0;ls
 : 1640893101:0;unzip CTS_R2_PASS_S1RM32.31_BERLNA_VZW.zip
 : 1640893103:0;cd android-cts-verifier/
-: 1640893104:0;ls
-: 1640893107:0;cd ..
 : 1640893114:0;cd CTS_R2_PASS_S1RM32.31_BERLNA_VZW/
-: 1640893115:0;ls
-: 1640893117:0;cd results/
-: 1640893118:0;ls
 : 1640893121:0;cd 2021.12.30_19.22.15/
-: 1640893122:0;nautilus .
-: 1640893477:0;tmux a
 : 1640893495:0;motorola-vpn 096675
-: 1640893615:0;cd ..
-: 1640893617:0;ls
 : 1640893640:0;unzip 2021.12.30_15.03.10.zip
 : 1640893644:0;cd 2021.12.30_15.03.10/
-: 1640893644:0;ls
-: 1640893652:0;nautilus .
-: 1640893666:0;ls
 : 1640893669:0;vim test_result.xml
-: 1641210963:0;tmux
 : 1641211012:0;motorola-vpn892127
 : 1641211017:0;motorola-vpn 892127
-: 1641215284:0;tmux a
 : 1641215865:0;motorola-vpn 844281
-: 1641228975:0;adbconnect
-: 1641229206:0;scrcpy
-: 1641229261:0;adb logcat -b all | lnav
-: 1641230855:0;cd
-: 1641230858:0;cd Documents/lbs-test-suite/
-: 1641230860:0;cd lbs_app/
-: 1641230861:0;ls
-: 1641230864:0;flutter packages pub run build_runner build --delete-conflicting-outputs
-: 1641232707:0;git diff
-: 1641232887:0;flutter packages pub run build_runner build --delete-conflicting-outputs
-: 1641233383:0;git diff
-: 1641233609:0;tig
-: 1641234269:0;git diff
-: 1641234536:0;adb shell
-: 1641236641:0;cd
-: 1641236642:0;cd Downloads
-: 1641236643:0;ls
-: 1641236647:0;cd
-: 1641236648:0;cd Documents
-: 1641236649:0;ls
-: 1641236651:0;cd crs/
-: 1641236652:0;ls
 : 1641236672:0;rm -rf IKSWS-19915
 : 1641237049:0;mv IKSWS-27891 ready_for
-: 1641237049:0;ls
 : 1641237109:0;rm -rf IKSWS-39635
-: 1641237110:0;ls
-: 1641237177:0;cd
-: 1641237178:0;cd Downloads
-: 1641237179:0;ls
 : 1641237198:0;unzip CTS_Berlin-NA_retus_S1RM32.18.zip
-: 1641237204:0;ls
 : 1641237207:0;rm CTS_Berlin-NA_retus_S1RM32.18
-: 1641237208:0;ls
 : 1641237210:0;rm CTS_Berlin-NA_retus_S1RM32.18.zip
-: 1641237211:0;ls
 : 1641237215:0;cd CTS_Berlin-NA_retus_S1RM32.18/results/
-: 1641237216:0;ls
 : 1641237227:0;cd 2021.12.16_13.44.14/
-: 1641237228:0;ls
-: 1641237230:0;nautilus .
-: 1641237535:0;cd ..
-: 1641237536:0;ls
-: 1641237537:0;cd ..
-: 1641237538:0;ls
 : 1641237541:0;unzip retest-S1RM32.24_CtsNetTestCases.zip
 : 1641237545:0;rm retest-S1RM32.24_CtsNetTestCases.zip
-: 1641237545:0;ls
 : 1641237547:0;cd retest-S1RM32.24_CtsNetTestCases/
-: 1641237547:0;ls
-: 1641237549:0;cd results/
-: 1641237550:0;ls
 : 1641237551:0;cd 2021.12.20_11.43.00/
-: 1641237552:0;ls
-: 1641237554:0;nautilus .
-: 1641237631:0;cd ..
 : 1641237633:0;kls
-: 1641237635:0;ls
 : 1641237637:0;unzup Berlna_vzw_S1RM32.31_pass.zip
 : 1641237640:0;unzi Berlna_vzw_S1RM32.31_pass.zip
 : 1641237643:0;unzip Berlna_vzw_S1RM32.31_pass.zip
-: 1641237645:0;ls
 : 1641237648:0;rm Berlna_vzw_S1RM32.31_pass.zip
 : 1641237650:0;cd Berlna_vzw_S1RM32.31_pass/
-: 1641237650:0;ls
-: 1641237712:0;cd ..
-: 1641237714:0;ls
-: 1641297574:0;tmux
 : 1641297605:0;motorola-vpn 889532
-: 1641300772:0;ls
-: 1641300773:0;cd Downloads
-: 1641300773:0;ls
-: 1641300774:0;cd
-: 1641300777:0;cd Documents
-: 1641300777:0;ls
-: 1641300780:0;cd scripts/
-: 1641300780:0;ls
-: 1641300783:0;cd ..
-: 1641300784:0;ls
 : 1641300810:0;git clone https://github.com/emanuel36/myWorkSpace
-: 1641301026:0;ls
-: 1641301029:0;cd myWorkSpace/
-: 1641301029:0;ls
-: 1641301033:0;cd scripts/
-: 1641301034:0;ls
 : 1641301047:0;cp ../../scripts/* .
-: 1641301048:0;ls
 : 1641301065:0;chmod +x getlogs.sh
 : 1641301068:0;rm -rf multipleBuilds.sh
-: 1641301070:0;git status
-: 1641301081:0;ls
-: 1641301098:0;tig
-: 1641301106:0;git add *
-: 1641301107:0;tig
-: 1641301120:0;git status
 : 1641301132:0;git rm multipleBuilds.sh
-: 1641301134:0;git status
-: 1641301161:0;tig
-: 1641301173:0;cd ..
-: 1641301174:0;ls
 : 1641301428:0;cp ~/Documents/bookmarks_1_4_22.html .
-: 1641301429:0;ls
 : 1641301437:0;git rm bookmarks_8_24_21.html
-: 1641301440:0;git status
-: 1641301445:0;git add *
-: 1641301446:0;git status
-: 1641301454:0;ls
-: 1641301473:0;mkdir logs
 : 1641301477:0;mv lnav_clipboard.patch android-logcat.json logs
-: 1641301478:0;ls
 : 1641301493:0;ll 
 : 1641301496:0;ls -a
 : 1641301515:0;cp ~/.zsh_history .
+: 1641301525:0;cp ~/.zshrc .
+: 1641301527:0;ll -a
+: 1641301536:0;rm zsh_history zshrc
+: 1641301539:0;mv .zshrc zshrc
+: 1641301542:0;mv .zsh_history zsh_history
+: 1641301566:0;cd build_server/
+: 1641301844:0;rm test
+: 1641301851:0;mkcd test
+: 1641301862:0;echo test > test.txt
+: 1641301868:0;rm test test.txt
+: 1641301986:0;cp ~/Downloads/bashrc vimrc .
+: 1641302020:0;cp ~/Downloads/bashrc ~/Downloads/vimrc .
+: 1641302039:0;git rm ../android-logcat.json ../lnav_clipboard.patch
+: 1641302113:0;vim bashrc
+: 1641302219:0;cd documents/
+: 1641302226:0;cd wireshark-profile-802.11/
+: 1641302263:0;git push origin master
+: 1641304024:0;rm bashrc vimrc
+: 1641308394:0;echo $((1 + $RANDOM % 10))
+: 1641308407:0;shuf -i 1-100000 -n 1
+: 1641308431:0;echo ${RANDOM:0:2}
+: 1641308978:0;b2g
+: 1641309001:0;rm -rf 257
+: 1641309021:0;b2g NB0C2E0121_318072811_USER@2021-12-18_08_00_01_-0300_IKUT-1613864.zip test 
+: 1641309076:0;b2g NB0C2E0121_318072811_USER@2021-12-18_08_00_01_-0300_IKUT-1613864.zip test
+: 1641309082:0;b2g NB0C2E0121_318072811_USER@2021-12-18_08_00_01_-0300_IKUT-1613864.zip
+: 1641309184:0;rg -i "00:31:92:dc:44:5a.*rssi"
+: 1641309215:0;lnav bugreport
+: 1641309242:0;lnav ap
+: 1641309460:0;rg -il "c2:48:e6:31:97:f4"
+: 1641309466:0;rg -i "c2:48:e6:31:97:f4"
+: 1641309733:0;lnav bugreport-berlin_global-S1RG32.22-2021-12-18-08-00-06.txt
+: 1641316776:0;adb install FPS\ Meter_v4.0.0_apkpure.com.apk
+: 1641317257:0;cd Documents/lbs-test-suite/lbs_app/
+: 1641318563:0;git rebase -i HEAD~2
+: 1641319160:0;git stash apply
+: 1641319173:0;git stash list
+: 1641321374:0;git diff
+: 1641383871:0;motorola-vpn 534609
+: 1641383890:0;motorola-vpn465669
+: 1641383895:0;motorola-vpn 465669
+: 1641388396:0;sls
+: 1641388401:0;cd 298/
+: 1641391290:0;rm -rf 298
+: 1641391295:0;dwbuild.sh https://artifacts.mot.com/artifactory/continuous_builds/hanoip/SRI32_hanoip-retail_userdebug_mr_r-qsh2019_test-keys_continuous_gc/26/fastboot_hanoip_retail_userdebug_12_SRI32.1_39252-a2ecc2_intcfg-test-keys_retail_US.tar.gz
+: 1641413488:0;motorola-vpn 945146
+: 1641413758:0;b2g user@2022-01-05_12-42-32.591-0500.zip
+: 1641414109:0;flash fastboot_hanoip_retail_userdebug_12_SRI32.1_39252-a2ecc2_intcfg-test-keys_retail_US.tar.gz
+: 1641414237:0;adv devices
+: 1641414544:0;flash hanoip_retail_userdebug_12_SRI32.1_39252-a2ecc2_intcfg-test-keys_retail_US
+: 1641414990:0;cd apps/
+: 1641415018:0;adb install lbs_app/build/app/outputs/flutter-apk/LBSTestApp_1.1.6.apk 
+: 1641471188:0;motorola-vpn 313603
+: 1641471518:0;vom dwbuild.sh
+: 1641473860:0;./dwbuild.sh http://artifacts.mot.com/artifactory/guamp/11/RPX31.Q2-76/guamp_retail/user/release-keys/fastboot_guamp_retail_user_11_RPX31.Q2-76_e2d4f_release-keys_retail_US.tar.gz
+: 1641473873:0;./dwbuild.sh https://artifacts.mot.com/artifactory/continuous_builds/hanoip/SRI32_hanoip-retail_userdebug_mr_r-qsh2019_test-keys_continuous_gc/30/fastboot_hanoip_retail_userdebug_12_SRI32.1_7715a-121e7e_intcfg-test-keys_retail_US.tar.gz
+: 1641474436:0;echo "123 456 789 abc 111 222 333" | sed 's/^.*abc/abc/'
+: 1641474465:0;echo "http://artifacts.mot.com/artifactory/guamp/11/RPX31.Q2-76/guamp_retail/user/release-keys/fastboot_guamp_retail_user_11_RPX31.Q2-76_e2d4f_release-keys_retail_US.tar.gz" | sed 's/^.*fastboot/fastboot/'
+: 1641474491:0;echo "https://artifacts.mot.com/artifactory/continuous_builds/hanoip/SRI32_hanoip-retail_userdebug_mr_r-qsh2019_test-keys_continuous_gc/30/fastboot_hanoip_retail_userdebug_12_SRI32.1_7715a-121e7e_intcfg-test-keys_retail_US.tar.gz" | sed 's/^.*fastboot/fastboot/'
+: 1641474674:0;dwbuild.sh https://artifacts.mot.com/artifactory/continuous_builds/hanoip/SRI32_hanoip-retail_userdebug_mr_r-qsh2019_test-keys_continuous_gc/30/fastboot_hanoip_retail_userdebug_12_SRI32.1_7715a-121e7e_intcfg-test-keys_retail_US.tar.gz
+: 1641474727:0;dwbuild.sh http://artifacts.mot.com/artifactory/sofiap/12/S0PR32.44-11-1/sofiap_ao/userdebug/intcfg_test-keys/fastboot_sofiap_ao_userdebug_12_S0PR32.44-11-1_71d541-ec6c80_intcfg-test-keys_retail_US.tar.gz\
+
+: 1641474813:0;rm -rf 248
+: 1641475024:0;rm -rf hanoip_retail_userdebug_12_SRI32.1_7715a-121e7e_intcfg-test-keys_retail_US
+: 1641475408:0;mv test.txt ~/.local/share/Trash/
+: 1641475425:0;echo teste > test.txt
+: 1641475430:0;mv test.txt ~/.local/share/Trash/files
+: 1641475453:0;rm ~/.local/share/Trash/test.txt
+: 1641475513:0;mkdir test
+: 1641475522:0;mv test ~/.local/share/Trash/files
+: 1641475740:0;mkdir test2
+: 1641475745:0;rm test2
+: 1641475757:0;mkdir test3
+: 1641475759:0;echo teste > test2.txt
+: 1641475768:0;rm test2.txt test3
+: 1641475797:0;lsl
+: 1641476918:0;adb shell motsettings put secure privacy_motorola_terms_of_service 1
+: 1641477098:0;rm hanoip_retail_userdebug_12_SRI32.1_7715a-121e7e_intcfg-test-keys_retail_US
+: 1641477156:0;rg -il "Received firmware down indication"
+: 1641477702:0;b2g N1HL4L0242_318356220_WLAN_Silent_Panic@2022-01-06_09_45_23_-0400.zip
+: 1641477721:0;cd 223/
+: 1641477971:0;rm -rf 223
+: 1641477975:0;rm 223 wlan_logs
+: 1641477990:0;b2g N1HL4L0242_318356326_WLAN_Silent_Panic@2022-01-06_09_47_42_-0400.zip
+: 1641487025:0;mkcd hanoip_bringup
+: 1641487056:0;adb root; adb shell logcat -b all -c; adb shell rm -rf data/vendor/aplogd/ /data/vendor/wifi/wlan_logs/ /data/vendor/bug2go; /data/vendor/diag_mdlog/logs/; adb reboot
+: 1641487187:0;adb reboot bootloader; fastboot -w; fastboot reboot
+: 1641487613:0;adb pull /data/vendor/bug2go/
+: 1641487650:0;unzip df_simcard_1_status@2022-01-06_06-03-18.989+0000.zip
+: 1641487664:0;unzip dropbox-MODEM_SILENT_PANIC@2022-01-06_12-44-25.919-0400.zip
+: 1641487717:0;unzip dropbox-MODEM_SILENT_PANIC@2022-01-06_12-44-25.919-0400.zip -d 1
+: 1641487800:0;unzip dropbox-MODEM_SILENT_PANIC@2022-01-06_12-44-37.457-0400.zip -d 2
+: 1641487804:0;cd bug2go/
+: 1641487911:0;unzip dropbox-MODEM_SILENT_PANIC@2022-01-06_12-44-49.632-0400.zip -d 3
+: 1641487919:0;unzip dropbox-MODEM_SILENT_PANIC@2022-01-06_12-44-59.265-0400.zip -d 4
+: 1641487925:0;unzip dropbox-MODEM_SILENT_PANIC@2022-01-06_12-46-00.583-0400.zip -d 5
+: 1641487955:0;cd 5
+: 1641489330:0;rg -il "PD_ERR"
+: 1641489348:0;lnav aplogcat-kernel.txt
+: 1641491558:0;dwbuild.sh https://artifacts.mot.com/artifactory/hanoip/11/RRI31.Q1-42-51-13/hanoip_retail/userdebug/intcfg_test-keys/fastboot_hanoip_retail_userdebug_11_RRI31.Q1-42-51-13_fcdb0_intcfg_test-keys_retail_US.tar.gz
+: 1641492353:0;ssh git-mot-man.corp.eldorado.org.br
+: 1641493402:0;motorola-vpn2 385108
+: 1641494222:0;flash fastboot_hanoip_retail_userdebug_11_RRI31.Q1-42-51-13_fcdb0_intcfg_test-keys_retail_US.tar.gz
+: 1641495431:0;fastboot devices
+: 1641495484:0;fastboot reboot fastboot
+: 1641495535:0;fastboot erase cache
+: 1641495544:0;fastboot erase data
+: 1641495549:0;fastboot -w
+: 1641556348:0;motorola-vpn 207115
+: 1641566726:0;flash fastboot_hanoip_retail_userdebug_12_SRI32.1_7715a-121e7e_intcfg-test-keys_retail_US.tar.gz
+: 1641568322:0;adb pull /vendor/firmware_mnt/image/bdwlan_hanoip_ipa.bin
+: 1641568332:0;mv bdwlan_hanoip_ipa.bin bdwlan_hanoip_i
+: 1641568400:0;adb remount
+: 1641568421:0;adb wait-for-device shell mount -o rw,remount /vendor/firmware_mnt/image/
+: 1641568463:0;adb shell mount -o remount,rw /vendor/firmware_mnt
+: 1641568467:0;adb push bdwlan_hanoip_i /vendor/firmware_mnt/image/
+: 1641570207:0;adb pull /data/vendor/wifi/wlan_logs
+: 1641576417:0;ssh-copy-id eangelim@100.66.32.58
+: 1641579017:0;motorola-vpn 526345
+: 1641580157:0;mv aplogd Downloads
+: 1641580246:0;adb shell pm list packages --apex-only --show-versioncode
+: 1641580280:0;adb shell pm list packages --apex-only --show-versioncode | grep apex
+: 1641580418:0;rg -i "apex.*wifi"
+: 1641580448:0;rg -i "wifi.*apex"
+: 1641580544:0;unzip bugreport-hanoip_retailnq-SRI32.1-2022-01-07-14-32-12.zip
+: 1641580625:0;adb shell pm list packages --apex-only --show-versioncode | grep wifi
+: 1641580688:0;lnav bugreport-hanoip_retailnq-SRI32.1-2022-01-07-14-32-12.txt
+: 1641817262:0;motorola-vpn 513077
+: 1641838847:0;flash fastboot_hanoip_retail_userdebug_12_SRI32.1_eng.eangelim.220110.132151-eng.eangelim.220110.120938_intcfg-test-keys_retail_US.tar.gz
+: 1641902215:0;motorola-vpn 749930
+: 1641902428:0;rm -rf hanoip_retail_userdebug_12_SRI32.1_eng.eangelim.220110.132151-eng.eangelim.220110.120938_intcfg-test-keys_retail_US
+: 1641902431:0;rm hanoip_retail_userdebug_12_SRI32.1_eng.eangelim.220110.132151-eng.eangelim.220110.120938_intcfg-test-keys_retail_US
+: 1641902449:0;b2g user@2022-01-06_17-55-51.629+0000.zip
+: 1641902471:0;lnav bugreport-ibiza_retail-SRF32.63-2022-01-06-17-55-57.txt
+: 1641906506:0;git rebase --abort
+: 1641907944:0;motorola-vpn 242388
+: 1641910645:0;motorola-vpn 107412
+: 1641910708:0;git rebase -i HEAD~3
+: 1641912389:0;motorola-vpn 815004
+: 1641912543:0;motorola-vpn 469648
+: 1641912561:0;git stash show
+: 1641920206:0;motorola-vpn 051478
+: 1641921378:0;motorola-vpn 963839
+: 1641931045:0;motorola-vpn995821
+: 1641931047:0;motorola-vpn 995821
+: 1641933701:0;motorola-vpn 769036
+: 1641988648:0;motorola-vpn 939052
+: 1641990250:0;unzip drive-download-20220112T121647Z-001.zip
+: 1641990307:0;mv ASSET_5.8_Ibiza_RetEU_S1RF32.4.txt CTS CTS_AOSP_IBIZA_RETEU_S1RF32.4.zip CTS/
+: 1641990312:0;mkdir cts
+: 1641990316:0;mv ASSET_5.8_Ibiza_RetEU_S1RF32.4.txt CTS CTS_AOSP_IBIZA_RETEU_S1RF32.4.zip cts
+: 1641990320:0;cd cts/
+: 1641990328:0;rm -rf CTS
+: 1641990331:0;rm CTS
+: 1641990340:0;unzip drive-download-20220112T121647Z-001.zip -d cts
+: 1641990354:0;rm drive-download-20220112T121647Z-001.zip
+: 1641990360:0;unzip drive-download-20220112T121700Z-001.zip -d gts
+: 1641990369:0;cd gts/
+: 1641990373:0;rm drive-download-20220112T121700Z-001.zip
+: 1641991079:0;motorola-vpn 634960
+: 1641994278:0;b2g N1ZR490121_318432170_USER@2022-01-11_14_53_38_-0300.zip cold
+: 1641994287:0;b2g N1ZR490121_318432170_USER@2022-01-11_14_53_38_-0300.zip
+: 1641994433:0;b2g N1ZR490133_318433078_USER@2022-01-11_15_07_27_-0300.zip
+: 1641994886:0;rm bugreport
+: 1641994888:0;rm bugreport.zip
+: 1641995035:0;rg -il 318433078
+: 1641995040:0;rg -il 318432170
+: 1641995049:0;rg -i 318432170
+: 1641995099:0;r -il 17:53:38
+: 1641995102:0;rg -il 17:53:38
+: 1641995133:0;rg -il "318433078"
+: 1641995205:0;cd ../226/
+: 1641996099:0;adb exec-out screencap -p > screenshot.png
+: 1641999911:0;motorola-vpn 787964
+: 1642000344:0;flash fastboot_hanoip_retail_userdebug_12_SRI32.1_eng.eangelim.220111.160101-eng.eangelim.220110.120938_intcfg-test-keys_retail_US.tar.gz
+: 1642000487:0;rm screenshot.png
+: 1642000495:0;cd 171/
+: 1642006873:0;rm -rf hanoip_retail_userdebug_12_SRI32.1_eng.eangelim.220111.160101-eng.eangelim.220110.120938_intcfg-test-keys_retail_US
+: 1642006877:0;rm hanoip_retail_userdebug_12_SRI32.1_eng.eangelim.220111.160101-eng.eangelim.220110.120938_intcfg-test-keys_retail_US
+: 1642006923:0;inzip N1ZR490121_318448196_USER@2022-01-12_13_39_42_-0300.zip -d logs
+: 1642006933:0;cd los
+: 1642007041:0;lnav bugreport-ibiza_retail-S1RF32.8-2022-01-12-13-39-49.txt
+: 1642010622:0;unzip user@2022-01-12_14-54-57.001-0300.7z
+: 1642012716:0;unzip N1ZR490121_318448196_USER@2022-01-12_13_39_42_-0300.zip -d logs
+: 1642012734:0;rg -i diag_mdlog
+: 1642013040:0;motorola-vpn 227789
+: 1642015887:0;adb shell ls system/etc/motorola/mdmctbk
+: 1642019297:0;cd user@2022-01-12_16-39-52.135-0300/
+: 1642019306:0;lnav bugreport-ibiza_retail-S1RF32.9-2022-01-12-16-40-00.txt
+: 1642075567:0;motorola-vpn 526832
+: 1642076070:0;rm EDITAL_MESTRADO_2022-_20-12-2021-FINAL.pdf user@2022-01-12_16-39-52.135-0300
+: 1642076076:0;unzip bugreport-minsk_retail-RPC31.Q2-182-2022-01-12-16-32-24.zip
+: 1642076127:0;lnav bugreport-minsk_retail-RPC31.Q2-182-2022-01-12-16-32-24.txt
+: 1642076983:0;adb pull /data/vendor/bug2go/user@2022-01-13_08-25-24.009-0400.zip
+: 1642077008:0;unzip user@2022-01-13_08-25-24.009-0400.zip -d minsk
+: 1642077078:0;rm user@2022-01-13_08-25-24.009-0400.zip
+: 1642077110:0;adb pull /data/vendor/bug2go/user@2022-01-13_08-26-06.381-0400.zip
+: 1642077154:0;unzip user@2022-01-13_08-26-06.381-0400.zip
+: 1642079285:0;dwbuild.sh https://artifacts.mot.com/artifactory/saipan/12/S1RS32.12/saipan_retail/userdebug/intcfg_test-keys/fastboot_saipan_retail_userdebug_12_S1RS32.12_857bc5_intcfg-test-keys_retail_US.tar.gz
+: 1642082152:0;cd qcap/
+: 1642082159:0;cd bin/
+: 1642082170:0;rm -rf QCAT
+: 1642082470:0;cd user@2022-01-12_14-54-57.001-0300/
+: 1642082472:0;ls mod
+: 1642082475:0;ls modem
+: 1642083103:0;tar -xvf diag_qdss_log_mpss_20220112_0608521641967732282.bin
+: 1642083898:0;cd /opt/qcom/
+: 1642083902:0;cd QCAT
+: 1642083906:0;cd Data
+: 1642083909:0;cd Doc
+: 1642083912:0;cd Script
+: 1642083916:0;cd Workspaces
+: 1642083940:0;cd Documents/QCAT/Log
+: 1642083974:0;lnav /home/eangelim/Documents/QCAT/Log/QCAT01.00.0020220113102554437_00005B32.log
+: 1642087512:0;/opt/qcom/QXDM/QXDM
+: 1642094238:0;rm =rf user@2022-01-12_14-54-57.001-0300
+: 1642094243:0;rm -rf user@2022-01-12_14-54-57.001-0300
+: 1642094319:0;cd saipan_retail_userdebug_12_SRS32.2_eng.vdeoliv.220113.122559_intcfg-test-keys_retail_US/
+: 1642095126:0;lnav bugreport-ibiza_retail-SRF32.29-2022-01-13-13-48-00.txt 
+: 1642095183:0;cd PASSED_user@2022-01-13_13-47-53.540-0300/
+: 1642095316:0;lnav bugreport/bugreport-ibiza_retail-SRF32.29-2022-01-13-13-48-00.txt
+: 1642095908:0;rm 01-13.hdf
+: 1642095992:0;cd FAILED-user@2022-01-13_14-28-10.080-0300
+: 1642095994:0;cd modem/
+: 1642095996:0;rm 01-13.13-41-01-752.hdf
+: 1642096032:0;lnav report_info.txt
+: 1642096074:0;cd PASSED_user@2022-01-13_13-47-53.540-0300
+: 1642096124:0;rm -rf bugreport
+: 1642096337:0;adb reboot
+: 1642096421:0;adb shell getprop | grep "SARCTRL"
+: 1642096425:0;adb shell getprop
+: 1642096432:0;adb shell getprop | grep "SAR"
+: 1642096447:0;adb shell setprop log.tag.SARCTRL VERBOSE
+: 1642096593:0;tar -czvf logs.tar.gz FAILED-user@2022-01-13_14-28-10.080-0300 PASSED_user@2022-01-13_13-47-53.540-0300/ 
+: 1642096979:0;adb shell am force-stop SarControlService
+: 1642097063:0;adb shell am force-stop com.motorola.sarcontrol
+: 1642097065:0;adb shell ps -e | grep -i sarcontrol
+: 1642105830:0;motorola-vpn 231717
+: 1642106062:0;rm logs.tar.gz
+: 1642106064:0;rm -rf saipan_retail_userdebug_12_SRS32.2_eng.vdeoliv.220113.122559_intcfg-test-keys_retail_US
+: 1642106276:0;flash fastboot_saipan_retail_userdebug_12_SRS32.2_eng.vdeoliv.220113.122559_intcfg-test-keys_retail_US.tar.gz
+: 1642106330:0;unzip user@2022-01-06_17-55-51.629+0000.zip -d logs
+: 1642106362:0;lnav host_driver_logs_current.txt
+: 1642106366:0;lnav cnss_fw_logs_current.txt
+: 1642106937:0;tar -czvf aplogd.tar.gz aplogd
+: 1642160903:0;motorola-vpn 959697
+: 1642166245:0;tar -xvf ADBPULL_1642166086.4243624.tar.gz
+: 1642166257:0;cd Boot-0000000001
+: 1642170200:0;tar -xvf ADBPULL_1642170162.359281.tar.gz
+: 1642170323:0;cd ../Boot-0000000001/
+: 1642170594:0;rm -rf aplogd
+: 1642170599:0;rm -rf ADBPULL_1642170162.359281.tar.gz
+: 1642170655:0;tar -xvf ADBPULL_1642170445.9828358.tar.gz
+: 1642170685:0;rg -i "cnss-daemon"
+: 1642170688:0;rg -il "cnss-daemon"
+: 1642170693:0;lnav aplogcat-main.txt aplogcat-kernel.txt
+: 1642170786:0;cd Boot-0000000003/
+: 1642171264:0;tar -xvf ADBPULL_1642171094.0573058.tar.gz
+: 1642171275:0;lnav aplogcat-main.txt aplogcat-crash.txt
+: 1642172245:0;adb shell find -name "ctbk_cfg.xml" 2>/dev/null
+: 1642172448:0;rm ctbk_cfg.xml
+: 1642172771:0;tar -xvf ADBPULL_1642172624.417893.tar.gz
+: 1642172786:0;rg -il ctbk_cfg
+: 1642179096:0;rm aplogd ADBPULL_1642172624.417893.tar.gz
+: 1642179100:0;rm -rf aplogd ADBPULL_1642172624.417893.tar.gz
+: 1642179105:0;tar -xvf ADBPULL_1642179007.956261.tar.gz
+: 1642179586:0;md5sum ctbk_cfg.xml
+: 1642180249:0;rm aplogd
+: 1642180251:0;rm ADBPULL_1642179007.956261.tar.gz
+: 1642180256:0;cd Boot-0000000002/
+: 1642180377:0;adb shell md5sum /system/etc/motorola/mdmctbk/ctbk_cfg.xml 
+: 1642180493:0;tar -xvf ADBPULL_1642180455.183009.tar.gz
+: 1642420739:0;motorola-vpn 699285
+: 1642424192:0;unzip drive-download-20220117T124028Z-001.zip
+: 1642424226:0;cd NA/
+: 1642424234:0;ccd Sniffer
+: 1642424235:0;ll 0h
+: 1642424252:0;rm -rf NA R ROW
+: 1642424546:0;unzip drive-download-20220117T124028Z-001.zip -d logs
+: 1642424748:0;unzip file.zip -d logs
+: 1642424849:0;motorola-vpn 801049
+: 1642425442:0;unzip *.zip
+: 1642425468:0;unzip drive-download-20220117T124028Z-001.zip drive-download-20220117T124028Z-002.zip
+: 1642425783:0;cat *.zip > file.zip
+: 1642426235:0;cd Sniffer
+: 1642426239:0;ll -h
+: 1642426273:0;cat timestamps.txt
+: 1642426306:0;cd r
+: 1642426311:0;cd R/
+: 1642426326:0;cat data.txt
+: 1642427580:0;cd ../R/
+: 1642427588:0;unzip Test1_14_02_22.zip
+: 1642428434:0;nautilus .
+: 1642428454:0;unzip Test2_14_08_19.zip -d b2g
+: 1642428464:0;cd lo
+: 1642428485:0;cd NA
+: 1642428494:0;unzip Test1_12_36_25.zip -d b2g
+: 1642428522:0;cd ROW
+: 1642428547:0;cd Bug2Go
+: 1642428583:0;unzip Test1_11_40_00.zip -d b2g
+: 1642433209:0;lnav bugreport-ibiza_retail-S1RF32.4-2022-01-14-14-07-34.txt
+: 1642433213:0;lnav bugreport-ibiza_retail-S1RF32.4-2022-01-14-11-43-43.txt
+: 1642438855:0;ccd ..
+: 1642438863:0;rm -rf logs
+: 1642446568:0;b2g N1HL4L0242_318356294_USER@2022-01-06_09_55_06_-0400.zip
+: 1642451294:0;adb shell getprop | grep "ro.boot.hardware.sku"
+: 1642507467:0;motorola-vpn 294677
+: 1642508937:0;rm teste2.mkv
+: 1642512620:0;sudo add-apt-repository ppa:rebuntu16/avidemux+unofficial
+: 1642512706:0;chmod +x avidemux_2.8.0.appImage
+: 1642513056:0;motorola-vpn2 111144
+: 1642514889:0;flash fastboot_caprip_retail_userdebug_12_S0RC32.41-10-7_f1061-0f0b5_intcfg-test-keys_retail_US.tar.gz
+: 1642516494:0;sudo add-apt-repository ppa:ubuntuhandbook1/avidemux
+: 1642516557:0;sudo apt install avidemux2.7-qt5 avidemux2.7-qt5-data avidemux2.7-plugins-qt5. avidemux2.7-jobs-qt5
+: 1642516566:0;sudo apt-get install avidemux2.6
+: 1642516622:0;sudo apt install libavidemux2.7-6 libavidemux2.7-qt5-6 avidemux2.7-qt5 avidemux2.7-plugins-qt5 avidemux2.7-jobs-qt5
+: 1642517018:0;ld
+: 1642517384:0;adb reboot bootloader
+: 1642517403:0;fastboot oem bp-tools-on
+: 1642517408:0;fastboot reboot
+: 1642518141:0;unzip Photos-001.zip
+: 1642518153:0;rm Photos-001.zip
+: 1642518565:0;adb shell "getprop ro.build.fingerprint"
+: 1642518646:0;dwbuild.sh https://artifacts.mot.com/artifactory/saipan/12/S1RS32.14/saipan_retail/userdebug/intcfg_test-keys/fastboot_saipan_retail_userdebug_12_S1RS32.14_39065_intcfg-test-keys_retail_US.tar.gz
+: 1642519014:0;./avidemux_2.8.0.appImage
+: 1642519389:0;rm *.mp4
+: 1642528171:0;flash fastboot_saipan_retail_userdebug_12_S1RS32.14_39065_intcfg-test-keys_retail_US.tar.gz
+: 1642593513:0;motorola-vpn2 634665
+: 1642596182:0;tar -xvf tsetup.3.4.3.tar.xz
+: 1642596185:0;Ã§s
+: 1642596188:0;cd Telegram
+: 1642596192:0;./Telegram
+: 1642597470:0;rm -rf Telegram Telegram\ Desktop
+: 1642598331:0;motorola-vpn 524743
+: 1642615076:0;b2g NDZT430193_317659210_USER@2021-11-22_17_14_20_-0600.zip
+: 1642615187:0;rm -rf 260
+: 1642615201:0;vim dwbuild.sh
+: 1642615376:0;sudo add-apt-repository ppa:atareao/telegram
+: 1642615443:0;sudo apt-get update
+: 1642615454:0;sudo apt-get install telegram
+: 1642615489:0;lnav bugreport-denver_global-SRE32.114-2022-01-13-18-05-48.txt
+: 1642616015:0;cd Telegram\ Desktop
+: 1642616028:0;cd imagine\ dragons/
+: 1642616054:0;for i in *.flac\
+do\
+    mv "$i" "`echo $i | sed 's/ (FLAC)//'`"\
+done
+: 1642616090:0;rm -rf Telegram\ Desktop imagine\ dragons
+: 1642617031:0;rm tsetup.3.4.3.tar.xz
+: 1642617033:0;cd 205/
+: 1642617053:0;rm -rf 205
+: 1642617210:0;rm -rf 31
+: 1642617248:0;b2g NDZA470224_318468152_USER@2022-01-13_18_05_45_-0300.zip
+: 1642617255:0;rm -rf 15
+: 1642617264:0;b2g NDZA470224_318468152_USER@2022-01-13_18_05_45_-0300.zip test
+: 1642617271:0;rm -rf test
+: 1642618277:0;mservman08]
+: 1642620672:0;b2g NB0R240329_318556110_USER@2022-01-19_14_52_52_-0400.zip
+: 1642620851:0;unzip bugreport.txt
+: 1642621821:0;b2g NB0R4B0308_318525101_USER@2022-01-17_23_35_43_+0530_IKUT-1621998.zip
+: 1642621889:0;lnav bugreport-berlin_global-S1RG32.50-2022-01-17-23-35-47.txt
+: 1642622058:0;rm -rf 60
+: 1643027871:0;motorola-vpn 742850
+: 1643029774:0;cd Documents/
+: 1643029777:0;cd myWorkSpace/
+: 1643029820:0;scp build_server/bashrc eangelim@100.66.32.58:/~
+: 1643029869:0;subl build_server/bashrc
+: 1643113005:0;motorola-vpn 021858
+: 1643113442:0;motorola-vpn 640255
+: 1643119189:0;unzip Test1_16-55-40.546-0500.zip -d 1
+: 1643119198:0;cd 1/
+: 1643119211:0;lnav bugreport-berlin_global-S1RG32.60-2022-01-19-16-55-50.txt
+: 1643119235:0;lnav logcat.main.txt
+: 1643119440:0;unzip Test2_12-29-04.692-0500.zip -d 2
+: 1643119453:0;unzip Test3_12-35-22.626-0500.zip -d 3
+: 1643119463:0;unzip Test4_12-41-51.362-0500.zip -d 4
+: 1643119474:0;unzip Test5_13-17-02.236-0500.zip -d 5
+: 1643119499:0;rm -rf *.zip
+: 1643119506:0;rg -il "wpa_supplicant"
+: 1643119516:0;rg -i "wpa_supplicant"
+: 1643131098:0;git stash
+: 1643133179:0;srcpy
+: 1643133271:0;adb devices
+: 1643134476:0;flutter packages pub run build_runner build --delete-conflicting-outputs
+: 1643137524:0;git commit --amend
+: 1643137877:0;git stash pop
+: 1643137907:0;git stash clear
+: 1643140325:0;git add *
+: 1643140331:0;git commit --signoff -v
+: 1643140342:0;git push origin HEAD:refs/for/main
+: 1643143024:0;motorola-vpn 215734
+: 1643197346:0;motorola-vpn 374944
+: 1643197372:0;motorola-vpn 176507
+: 1643215327:0;cd Documents/lbs-test-suite/
+: 1643215365:0;cd lbs_app/
+: 1643215369:0;flutter build apk
+: 1643215494:0;adb install build/app/outputs/flutter-apk/app-release.apk 
+: 1643215542:0;nautilus build/app/outputs/flutter-apk/
+: 1643228097:0;motorola-vpn 355409
+: 1643228713:0;b2g NB0R240329_318569317_USER@2022-01-20_15_38_02_-0400.zip
+: 1643284057:0;motorola-vpn 250974
+: 1643287834:0;sudo apt install kazam
+: 1643301705:0;unzip 201104_XT2063-DL_3.2_Two_Calls_Exiting_ECBM_FAIL.zip
+: 1643301708:0;cd 201104_XT2063-DL_3.2_Two_Calls_Exiting_ECBM_FAIL/
+: 1643313446:0;motorola-vpn 170792
+: 1643314516:0;rg -il "## LBS ## Position error reported"
+: 1643371812:0;motorola-vpn 704239
+: 1643372507:0;rm LTE-BTR-5-4580.0000
+: 1643376223:0;cd server/
+: 1643376227:0;cd ,,
+: 1643376241:0;lnav client/XDDExplorerDebug.20220124_014306.5768.log
+: 1643376441:0;unzip LTE-BTR-5-4580.0000.zip -d 88
+: 1643376462:0;rm -rf 88 2
+: 1643376503:0;mkcd 2
+: 1643376521:0;mv *.zip 2
+: 1643376523:0;cd 2/
+: 1643376539:0;unzip LTE-BTR-5-4580.0000.zip -d LTE-BTR-5-4580.0000
+: 1643376547:0;rm -rf LTE-BTR-5-4580.0000
+: 1643376574:0;cd LTE-BTR-5-458
+: 1643376592:0;lnav XDDExplorerDebug.20220117_045159.1492.log
+: 1643376635:0;unzip bugreport-berlna_global-S1RM32.47-2022-01-15-07-54-11.zip
+: 1643376639:0;rg -il -uuu "## LBS ## Position error reported"
+: 1643376758:0;cd LTE-BTR-5-4580.0000
+: 1643376762:0;cd client/
+: 1643376766:0;lnav XDDExplorerDebug.20220124_014306.5768.log
+: 1643383475:0;lnav messagelog.msglog
+: 1643383671:0;rg -i -uuu "## LBS ## Position error reported"
+: 1643383806:0;rg -il "01:59:11"
+: 1643398244:0;cd Boot-0000000005/
+: 1643398278:0;rg -i "S0RE32"
+: 1643398289:0;rg -i "S1RE"
+: 1643398296:0;rg -i "fingerprint"
+: 1643398309:0;rg -i "build.*fingerprint"
+: 1643630200:0;motorola-vpn 561472
+: 1643643126:0;adb install com.google.android.apps.chromecast.app_2.47.79.5-24779050_minAPI23\(arm64-v8a,armeabi-v7a,x86,x86_64\)\(nodpi\)_apkmirror.com.apk
+: 1643650396:0;adb pull /data/vendor/aplogd
+: 1643650411:0;cd Boot-0000000009/
+: 1643716493:0;motorola-vpn 512002
+: 1643803083:0;motorola-vpn 156531
+: 1643811330:0;unzip Denver_geo_18_2_FAIL.zip
+: 1643815326:0;sudo apkd -i teamviewer_15.26.4_amd64.deb
+: 1643815331:0;sudo dpkd -i teamviewer_15.26.4_amd64.deb
+: 1643815335:0;sudo dpkg -i teamviewer_15.26.4_amd64.deb
+: 1643822749:0;echo 742758 | sudo openconnect --protocol=nc --no-dtls https://br-partnervpn.motorola.com/7119-otp --user eangelim --passwd-on-stdin
+: 1643822832:0;echo 559683 | sudo openconnect --protocol=nc --no-dtls https://br-partnervpn.motorola.com/7119-otp --user khso --passwd-on-stdin
+: 1643822896:0;echo 5148022 | sudo openconnect --protocol=nc --no-dtls https://br-partnervpn.motorola.com/7119-otp --user khso --passwd-on-stdin
+: 1643822954:0;echo 531912 | sudo openconnect --protocol=nc --no-dtls https://br-partnervpn.motorola.com/7119-otp --user eangelim --passwd-on-stdin
+: 1643831442:0;ssh eangelim@100.66.32.58
+: 1643834536:0;rm Pixel_Screen_Cast_1.mp4 ps-pulse-win-9.0r4.0-b1731-64bitinstaller.msi teamviewer_15.26.4_amd64.deb
+: 1643834593:0;unzip LTE-BTR-5-4580.0000.zip -d past
+: 1643834600:0;rm LTE-BTR-5-4580.0000.zip
+: 1643834603:0;cd past/
+: 1643888092:0;tmux 
+: 1643888111:0;motorola-vpn 348490
+: 1643894916:0;motorola-vpn 819115
+: 1644492591:0;it clone https://github.com/TencentARC/GFPGAN.git
+: 1644492593:0;git clone https://github.com/TencentARC/GFPGAN.git
+: 1644492618:0;cd GFPGAN/
+: 1644492628:0;pip install basicsr
+: 1644492934:0;pip install facexlib
+: 1644492954:0;pip install -r requirements.txt
+: 1644492966:0;python setup.py develop
+: 1644596443:0;ifconfig
+: 1644596499:0;ip -r
+: 1644923260:0;iperf3 -c 192.168.1.7
+: 1644923290:0;iperf3 -c 192.168.1.7 -w 2M -t 30
+: 1644923293:0;iperf3 -c 192.168.1.7 -w 2M -i 1 -t 30
+: 1644923300:0;iperf3 -c 192.168.1.7 -t 30
+: 1644923332:0;iperf3 -c 192.168.1.7 -w 2M -i 1 -t 30 -R
+: 1644923422:0;iperf3 -c 192.168.1.7 -w 2KM -i 2 -t 30
+: 1644923440:0;iperf3 -c 192.168.1.7 -w 2048KM -i 1 -t 30
+: 1644923446:0;iperf3 -c 192.168.1.7 -w 20KM -i 1 -t 30
+: 1644923494:0;iperf3 -c 192.168.1.7 -w 1M -i 1 -t 30
+: 1644923504:0;iperf3 -c 192.168.1.7 -i 1 -t 30
+: 1645441934:0;motorola-vpn 500713
+: 1645445853:0;rm -rf ready_for
+: 1645445856:0;rm -rf hanoip_bringup
+: 1645445871:0;rm -rf IKSWS-28642
+: 1645445880:0;mkcd IKSWS-60272
+: 1645445973:0;unzip ~/Downloads/NDZA2C0166_318701751_USER@2022-02-01_16_20_03_-0500_IKUT-1626915.zip -d 
+: 1645445976:0;unzip ~/Downloads/NDZA2C0166_318701751_USER@2022-02-01_16_20_03_-0500_IKUT-1626915.zip -d .
+: 1645445989:0;rm -rf ~/Downloads/*
+: 1645447167:0;cd ../crs/IKSWS-60272/
+: 1645447279:0;perl ~/Documents/scripts/gpsTestApp_parser_P.pl bugreport/bugreport-denver_global-SRE32.133-2022-02-01-16-20-21.txt
+: 1645447768:0;rm -rf bugreport.zip
+: 1645448034:0;unzip bugreport-minsk_retail-RPC31.Q2-182-2022-02-21-08-49-34.zip
+: 1645448041:0;lnav bugreport-minsk_retail-RPC31.Q2-182-2022-02-21-08-49-34.
+: 1645448043:0;lnav bugreport-minsk_retail-RPC31.Q2-182-2022-02-21-08-49-34.txt
+: 1645448460:0;motorola-vpn 718214
+: 1645448778:0;unzip ND3B4J0116_316508943_USER@2021-09-09_11_53_36_-0300_IKUT-1581904.zip -d logs
+: 1645448862:0;rg -il "reportLocation"
+: 1645448867:0;rg -i "reportLocation"
+: 1645449023:0;ls aplog
+: 1645449491:0;rm -rf aplogcat-main.txt.csv aplogcat-main.txt.kml
+: 1645449532:0;perl ~/Documents/scripts/gpsTestApp_parser_P.pl aplogcat-main.txt
+: 1645449710:0;lnav bugreport/bugreport-denver_global-SRE32.133-2022-02-01-16-20-21.txt
+: 1645468971:0;cp ~/Documents/scripts/gpsTestApp_parser_P.pl .
+: 1645473222:0;cd Documents/scripts/
+: 1645473781:0;rm -rf gpsTestApp_parser_P.pl
+: 1645473797:0;git clone ssh://eangelim@gerrit.mot.com:29418/ssw_bz/scripts
+: 1645473854:0;cd staging/
+: 1645473856:0;cd wisl/
+: 1645473871:0;cp gpsTestApp_parser_P.pl ../../../IKSWS-60272
+: 1645473873:0;cd -
+: 1645473876:0;cd ../../
+: 1645473878:0;cd IKSWS-60272
+: 1645474601:0;rm gpsTestApp_parser_P.pl
+: 1645474612:0;cp ../scripts/staging/wisl/gpsTestApp_parser_P.pl .
+: 1645529710:0;motorola-vpn 128486
+: 1645531106:0;mv logs ../Documents/crs/IKSWS-60272/refLogs
+: 1645531121:0;mkcd logs
+: 1645531126:0;mv * .
+: 1645531133:0;mv ../* ,
+: 1645531134:0;mv ../* .
+: 1645531143:0;mv refLogs ../
+: 1645531147:0;cd refLogs/
+: 1645531522:0;unzip CTS_AOSP-HANOIP_RETBR-SRI31.18.zip
+: 1645531531:0;rm -rm CTS_AOSP-HANOIP_RETBR-SRI31.18.zip
+: 1645531536:0;rm -rf CTS_AOSP-HANOIP_RETBR-SRI31.18.zip
+: 1645531550:0;unzip CTS_AOSP-12_r2-HANOIP_RETBR-SRI32.18.zip
+: 1645531562:0;unzip CTS_AOSP-12_r4-HANOIP_RETBR-SRI32.22.zip
+: 1645531692:0;cd ../logs/2022.02.15_13.08.05/
+: 1645531695:0;cd inv_14470876574306537533/
+: 1645531737:0;rg -uuu -il "testGetGnssAntennaInfos"
+: 1645531748:0;gzip -d *
+: 1645531768:0;lnav filter-arm64-v8a%20CtsLocationFineTestCases532805498145864420.include_4070932715923894817.txt
+: 1645532151:0;motorola-vpn 575001
+: 1645538361:0;cp ~/Documents/crs/IKSWS-60272/logs/aplogcat-main.txt .
+: 1645538436:0;vim gpsTestApp_parser_P.pl
+: 1645541160:0;perl gpsTestApp_parser_P.pl gpsTestApp_parser_P\ \(1\).pl aplogcat-main.txt
+: 1645541372:0;perl gpsTestApp_parser_P\ \(1\).pl aplogcat-main.txt
+: 1645542172:0;mkcd lbs
+: 1645542739:0;adb pull /data/vendor/bug2go/user@2022-02-22_11-05-04.096-0400.zip
+: 1645542751:0;unzip user@2022-02-22_11-05-04.096-0400.zip
+: 1645542762:0;rm user@2022-02-22_11-05-04.096-0400.zip
+: 1645542769:0;mkdir logs
+: 1645542771:0;mv * log
+: 1645542777:0;mv * logs
+: 1645544439:0;cd ../../../
+: 1645544446:0;cd 2022.02.15_13.08.05/
+: 1645544451:0;rg -i "N1HL4L0257"
+: 1645544461:0;rg -il "N1HL4L0257"
+: 1645544470:0;rg -il "N1HL1P0110"
+: 1645548821:0;tar -xvf fastboot_berlin_global_userdebug_12_S1RG32.53-18-2_05a7c-a5ed9_intcfg-test-keys_global_US.tar.gz
+: 1645548893:0;cd berlin_global_userdebug_12_S1RG32.53-18-2_05a7c-a5ed9_intcfg-test-keys_global_US/
+: 1645548914:0;rg -il "lahaina"
+: 1645549050:0;rg -i "lahaina.la"
+: 1645549053:0;rg -i "lahaina"
+: 1645549548:0;cd CTS_AOSP-HANOIP_RETBR-SRI31.18
+: 1645549549:0;cd CTS_AOSP-12_r4-HANOIP_RETBR-SRI32.22
+: 1645549555:0;rg -il "TestRunner"
+: 1645549568:0;lnav logs/2022.02.15_13.08.05/inv_14470876574306537533/device_logcat_setup_N1HL1P0110_8392760812493768481.txt
+: 1645549610:0;lnav logs/2022.02.15_13.08.05/inv_14470876574306537533/filter-arm64-v8a%20CtsLocationFineTestCases532805498145864420.include_4070932715923894817.txt
+: 1645549654:0;lnav logs/2022.02.15_13.08.05/inv_14470876574306537533/host_log_shard_index_0_12662079931160686666.txt
+: 1645550520:0;cd Documents/lbs/
+: 1645550525:0;lnav bugreport.txt
+: 1645550545:0;rg -il "GNSS Manage"]
+: 1645550547:0;rg -il "GNSS Manage"
+: 1645551542:0;adb shell dumpsys location
+: 1645551815:0;lnav log_hanoi.txt
+: 1645554900:0;unzip android-cts.zip
+: 1645554957:0;cat version.txt
+: 1645554960:0;cat README
+: 1645554972:0;cd testcases/
+: 1645554978:0;cat NOTICE.txt
+: 1645554991:0;lnav NOTICE.txt
+: 1645555010:0;cd jdk/
+: 1645555015:0;cat release
+: 1645555030:0;rg -i "12_r"
+: 1645555074:0;rg -i "12_r4"
+: 1645555080:0;rg -uuu "12_r4"
+: 1645555165:0;./cts-tradefed
+: 1645560154:0;mkcd IKSWS-58280
+: 1645616776:0;motorola-vpn 534000
+: 1645616845:0;motorola-vpn 841147
+: 1645616963:0;sudo apt get update
+: 1645616968:0;sudo apt update
+: 1645617004:0;sudo apt upgrade
+: 1645617317:0;motorola-vpn 851796
+: 1645623735:0;adb shell 
+: 1645624119:0;adb pull vendor/firmware_mnt/image/bdwlan_minsk_epa.bin
+: 1645624348:0;adb shell
+: 1645624376:0;md5sum bdwlan_minsk_epa\ \(copy\).bin
+: 1645624380:0;md5sum bdwlan_minsk_epa.bin
+: 1645624522:0;rm -rf *.bin
+: 1645624598:0;adb shell ls /data/vendor/wifi/wlan_logs]
+: 1645624601:0;adb root[
+: 1645624603:0;adb root
+: 1645624608:0;adb shell ls /data/vendor/wifi/wlan_logs
+: 1645628868:0;unzip NB0R130101_318727962_WLAN_Silent_Panic@2022-02-04_15_27_45_+0530\ \(2\).zip -d logs
+: 1645628881:0;cd wl
+: 1645628886:0;cd wlan_logs/
+: 1645628934:0;unzip ramdump\ \(1\).zip
+: 1645631846:0;cd tests/android-cts/
+: 1645632455:0;gpload android-cts.zip
+: 1645636438:0;cd tools/
+: 1645636784:0;cls
+: 1645637749:0;unzip N1ZR2Q0102_318802958_USER@2022-02-11_07_44_32_-0300_IKUT-1629993.zip -d logs
+: 1645639410:0;mv gpsTestApp_parser_P.pl ~/Documents/crs/IKSWS-60272
+: 1645639411:0;cd 
+: 1645639425:0;gpsTestApp_parser_P.pl logs/aplogcat-main.txt
+: 1645641386:0;rm N1ZR2Q0102_318802958_USER@2022-02-11_07_44_32_-0300_IKUT-1629993.zip
+: 1645641427:0;rm -rf logs android-cts.zip
+: 1645641431:0;unzip NDZA2C0166_318701751_USER@2022-02-01_16_20_03_-0500_IKUT-1626915.zip -d logs
+: 1645641901:0;lnav bugreport-denver_global-SRE32.133-2022-02-01-16-20-21.txt
+: 1645643290:0;adb disconnect
+: 1645643818:0;adbconnect
+: 1645643828:0;scrcpy
+: 1645646089:0;rm NDZA2C0166_318701751_USER@2022-02-01_16_20_03_-0500_IKUT-1626915.zip
+: 1645646125:0;b2g N1ZR2Q0102_318802958_USER@2022-02-11_07_44_32_-0300_IKUT-1629993.zip
+: 1645646244:0;motorola-vpn 278365
+: 1645646585:0;perl gpsTestApp_parser_P.pl aplogcat-main.txt
+: 1645646626:0;perl gpsTestApp_parser_P.pl logs/aplogcat-main.txt
+: 1645646630:0;cd logs/
+: 1645648438:0;motorola-vpn 544800
+: 1645703494:0;motorola-vpn 159149
+: 1645703522:0;cd r2
+: 1645703525:0;cd 12_r3/
+: 1645703528:0;cd results/
+: 1645703652:0;cd a/
+: 1645703658:0;ks
+: 1645707984:0;cd Documents/tests/android-cts/
+: 1645707990:0;cd 12_r4/
+: 1645714699:0;rm *.jpg
+: 1645714703:0;unzip 2022.02.24_11.28.10.zip
+: 1645714711:0;cd 2022.02.24_11.28.10/
+: 1645715089:0;unzip N1ZR2A0123_318775674_USER@2022-02-09_11_38_03_+0530_IKUT-1629148.zip
+: 1645715115:0;bug2go N1ZR2A0123_318775674_USER@2022-02-09_11_38_03_+0530_IKUT-1629148.zip
+: 1645715117:0;b2g N1ZR2A0123_318775674_USER@2022-02-09_11_38_03_+0530_IKUT-1629148.zip
+: 1645721016:0;motorola-vpn 624778
+: 1645721221:0;unzip 2022.02.24_11.31.41.zip
+: 1645722541:0;motorola-vpn 186870
+: 1645722792:0;unzip 2022.02.24_13.59.36.zip
+: 1645722883:0;cd Documents/cr
+: 1645722885:0;cd Documents/crs/
+: 1645722888:0;mkcd IKSWS-65497
+: 1645722932:0;rm -rf user@2022-02-24_14-05-16.066-0300.zip 2022.02.24_13.59.36.zip
+: 1645723087:0;cd 2022.02.24_13.59.36/
+: 1645723105:0;rg -il "testGetGnssAntennaInfos"
+: 1645724466:0;unzip user@2022-02-24_14-05-16.066-0300.zip -d b2g
+: 1645724550:0;lnav aplogcat-main.txt 
+: 1645725246:0;lnav bugreport-hanoip_retailnq-SRI32.6-2022-02-24-14-05-28.txt
+: 1645725384:0;motorola-vpn 079590
+: 1645727334:0;unzip user@2022-02-24_15-14-41.602-0300.zip -d b2g
+: 1645727347:0;unzip bugreport.zip -d bugreport
+: 1645727349:0;cd bugreport/
+: 1645727351:0;lnav bugreport-hanoip_retailnq-SRI32.30-2022-02-24-15-14-55.txt
+: 1645727402:0;rg -i "testRequestFlush_Gnss"
+: 1645727414:0;rg -i "testGetGnssAntennaInfos"
+: 1645727696:0;cd .
+: 1645727705:0;cd 2022.02.24_15.00.24/
+: 1645727710:0;lnav invocation_summary.txt
+: 1645727838:0;cd android-cts/
+: 1645727862:0;cd Documents/crs/IKSWS-60272/
+: 1645727867:0;cd b2g/
+: 1645727874:0;lnav bugreport/bugreport-hanoip_retailnq-SRI32.30-2022-02-24-15-14-55.txt
+: 1645730462:0;rm -rf *
+: 1645730542:0;cd crs/IKSWS-60272/logs/
+: 1645730557:0;lnav aplogcat-events.txt
+: 1645730655:0;rg -il "ActivityManager: CPU usage"
+: 1645730952:0;rg -i "lowmemorykiller"
+: 1645730963:0;rg -il "lowmemorykiller"
+: 1645730968:0;lnav aplogcat-system.txt
+: 1645734178:0;md5sum WCNSS_qcom_cfg.ini
+: 1645734186:0;md5sum WCNSS_qcom_cfg\ \(1\).ini
+: 1645734597:0;lnav N1ZR420150_2_24_2022_logcat.txt
+: 1645734997:0;rg -i "ctbk_cfg.xml"
+: 1645735001:0;rg -i "ctbk_cfg"
+: 1645790470:0;motorola-vpn 603222
+: 1645790803:0;rm *
+: 1645791972:0;unzip LTE-BTR-5-4580.0000.zip
+: 1645792024:0;unzip LTE-BTR-5-4588.0000.zip
+: 1645792030:0;rm *.zip
+: 1645792082:0;/opt/qcom/QCAT/bin/QCAT
+: 1645793014:0;cd LTE-BTR-5-4580.0000/
+: 1645793020:0;cd aplogd/
+: 1645793023:0;getlogs
+: 1645793027:0;getlogs.sh
+: 1645793033:0;cd Boot-0000000004/
+: 1645793059:0;rg -il "Position error reported by lbs server"
+: 1645793063:0;lnav TestCaseReport.tcr
+: 1645794684:0;cd LTE-BTR-5-4588.0000/
+: 1645795140:0;unzip supportinfo.zip
+: 1645795144:0;rm supportinfo.zip
+: 1645795146:0;rg -il "< sM_LbsControl >"
+: 1645795152:0;lnav server/tc_session/mlscn.txt
+: 1645795649:0;cd ../LTE-BTR-5-4588.0000/
+: 1645802882:0;cd dpw
+: 1645803050:0;cd 20/
+: 1645803069:0;rg -i "NetworkMonitor.*226"
+: 1645810589:0;motorola-vpn 604299
+: 1645811643:0;b2g N1ZR4F0151_318861582_USER@2022-02-16_16_12_34_-0300_IKUT-1631697.zip
+: 1645811652:0;cd bluetooth_logs/
+: 1645811656:0;cd Downloads/20/
+: 1645813587:0;ssh -vvv eangelim@100.66.32.77
+: 1645814256:0;unzip user@2022-02-25_14-31-25.364-0300.zip -d ref
+: 1645814273:0;unzip bugreport.zip
+: 1645814334:0;lnav aplogcat-main.txt
+: 1645814714:0;cd
+: 1645814717:0;cd Downloads
+: 1645814984:0;unzuo bugreport-minsk_retail-RPC31.Q2-182-2022-02-25-14-45-22.zip -d minsl
+: 1645814990:0;unzip bugreport-minsk_retail-RPC31.Q2-182-2022-02-25-14-45-22.zip -d minsk
+: 1645814996:0;lnav bugreport-minsk_retail-RPC31.Q2-182-2022-02-25-14-45-22.txt
+: 1645815319:0;rm -rf *.zip minsk
+: 1645815323:0;adb logcat -b all | lnav
+: 1645815641:0;unzip bugreport-minsk_retail-RPC31.Q2-182-2022-02-25-14-57-08.zip -d minsk
+: 1645815648:0;lnav bugreport-minsk_retail-RPC31.Q2-182-2022-02-25-14-57-08.txt
+: 1645815857:0;ssh -vvv eangelim@100.66.32.65
+: 1645815865:0;ssh - eangelim@100.66.32.65
+: 1645815868:0;ssh -v eangelim@100.66.32.65
+: 1645815881:0;ssh eangelim@100.66.32.65
+: 1645816116:0;lnav bugreport-ibiza_retail-S1RF32.23-2022-02-16-16-12-50.txt
+: 1645816138:0;rm bugreport-minsk_retail-RPC31.Q2-182-2022-02-25-14-57-08.zip
+: 1645816141:0;rg -il "Found upstream interface"
+: 1645816158:0;lnav ref/user@2022-02-25_14-31-25.364-0300/bugreport-ibiza_retailq-S1RF32.23-2022-02-25-14-31-34.txt
+: 1645816235:0;rm -rf minsk
+: 1645816262:0;adb bugreport
+: 1645816473:0;unzip bugreport-minsk_retail-RPC31.Q2-182-2022-02-25-15-11-02.zip -d minsk
+: 1645816491:0;ssh eangelim@100.66.32.77
+: 1645816820:0;adb shell dumpsys tethering
+: 1645817104:0;lnav tethering.txt
+: 1645818014:0;cd ref/
+: 1645818016:0;cd user@2022-02-25_14-31-25.364-0300/
+: 1645818022:0;lnav bugreport-ibiza_retailq-S1RF32.23-2022-02-25-14-31-34.txt
+: 1645818050:0;cd minsk/
+: 1645818053:0;lnav bugreport-minsk_retail-RPC31.Q2-182-2022-02-25-15-11-02.txt
+: 1646047639:0;tmux
+: 1646047648:0;motorola-vpn 336926
+: 1646047676:0;motorola-vpn 616163
+: 1646047699:0;motorola-vpn2 616163
+: 1646050153:0;cd Documents
+: 1646050202:0;cd crs/
+: 1646050206:0;cd IKSWS-60272/
+: 1646050214:0;cd IKSWS-65497/
+: 1646050218:0;l
+: 1646050227:0;rm -rf documents.tar.gz crs
+: 1646050250:0;rm -rf documents.tar.gz lbs
+: 1646050269:0;cd lbs-test-suite/
+: 1646050271:0;tig
+: 1646050279:0;git status
+: 1646050281:0;exit
+: 1646050422:0;rm -rf documents.tar.gz lbs-test-suite 
+: 1646050439:0;rm documents.tar.gz
+: 1646050444:0;cd tests/
+: 1646050450:0;cd scripts/
+: 1646050457:0;rm -rf scripts
+: 1646050467:0;rm -rf android-cts android-vts cts.tar.gz
+: 1646050469:0;cd ..
+: 1646050474:0;tar -czvf documents.tar.gz *
+: 1646050485:0;gpload documents.tar.gz
+: 1646050698:0;ls
+: 1646052241:0;mservman08
+: 1646052893:0;motorola-vpn 953905
+: 1646053631:0;tmux a
+: 1646053911:0;motorola-vpn 035569
+: 1646054002:0;motorola-vpn 251659
+: 1646054022:0;vim ~/.zshrc
+: 1646054037:0;zsh
+: 1646054046:0;motorola-vpn2 998097
+: 1646056358:0;exit
+: 1646056373:0;git clone https://github.com/emanuel36/myWorkSpace
+: 1646056603:0;ls
+: 1646056604:0;cd myWorkSpace/
+: 1646056605:0;ls
+: 1646056606:0;ll
+: 1646056609:0;ls
+: 1646056611:0;cd documents/
+: 1646056611:0;ls
+: 1646056612:0;cd ..
+: 1646056613:0;ls
+: 1646056663:0;cd 
+: 1646056664:0;cd Downloads
+: 1646056664:0;ls
+: 1646056689:0;mv ~/Downloads/bookmarks_2_28_22.html .
+: 1646056690:0;ls
+: 1646056698:0;rm bookmarks_1_4_22.html
+: 1646056701:0;git status
+: 1646056724:0;ls
+: 1646056737:0;cp ~/.zshrc .
+: 1646056750:0;cp ~/.zsh_history .

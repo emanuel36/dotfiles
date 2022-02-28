@@ -41,9 +41,9 @@ source $ZSH/oh-my-zsh.sh
 
 setopt rm_star_silent
 
-alias motorola-vpn2='f() { echo "https://br-partnervpn.motorola.com/7119-otp" | /opt/pulsesecure/bin/pulselauncher -u eangelim -p $1 -r motorola };f'
+alias motorola-vpn2='f() { echo "https://partnervpn.motorola.com/7119-otp" | /opt/pulsesecure/bin/pulselauncher -u eangelim -p $1 -r motorola };f'
 
-alias motorola-vpn='f() { echo $1 | sudo openconnect --protocol=nc --no-dtls https://br-partnervpn.motorola.com/7119-otp --user eangelim --passwd-on-stdin };f'
+alias motorola-vpn='f() { echo $1 | sudo openconnect --protocol=nc --no-dtls https://partnervpn.motorola.com/7119-otp --user eangelim --passwd-on-stdin };f'
 
 mkcd(){
 	DIR="$*";
@@ -91,8 +91,16 @@ flash(){
 }
 
 b2g(){
-	FILE="$1"
-	DIR="$2"
+	if [ "$#" -lt 1 ]; then
+		echo "Illegal number of parameters"
+		return 1
+	elif [ "$#" -lt 2 ]; then
+		FILE="$1"
+		DIR=${RANDOM:0:2}
+	else
+		FILE="$1"
+		DIR="$2"
+	fi
 	unzip $FILE -d $DIR
 	rm -rf $FILE
 	cd $DIR
