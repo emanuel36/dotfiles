@@ -87,8 +87,16 @@ flash(){
 }
 
 b2g(){
-	FILE="$1"
-	DIR="$2"
+	if [ "$#" -lt 1 ]; then
+		echo "Illegal number of parameters"
+		return 1
+	elif [ "$#" -lt 2 ]; then
+		FILE="$1"
+		DIR=${RANDOM:0:2}
+	else
+		FILE="$1"
+		DIR="$2"
+	fi
 	unzip $FILE -d $DIR
 	rm -rf $FILE
 	cd $DIR
