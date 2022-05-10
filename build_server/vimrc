@@ -10,15 +10,15 @@ endif
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-"Vim Airline
+"airline
 Plug 'https://github.com/vim-airline/vim-airline'
+Plug 'https://github.com/vim-airline/vim-airline-themes'
 set ttimeoutlen=50
 let g:airline#extensions#hunks#enabled=0
 let g:airline#extensions#branch#enabled=1
-Plug 'https://github.com/vim-airline/vim-airline-themes'
 let g:airline_theme='jellybeans'
 
-"vim-gitgutter
+"gitgutter
 Plug 'https://github.com/airblade/vim-gitgutter'
 set updatetime=250
 let g:gitgutter_max_signs = 500
@@ -28,15 +28,18 @@ highlight GitGutterDelete ctermfg=1
 highlight GitGutterChangeDelete ctermfg=4
 highlight! link SignColumn LineNr
 
-"vim-rainbow"
+"rainbow"
 Plug 'https://github.com/frazrepo/vim-rainbow'
 let g:rainbow_active = 1
 
+"no tab
 Plug 'https://github.com/ntpeters/vim-better-whitespace'
+
+"theme
+Plug 'rafalbromirski/vim-aurora'
 
 " Initialize plugin system
 call plug#end()
-
 
 " Settings
 set termguicolors
