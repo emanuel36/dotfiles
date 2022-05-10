@@ -1,4 +1,4 @@
-export ZSH="/home/eangelim/.oh-my-zsh"
+export ZSH="/home/emanuelangelim/.oh-my-zsh"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -41,7 +41,6 @@ source $ZSH/oh-my-zsh.sh
 setopt rm_star_silent
 
 
-
 mkcd(){
 	DIR="$*";
 	mkdir -p "$DIR" && cd "$DIR";
@@ -69,21 +68,22 @@ flash(){
         if [[ "$1" == *"tar.gz" ]]; then
 		FILE="$1"
                 FOLDER=$(echo $FILE | cut --complement -f 1 -d "_" | sed -r 's/\.[[:alnum:]]+\.[[:alnum:]]+$//' )
-		tar -xvf $FILE
+                mkdir -p builds
+		tar -xvf $FILE -C ~/Downloads/builds/
                 rm -rf $FILE
+                cd ~/Downloads/builds/$FOLDER
         else
                 FOLDER="$1"
+                cd $FOLDER
         fi
         adb reboot bootloader
-        fastboot erase cache
-        fastboot erase userdata
-        cd $FOLDER
+        fastboot -w
         if [[ -f flash-msi.sh ]]; then
 		./flash-msi.sh
 	else
 		./flashall.sh
 	fi
-        cd ..
+        cd -
 }
 
 b2g(){
@@ -103,8 +103,16 @@ b2g(){
 	lnav aplogcat-main.txt
 }
 
-export PATH="/home/eangelim/Android/flutter/bin:$PATH"
-export PATH="/home/eangelim/Android/Sdk/platform-tools:$PATH"
-export PATH="/home/eangelim/.local/bin:$PATH"
+tmuxa(){
+        tmux attach -t "$1"
+}
+
+bssf(){
+}
+
+bsgf(){
+}
+
+
 export PATH="/usr/local/bin:$PATH"
-export PATH="/home/eangelim/Documents/scripts:$PATH"
+export PATH="/home/emanuelangelim/Documents/scripts:$PATH"
