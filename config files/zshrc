@@ -42,13 +42,14 @@ POWERLEVEL9K_TIME_FOREGROUND=16
 POWERLEVEL9K_TIME_BACKGROUND=28
 
 #Plugins
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 plugins=(
         git
 	zsh-autosuggestions
 	zsh-interactive-cd
 	dirhistory
         )
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 #Settings
 source $ZSH/oh-my-zsh.sh
