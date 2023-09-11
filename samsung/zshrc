@@ -1,0 +1,258 @@
+# Check if setup is required
+if [ ! -d "$HOME/.oh-my-zsh" ];
+then
+        # Install linux packages
+        sudo apt update
+        sudo apt install curl git tig lnav ripgrep vim unzip build-essential coreutils tree htop -y
+
+        # Setup zsh
+        # Oh my zsh
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --keep-zshrc --skip-chsh --unattended"
+        # Theme manager
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+        # Fonts
+        wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf \
+             https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf \
+             https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf \
+             https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf -P ~/.local/share/fonts
+        # Autosuggestions
+        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+        # fzf
+        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install --key-bindings --completion --update-rc
+        git clone https://github.com/joshskidmore/zsh-fzf-history-search ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-fzf-history-search
+        git clone https://github.com/junegunn/fzf-git.sh ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/fzf-git
+        # Make zsh default
+        chsh -s $(which zsh)
+        clear
+fi
+
+zstyle ':omz:update' mode auto
+export ZSH="${HOME}/.oh-my-zsh"
+
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+POWERLEVEL9K_MODE='nerdfont-complete'
+
+#LEFT PROMPT
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon host dir vcs)
+POWERLEVEL9K_OS_ICON_BACKGROUND=233
+POWERLEVEL9K_OS_ICON_FOREGROUND=220
+POWERLEVEL9K_HOST_TEMPLATE="emanuel.ap@sidi"
+POWERLEVEL9K_HOST_BACKGROUND=233
+POWERLEVEL9K_HOST_FOREGROUND=28
+POWERLEVEL9K_DIR_FOREGROUND=16
+POWERLEVEL9K_DIR_BACKGROUND=4
+
+#RIGHT PROMPT
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time time)
+POWERLEVEL9K_STATUS_BACKGROUND=233
+POWERLEVEL9K_STATUS_OK_FOREGROUND=28
+POWERLEVEL9K_STATUS_ERROR_BACKGROUND=160
+POWERLEVEL9K_STATUS_ERROR_FOREGROUND=11
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=28
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=233
+POWERLEVEL9K_TIME_FOREGROUND=16
+POWERLEVEL9K_TIME_BACKGROUND=28
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+plugins=(
+	git
+	zsh-autosuggestions
+	zsh-interactive-cd
+	dirhistory
+	command-not-found
+        zsh-fzf-history-search
+)
+
+source $ZSH/oh-my-zsh.sh
+
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+setopt rm_star_silent
+
+rgfzf(){
+        RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
+        INITIAL_QUERY="${*:-}"
+        : | fzf --ansi --disabled --query "$INITIAL_QUERY" \
+            --bind "start:reload:$RG_PREFIX {q}" \
+            --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
+            --delimiter : \
+            --preview 'bat --color=always {1} --highlight-line {2}' \
+            --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
+            --bind 'enter:become(vim {1} +{2})'
+}
+
+zle -N rgfzf_widget rgfzf
+bindkey '^f' rgfzf_widget
+
+mkcd(){
+	DIR="$*";
+	mkdir -p "$DIR" && cd "$DIR";
+}
+
+adbconnect(){
+	adb.exe disconnect
+	adb.exe tcpip 5555
+	sleep 3
+	IP=$(adb.exe shell ip addr show wlan0  | grep 'inet ' | cut -d' ' -f6 | cut -d/ -f1)
+	adb connect $IP
+}
+
+alias odin=odin4.exe
+alias adb=adb.exe
+
+waitForDevice(){
+        if [[ "$#" -eq 0 ]] then;
+                echo "Waiting for any device..."
+                until [[ $(adb.exe devices | wc -l) -ge 3 ]]; do sleep 1; done
+                DEVICE="$(adb.exe devices | sed -n 2p | awk '{print $1}')"
+        elif [[ "$#" -eq 1 ]] then;
+                DEVICE="$1"
+                echo "Waiting for device $DEVICE..."
+                until [[ $(adb.exe devices) =~ $DEVICE ]]; do sleep 1; done
+        else
+                echo "Too many arguments!"
+                exit 1
+        fi
+
+        echo "Device $DEVICE got available!"
+}
+
+flash(){
+        DEVICES=()
+        if [[ "$#" -eq 1 ]] then;
+                BUILD="$1"
+                if [ ! -f $BUILD ]; then
+                        echo "Could not find the passed build file!\n"
+                        exit 1
+                fi
+        else
+                echo "Usage: flash <build>\n"
+                exit 1
+        fi
+
+        if [ $(adb.exe devices | wc -l) -lt 3 ]; then
+                echo "No devices available"
+                waitForDevice
+        elif [ $(adb.exe devices | wc -l) -eq 3 ]; then
+                echo "Single device available"
+                DEVICE="$(adb.exe devices | sed -n 2p | awk '{print $1}')"
+        elif [ $(adb.exe devices | wc -l) -gt 3 ]; then
+                PS3="Choose a target to flash: "
+
+                for I in {2..$(adb.exe devices | sed -r "/^\r?$/d" | wc -l)}
+                do
+                        DEVICES+="$(adb.exe devices | sed -n ${I}p | awk '{print $1}')"
+                done
+
+                select DEVICE in $DEVICES
+                do
+                        break
+                done
+        fi
+
+        echo "Flashing device $DEVICE..."
+        echo "Entering on download mode..."
+        adb -s $DEVICE reboot download
+
+        echo "Waiting for odin to detect device serial port..."
+        until [[ $(odin -l | head -c1 | wc -c) -gt i0 ]]; do sleep 1; done
+        SERIAL_PORT=$(odin -l | tr -d "\n\r")
+        echo "Serial port detected: $SERIAL_PORT"
+
+        odin4.exe -a $BUILD -d $SERIAL_PORT
+
+        waitForDevice $DEVICE
+        echo "Skipping setup wizard..."
+        sleep 5
+        adb -s $DEVICE shell settings put global setup_wizard_has_run 1
+        adb -s $DEVICE shell settings put secure user_setup_complete 1
+        adb -s $DEVICE shell settings put global device_provisioned 1
+        sleep 5
+        adb -s $DEVICE reboot
+
+        waitForDevice $DEVICE
+        echo "Setting time to same as PC..."
+        adb -s $DEVICE root
+        adb -s $DEVICE shell date -s $(date +%m%d%H%M%Y.%S)
+
+        echo "Done!"
+}
+
+skipSetupWizard(){
+        waitForDevice
+        echo "Skipping setup wizard..."
+        sleep 5
+        adb shell settings put global setup_wizard_has_run 1
+        adb shell settings put secure user_setup_complete 1
+        adb shell settings put global device_provisioned 1
+        sleep 5
+        adb reboot
+
+        waitForDevice
+        echo "Done!"
+}
+
+factoryReset(){
+        waitForDevice
+        echo "Rebooting to recovery mode..."
+        adb reboot recovery
+        waitForDevice
+        echo "Wiping data..."
+        adb shell recovery --wipe_data
+        skipSetupWizard
+}
+
+bugreport(){
+        CURRENT_DIRECTORY="$pwd"
+        cd ~/
+        adb bugreport
+        FILE="$(ls -tr | tail -1)"
+        FOLDER="$(echo $FILE | cut -f1 -d ".")"
+        mkdir -p .bugreports/$FOLDER
+        unzip $FILE -d .bugreports/$FOLDER
+        rm -rf $FILE
+        lnav .bugreports/$FOLDER/$FOLDER.txt
+        cd $CURRENT_DIRECTORY
+}
+
+run_payload(){
+        adb.exe disconnect
+        if [[ $(adb devices | wc -l) -gt 3 ]] then;
+                 echo "More than one device available!"
+                 exit 1
+        fi
+        waitForDevice
+        PAYLOAD_PATH="$1"
+        PAYLOAD_NAME=$(echo $PAYLOAD_PATH | sed 's/.apk//' | tr -d '\n\r')
+        PACKAGE_NAME=$( aapt dump badging $PAYLOAD_PATH | grep 'package' | sed -r "s/package: name='([a-z0-9.]*)'.*/\1/")
+        adb.exe uninstall ${PACKAGE_NAME} 2> /dev/null
+        adb.exe install -t -g $PAYLOAD_PATH
+        adb.exe root
+        adb.exe shell pm grant $PACKAGE_NAME android.permission.MANAGE_VIRTUAL_MACHINE
+        VM_PATH='/apex/com.android.virt/bin/vm'
+        RUN_PATH='/data/local/tmp/virt'
+        CONFIG_FILE='vm_config.json'
+        APP_PATH=$(adb.exe shell pm path $PACKAGE_NAME | sed 's/package://' | tr -d '\n\r')
+        adb.exe shell rm -rf $RUN_PATH
+        adb.exe shell mkdir $RUN_PATH
+        adb.exe shell $VM_PATH run-app --cpus=2 --debug=full --log $RUN_PATH/log.txt $APP_PATH $RUN_PATH/PAYLOAD_NAME.apk.idsig $RUN_PATH/instance.img assets/$CONFIG_FILE
+}
+
+connect_vm(){
+        adb.exe disconnect
+        CID=$(adb.exe shell /apex/com.android.virt/bin/vm list | awk 'BEGIN { FS="[:,]" } /cid/ { print $2; }')
+        echo Connecting to CID ${CID}
+        adb.exe forward tcp:8000 vsock:${CID}:5555
+        adb.exe connect localhost:8000
+        adb.exe -s localhost:8000 root
+        adb.exe -s localhost:8000 wait-for-device
+        adb.exe -s localhost:8000 shell
+}
+
+source ${ZSH_CUSTOM}/plugins/fzf-git/fzf-git.sh
+export PATH="/usr/local/bin:$PATH"
+PATH="${HOME}/.bin:${PATH}"
+

@@ -1,0 +1,11 @@
+[boot]
+command = /bin/bash -c 'chown -v root:kvm /dev/kvm && chmod 660 /dev/kvm'
+
+[user]
+default=emanuel
+
+[wsl2]
+memory=20GB
+swap=5GB
+kernelCommandLine = "sysctl.vm.swappiness=10"
+nestedVirtualization=true

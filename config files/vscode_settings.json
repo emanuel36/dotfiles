@@ -1,0 +1,13 @@
+{
+    "security.workspace.trust.untrustedFiles": "open",
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.external.osxExec": "iTerm.app",
+    "terminal.integrated.fontFamily": "MesloLGS NF",
+    "terminal.integrated.fontWeight": "normal",
+    "terminal.integrated.fontWeightBold": "100",
+    "terminal.integrated.cursorStyle": "underline",
+    "security.allowedUNCHosts": [
+        "wsl.localhost"
+    ],
+    "files.autoSave": "afterDelay"
+}
