@@ -1,0 +1,4 @@
+[manager]
+sort_by        = "modified"
+show_hidden    = false
+show_symlink   = false
