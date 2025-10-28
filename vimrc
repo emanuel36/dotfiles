@@ -51,6 +51,7 @@ set ignorecase
 set redrawtime=10000
 set backspace=indent,eol,start
 set expandtab
+set spell
 colorscheme aurora
 
 "Start from last line
