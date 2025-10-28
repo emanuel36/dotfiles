@@ -1,0 +1,43 @@
+#!/usr/bin/expect -f
+
+# Define variables
+set hostname_ethernet "192.168.1.100"
+set hostname_wifi "192.168.240.1"
+set username "root"
+set password "RMSoft1107"
+
+# Check if an argument was passed
+if {[llength $argv] > 0} {
+    set option [lindex $argv 0]
+} else {
+    puts "Choose an option:"
+    puts "1) ethernet"
+    puts "2) wifi"
+    expect_user -re ".*" { set option $expect_out(buffer) }
+}
+
+if {$option == "1"} {
+    set hostname $hostname_ethernet
+} elseif {$option == "2"} {
+    set hostname $hostname_wifi
+} else {
+    puts "Invalid option. Use '1' for ethernet or '2' for wifi."
+    exit 1
+}
+
+# Start session
+spawn telnet $hostname
+
+# Wait for login prompt
+expect "login:"
+
+# Send username
+send "$username\r"
+
+# Wait for password prompt
+expect "Password:"
+
+# Send password
+send "$password\r"
+
+interact

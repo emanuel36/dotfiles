@@ -156,6 +156,7 @@ rgfzf(){
 
 zle -N rgfzf
 bindkey '^f' rgfzf
+bindkey '^P' fzf-file-widget
 
 extract(){
     if [ -f $1 ]; then
@@ -180,5 +181,14 @@ extract(){
     fi
 }
 
+dbuild() {
+  docker compose exec -it -w /root/workspace lta-dev bash -c "./scripts/build $*"
+}
+
+iot() {
+    python ~/workspace/scripts/azure_script/main.py "$@"
+}
+
 source ${ZSH_CUSTOM}/plugins/fzf-git/fzf-git.sh
 export PATH="/usr/local/bin:$PATH"
+export PATH="/home/epereir/workspace/scripts:$PATH"
