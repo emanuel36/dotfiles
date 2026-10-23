@@ -1,0 +1,19 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "e0bbd20"
+hash = "347cc6b190eb0c2fd60513cc7ae37412"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "e0bbd20"
+hash = "17ebde15c4349f90aedbc45984b98db2"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:diff"
+rev = "e0bbd20"
+hash = "14558d2829c0aa05e99c57de8f74d199"
+
+[[flavor.deps]]
+use = "kalidyasin/yazi-flavors:tokyonight-storm"
+rev = "bfd1b37"
+hash = "be618d6b9aecfdd23139fc5753cdeb3b"
