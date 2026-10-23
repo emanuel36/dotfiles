@@ -1,0 +1,31 @@
+# Identity lives in ~/.gitconfig.local (not versioned)
+[include]
+	path = ~/.gitconfig.local
+[push]
+	default = current
+	recurseSubmodules = check
+[init]
+	defaultBranch = main
+[submodule]
+	recurse = true
+[alias]
+	cleanup = !git fetch --prune --prune-tags && git branch --merged | grep -vE \"(^\\*| main$| develop$)\" | xargs -r git branch -d && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -D && git submodule foreach --recursive \"git fetch --prune --prune-tags && git branch --merged | grep -vE '(^\\*| main$| develop$)' | xargs -r git branch -d && git branch -vv | grep ': gone]' | awk '{print \\$1}' | xargs -r git branch -D\"
+	sync = "!git fetch --all && CURRENT=$(git rev-parse --abbrev-ref HEAD) && git branch -r | grep -v HEAD | sed 's|origin/||' | while read b; do if [ \"$b\" = \"$CURRENT\" ]; then if ! git log origin/$b..$b --oneline 2>/dev/null | grep -q .; then git merge --ff-only origin/$b; else echo \"Skipping $b (has local commits)\"; fi; elif git worktree list | grep -q $b; then echo \"Skipping $b (in use by worktree)\"; elif git rev-parse $b >/dev/null 2>&1 && ! git log origin/$b..$b --oneline 2>/dev/null | grep -q .; then git branch -f $b origin/$b; fi; done && git submodule update"
+	sync-remote = !git reset --hard @{u} && git fetch origin && git reset --hard @{u}
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[url "git@bitbucket.org:"]
+	insteadof = https://bitbucket.org/
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[status]
+	submoduleSummary = true
+[diff]
+	submodule = log

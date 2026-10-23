@@ -1,0 +1,71 @@
+{
+    "files.autoSave": "afterDelay",
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "terminal.integrated.cursorStyle": "underline",
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.fontSize": 10,
+    "workbench.iconTheme": "vs-seti",
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**/*.egg-info": true,
+        "**/.pytest_cache": true,
+        "**.gitkeep": true,
+        "**.gitattributes": true,
+        "**.ecudata": true,
+        "**.venv": true
+    },
+    "search.exclude": {
+        "**/.git": true,
+        "**/.claude": true,
+        "**/.gemini": true,
+        "**/.specify": true,
+        "**/specs": true,
+        "CLAUDE.md": true,
+        "GEMINI.md": true,
+        "AGENTS.md": true
+    },
+    "python.createEnvironment.trigger": "off",
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "typos.diagnosticSeverity": "Hint",
+    "typos.logLevel": "off",
+    "cmake.loggingLevel": "error",
+    "editor.renderWhitespace": "all",
+    "diffEditor.renderSideBySide": false,
+    "cmake.showConfigureWithDebuggerNotification": false,
+    "workbench.editor.languageDetection": true,
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "diffEditor.ignoreTrimWhitespace": true,
+    "workbench.editorAssociations": {
+        "git-rebase-todo": "default"
+    },
+    "workbench.editor.enablePreview": false,
+    "windsurf.autoContinue": 0,
+    "windsurf.allowCascadeAccessGitignoreFiles": true,
+    "devin.autoContinue": 0,
+    "devin.allowCascadeAccessGitignoreFiles": true,
+    "markdown.preview.doubleClickToSwitchToEditor": false,
+    "devin.acp.agentPreferences": {
+        "devin-cli": {
+            "model": "claude-sonnet-5-5-high"
+        }
+    },
+    "claudeCode.preferredLocation": "panel"
+}
