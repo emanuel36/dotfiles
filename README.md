@@ -10,7 +10,7 @@ Personal Linux (Ubuntu + GNOME) configuration. Each top-level directory groups o
 | `vim`, `tmux`, `ghostty` | editor and terminal configs |
 | `yazi` | file manager config; plugins and flavor pinned in `package.toml` |
 | `devin` | Devin IDE settings and keybindings (VS Code format) |
-| `claude` | Claude Code: `CLAUDE.md`, settings, status line |
+| `claude` | Claude Code: `CLAUDE.md`, settings, status line, user-level skills in `skills/` |
 | `scripts` | install, linking, and shell history backup/restore |
 | `secrets` | encrypted shell history and the age public key |
 | `previous-jobs` | archived configs from past jobs (not linked) |
@@ -40,6 +40,8 @@ Files in `$HOME` are symlinks into this repo, so edits show up in `git status` d
 
 - New config file: move it into its directory, add a line to the map in `scripts/link.sh`,
   then run `scripts/link.sh`
+- New Claude Code skill: move its directory into `claude/skills/`, then run `scripts/link.sh`
+  (no map line needed)
 - Back up shell history: `scripts/history-backup.sh`, then commit `secrets/zsh_history.age`
 
 ## Not versioned
@@ -48,6 +50,7 @@ Machine- and work-specific config lives outside the repo and is sourced if prese
 
 - `~/.zshrc.local`: work aliases, VPN, proxy CA bundle, cloud project
 - `~/.gitconfig.local`: `[user]` identity
+- Claude Code skills installed by other tools (`graphify`) or synced from claude.ai (`synced/`)
 
 ## Shell history
 

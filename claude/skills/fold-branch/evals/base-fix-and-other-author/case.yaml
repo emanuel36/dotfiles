@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: base-fix-and-other-author
+expected_outcome: |
+  The rounding fix is folded into Ana's percentage commit and the sign fix into Ana's format commit, both keeping Ana Souza as author, with a Co-authored-by trailer where the user's fix was folded; the divide-by-zero guard stays its own commit; the final tree equals the backup; the uncommitted README change and notes.txt are still present afterwards.
+context:
+  scaffold_script: setup.sh
