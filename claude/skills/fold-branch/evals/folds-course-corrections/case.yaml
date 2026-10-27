@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: folds-course-corrections
+expected_outcome: |
+  feature/PRJ-7-stats is rewritten into a few logical commits (stats and CLI work) with the fixes, debug print, rename, lint, review fix and the variance add/revert pair folded or dropped; the final tree is identical to a backup branch; every new commit passes python3 -m unittest; messages follow the PRJ-7 <Imperative> convention with bullet bodies.
+context:
+  scaffold_script: setup.sh

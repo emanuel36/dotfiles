@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fold plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #fcfcfb; --ink: #1b1d1f; --graphite: #6b7075; --faint: #a3a7ab; --rule: #e7e8e6;
+  --accent: #1d6b4f; --accent-soft: #e4f0ea; --warn: #9a5b14;
+  --sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #16181a; --ink: #e8e9e7; --graphite: #9a9fa4; --faint: #61666b; --rule: #2a2d30;
+    --accent: #5cc49a; --accent-soft: #1b3229; --warn: #e0a656; color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 15px/1.55 var(--sans); }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+main { max-width: 1120px; margin: 0 auto; padding: 40px 24px 120px; }
+
+.head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;
+  flex-wrap: wrap; margin-bottom: 28px; }
+.branch { font-family: var(--mono); font-size: 14px; color: var(--graphite); margin: 0 0 6px; }
+.count { font-size: 44px; line-height: 1; font-weight: 500; letter-spacing: -0.02em; margin: 0; }
+.count .from { color: var(--faint); }
+.facts { color: var(--graphite); font-size: 13.5px; margin: 10px 0 0; }
+.seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 8px; padding: 3px; }
+.seg button { padding: 6px 14px; border-radius: 6px; font-size: 14px; color: var(--graphite); }
+.seg button.on { background: var(--ink); color: var(--paper); }
+.seg small { opacity: .7; margin-left: 4px; }
+.reason { color: var(--graphite); font-size: 14px; margin: 8px 0 0; max-width: 460px; }
+.notices { list-style: none; margin: 0 0 28px; padding: 0; color: var(--warn); font-size: 14px; }
+.notices li { margin: 2px 0; }
+
+.map { position: relative; display: grid;
+  grid-template-columns: minmax(0, 1fr) 140px minmax(0, 1.1fr); align-items: start; }
+.map h3 { font-size: 13px; font-weight: 500; color: var(--graphite); margin: 0 0 12px; }
+.map svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
+  overflow: visible; }
+.map path { fill: none; stroke: var(--rule); stroke-width: 1.5; transition: stroke .15s; }
+.map path.hl { stroke: var(--accent); stroke-width: 2; }
+.old { font-family: var(--mono); font-size: 12.5px; padding: 5px 8px; border-radius: 5px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.old .sha { color: var(--faint); margin-right: 8px; }
+.old .who { color: var(--faint); margin-left: 8px; font-family: var(--sans); }
+.old.fix { color: var(--graphite); }
+.old.drop { color: var(--faint); text-decoration: line-through; }
+.old.base { font-weight: 500; }
+.old.hl, .new-row.hl { background: var(--accent-soft); }
+.new-row { display: block; width: 100%; text-align: left; padding: 10px 12px; border-radius: 6px;
+  margin-bottom: 6px; border: 1px solid var(--rule); }
+.new-row .subj { font-family: var(--mono); font-size: 14px; font-weight: 500; }
+.new-row .meta { font-size: 12.5px; color: var(--graphite); }
+.new-row .meta .done { color: var(--accent); }
+.new-row .meta .todo { color: var(--warn); }
+.legend { display: flex; gap: 20px; font-size: 12.5px; color: var(--graphite); margin-top: 16px;
+  flex-wrap: wrap; }
+.legend .drop { text-decoration: line-through; color: var(--faint); }
+.legend .base { font-weight: 500; color: var(--ink); }
+
+.drawer { margin-top: 28px; border-top: 1px solid var(--rule); padding-top: 20px; max-width: 760px; }
+.drawer .subj { font-family: var(--mono); font-size: 15px; font-weight: 500; }
+.drawer pre { font-family: var(--mono); font-size: 13.5px; white-space: pre-wrap; margin: 6px 0 0; }
+.drawer .why { color: var(--graphite); font-size: 14px; margin: 10px 0 0; }
+.drawer .by { color: var(--graphite); font-size: 13px; margin: 4px 0 0; }
+.tools { display: flex; gap: 16px; margin-top: 12px; align-items: baseline; }
+.ok { font-size: 13.5px; color: var(--graphite); }
+.ok.on { color: var(--accent); font-weight: 500; }
+.change.on { color: var(--warn); font-weight: 500; }
+.quiet { color: var(--graphite); font-size: 14px; }
+.quiet:hover { color: var(--ink); }
+textarea[hidden] { display: none; }
+textarea { width: 100%; font: inherit; font-size: 14px; color: var(--ink); background: var(--paper);
+  border: 1px solid var(--rule); border-radius: 6px; padding: 8px 10px; resize: vertical;
+  min-height: 60px; margin-top: 10px; }
+
+.footer { margin-top: 36px; max-width: 760px; }
+.actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
+.primary { background: var(--accent); color: #fff; padding: 9px 18px; border-radius: 8px;
+  font-weight: 500; }
+.primary.on { background: none; color: var(--accent); border: 1px solid var(--accent); }
+.hint { color: var(--graphite); font-size: 13.5px; }
+.toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+  background: var(--ink); color: var(--paper); padding: 7px 14px; border-radius: 6px;
+  font-size: 13px; opacity: 0; transition: opacity .2s; pointer-events: none; }
+.toast.show { opacity: 1; }
+@media (max-width: 760px) {
+  .map { grid-template-columns: 1fr; }
+  .map svg, .map .gap { display: none; }
+  .map > div + div + div { margin-top: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .map path, .toast { transition: none; } }
+</style>
+</head>
+<body>
+<main id="app"></main>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const PLAN = /*__PLAN__*/null;
+
+// A plan without variants is one variant.
+const V = PLAN.variants || [{ name: 'Plan', before: PLAN.before, after: PLAN.after,
+  strategy: PLAN.strategy }];
+const FIX = new Set(['fold', 'redesign', 'review', 'lint', 'changelog', 'split']);
+const esc = s => String(s ?? '').replace(/[&<>"]/g,
+  c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+const KEY = 'fold-plan:' + PLAN.repo + ':' + PLAN.branch + ':' + (PLAN.generated_at || '');
+let saved = {};
+try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { saved = {}; }
+const state = Object.assign({
+  option: Math.max(0, V.findIndex(v => v.recommended)),
+  approved: null,      // name of the approved option
+  commits: {},         // "<option>:<id>" -> {v: 'ok'|'change', c: comment}
+  overall: '',
+  open: null,
+}, saved);
+const save = () => {
+  try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+};
+const ck = id => state.option + ':' + id;
+const subjectOf = (v, sha) => (v.before.find(c => c.sha === sha) || {}).subject || '';
+
+function render() {
+  const v = V[state.option];
+  const open = v.after.find(c => c.id === state.open) || v.after[0];
+  const dependents = PLAN.dependents || [];
+  const facts = [
+    PLAN.published ? 'Published, needs a force-push' : 'Not published',
+    dependents.length ? 'Moves ' + dependents.join(', ') : 'No branches on top',
+    'Final code unchanged',
+  ].join('. ') + '.';
+  const notices = (PLAN.warnings || []).concat(v.warnings || []);
+  const seg = V.length < 2 ? '' : `<div><div class="seg" role="tablist">${V.map((x, i) =>
+    `<button role="tab" aria-selected="${i === state.option}" data-opt="${i}"
+      class="${i === state.option ? 'on' : ''}">${esc(x.name)}<small>${x.after.length}</small></button>`
+  ).join('')}</div><p class="reason">${esc(v.summary || '')}</p></div>`;
+
+  const manyAuthors = new Set(v.before.map(c => c.author).filter(Boolean)).size > 1;
+  const olds = v.before.map(c => {
+    const dropped = !(c.to || []).length;
+    const cls = dropped ? 'drop' : c.class === 'base-fix' ? 'base' : FIX.has(c.class) ? 'fix' : '';
+    const who = manyAuthors ? `<span class="who">${esc(c.author)}</span>` : '';
+    return `<div class="old ${cls}" data-sha="${esc(c.sha)}" title="${esc(c.note || '')}">` +
+      `<span class="sha">${esc(c.sha)}</span>${esc(c.subject)}${who}</div>`;
+  }).join('');
+
+  const news = v.after.map(c => {
+    const s = state.commits[ck(c.id)] || {};
+    const n = (c.from || []).length;
+    const mark = s.v === 'ok' ? ' <span class="done">approved</span>' :
+      s.v === 'change' ? ' <span class="todo">needs changes</span>' : '';
+    return `<button class="new-row" data-new="${esc(c.id)}">
+      <div class="subj">${esc(c.subject)}</div>
+      <div class="meta">${n ? `${n} commit${n > 1 ? 's' : ''} folded in` : 'new'}${mark}</div>
+    </button>`;
+  }).join('');
+
+  const s = state.commits[ck(open.id)] || {};
+  const approvedHere = state.approved === v.name;
+  document.getElementById('app').innerHTML = `
+    <div class="head"><div>
+      <p class="branch">${esc(PLAN.branch)} onto ${esc(PLAN.base)}</p>
+      <p class="count"><span class="from">${v.before.length}</span> → ${v.after.length} commits</p>
+      <p class="facts">${esc(facts)}</p>
+    </div>${seg}</div>
+    ${notices.length ? `<ul class="notices">${notices.map(n => `<li>${esc(n)}</li>`).join('')}</ul>` : ''}
+    <div class="map" id="mapgrid"><svg id="wires" aria-hidden="true"></svg>
+      <div><h3>Now</h3>${olds}</div><div class="gap"></div><div><h3>After</h3>${news}</div></div>
+    <div class="legend">${legend(v)}</div>
+    <div class="drawer">
+      <div class="subj">${esc(open.subject)}</div>
+      ${open.body ? `<pre>${esc(open.body)}</pre>` : ''}
+      ${open.author ? `<p class="by">Author: ${esc(open.author)}${open.method ? ', ' + esc(open.method) : ''}</p>` : ''}
+      ${open.why ? `<p class="why">${esc(open.why)}</p>` : ''}
+      <div class="tools">
+        <button class="ok ${s.v === 'ok' ? 'on' : ''}" data-mark="ok">${s.v === 'ok' ? 'Approved' : 'Approve'}</button>
+        <button class="quiet change ${s.v === 'change' ? 'on' : ''}" data-mark="change">Needs changes</button>
+        <button class="quiet" data-toggle="c-commit">Comment</button>
+      </div>
+      <textarea id="c-commit" ${s.c ? '' : 'hidden'} placeholder="What should change in this commit?">${esc(s.c || '')}</textarea>
+    </div>
+    <div class="footer">
+      <textarea id="c-overall" ${state.overall ? '' : 'hidden'} placeholder="Anything about the plan as a whole">${esc(state.overall)}</textarea>
+      <div class="actions">
+        <button class="primary ${approvedHere ? 'on' : ''}" data-approve>${approvedHere ?
+          'Approved: ' + esc(v.name) : 'Approve ' + (V.length > 1 ? esc(v.name) : 'the plan')}</button>
+        <button class="quiet" data-export>Export feedback</button>
+        <button class="quiet" data-copy>Copy feedback</button>
+        <button class="quiet" data-toggle="c-overall">Note on the whole plan</button>
+      </div>
+      <p class="hint">Approve here or in the chat. Export saves the file Claude reads.</p>
+    </div>`;
+
+  document.getElementById('c-commit').oninput = e => {
+    state.commits[ck(open.id)] = { ...(state.commits[ck(open.id)] || {}), c: e.target.value };
+    save();
+  };
+  document.getElementById('c-overall').oninput = e => { state.overall = e.target.value; save(); };
+  requestAnimationFrame(() => wires(v, open.id));
+}
+
+function legend(v) {
+  const kind = c => !(c.to || []).length ? 'drop' : c.class === 'base-fix' ? 'base' :
+    FIX.has(c.class) ? 'fix' : 'keep';
+  const used = new Set(v.before.map(kind));
+  return [['keep', 'Logical change'], ['fix', 'Correction, folded in'],
+    ['base', 'Change to code from before the branch'], ['drop', 'Dropped']]
+    .filter(([k]) => used.has(k)).map(([k, t]) => `<span class="${k}">${t}</span>`).join('');
+}
+
+function wires(v, active) {
+  const grid = document.getElementById('mapgrid');
+  const svg = document.getElementById('wires');
+  if (getComputedStyle(svg).display === 'none') return;
+  const g = grid.getBoundingClientRect();
+  let paths = '';
+  v.before.forEach(c => (c.to || []).forEach(to => {
+    const from = grid.querySelector(`.old[data-sha="${CSS.escape(c.sha)}"]`);
+    const into = grid.querySelector(`.new-row[data-new="${CSS.escape(to)}"]`);
+    if (!from || !into) return;
+    const a = from.getBoundingClientRect(), b = into.getBoundingClientRect();
+    const x1 = a.right - g.left + 4, y1 = a.top + a.height / 2 - g.top;
+    const x2 = b.left - g.left - 4, y2 = b.top + b.height / 2 - g.top;
+    const mx = (x1 + x2) / 2;
+    paths += `<path data-from="${esc(c.sha)}" class="${to === active ? 'hl' : ''}"
+      d="M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}"/>`;
+  }));
+  svg.innerHTML = paths;
+  const lit = new Set([...svg.querySelectorAll('path.hl')].map(p => p.dataset.from));
+  grid.querySelectorAll('.old').forEach(o => o.classList.toggle('hl', lit.has(o.dataset.sha)));
+  grid.querySelectorAll('.new-row').forEach(n => n.classList.toggle('hl', n.dataset.new === active));
+}
+
+function feedback() {
+  return {
+    branch: PLAN.branch, repo: PLAN.repo, generated_at: PLAN.generated_at,
+    chosen_option: state.approved || (V.length > 1 ? null : V[0].name),
+    approved: !!state.approved,
+    overall: state.overall,
+    commits: V.flatMap((v, i) => v.after.map(c => {
+      const s = state.commits[i + ':' + c.id] || {};
+      return { option: v.name, id: c.id, subject: c.subject, decision: s.v || null,
+        comment: s.c || '' };
+    })).filter(c => c.decision || c.comment),
+  };
+}
+function toast(m) {
+  const t = document.getElementById('toast');
+  t.textContent = m; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+document.getElementById('app').onclick = async e => {
+  const t = e.target.closest('button');
+  if (!t) return;
+  const v = V[state.option];
+  const open = v.after.find(c => c.id === state.open) || v.after[0];
+  if (t.dataset.toggle) {
+    const box = document.getElementById(t.dataset.toggle);
+    box.hidden = !box.hidden;
+    if (!box.hidden) box.focus();
+    return;
+  }
+  if (t.dataset.opt) { state.option = +t.dataset.opt; state.open = null; }
+  else if (t.dataset.new) { state.open = t.dataset.new; }
+  else if (t.dataset.mark) {
+    const cur = state.commits[ck(open.id)] || {};
+    cur.v = cur.v === t.dataset.mark ? '' : t.dataset.mark;
+    state.commits[ck(open.id)] = cur;
+  }
+  else if ('approve' in t.dataset) { state.approved = state.approved === v.name ? null : v.name; }
+  else if ('export' in t.dataset) {
+    const name = 'fold-plan-feedback-' + PLAN.branch.replace(/[^\w.-]+/g, '-') + '.json';
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(feedback(), null, 2)],
+      { type: 'application/json' }));
+    a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    toast('Saved ' + name + ' to Downloads');
+    return;
+  }
+  else if ('copy' in t.dataset) {
+    try { await navigator.clipboard.writeText(JSON.stringify(feedback(), null, 2)); toast('Copied'); }
+    catch (err) { toast('Copy failed; use Export feedback'); }
+    return;
+  }
+  save();
+  render();
+};
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => wires(V[state.option], state.open || V[state.option].after[0].id), 100);
+});
+document.title = 'Fold plan: ' + PLAN.branch;
+render();
+</script>
+</body>
+</html>

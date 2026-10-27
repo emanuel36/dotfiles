@@ -30,3 +30,9 @@ zsh/functions.zsh               .zsh/functions.zsh
 zsh/theme.zsh                   .zsh/theme.zsh
 zsh/tools.zsh                   .zsh/tools.zsh
 EOF
+
+# Each user-level Claude Code skill is a directory, linked as a whole
+mkdir -p "$HOME/.claude/skills"
+for skill in "$repo"/claude/skills/*/; do
+    ln -sfn "${skill%/}" "$HOME/.claude/skills/$(basename "$skill")"
+done
