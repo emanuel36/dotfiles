@@ -15,6 +15,13 @@ Personal Linux (Ubuntu + GNOME) configuration. Each top-level directory groups o
 | `secrets` | encrypted shell history and the age public key |
 | `previous-jobs` | archived configs from past jobs (not linked) |
 
+## Claude Code skills
+
+| # | Skill | What it does |
+|---|---|---|
+| 1 | [`daily-recap`](https://github.com/emanuel36/dotfiles/tree/master/claude/skills/daily-recap) | Daily work summary for the standup |
+| 2 | [`fold-branch`](https://github.com/emanuel36/dotfiles/tree/master/claude/skills/fold-branch) | Folds a branch's fixes into clean commits |
+
 ## New machine
 
 ```sh
