@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily recap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --paper: #f5f6f8;
+  --ink: #1e2532;
+  --ink-2: #5b6577;
+  --ink-3: #8b93a3;
+  --rule: #dce0e7;
+  --wash: #eceef2;
+  --add: #0f6b2f;
+  --del: #b4373a;
+  --focus: #2a78d6;
+  /* Activities: dataviz slots 1-3, distinct for every pair. */
+  --act-build: #2a78d6;
+  --act-review: #eb6834;
+  --act-plan: #1baf7a;
+  --act-other: #a3a9b5;
+  /* Languages: dataviz slots 4-8, so no color means both a language and an activity. */
+  --l1: #eda100;
+  --l2: #e87ba4;
+  --l3: #008300;
+  --l4: #6250d6;
+  --l5: #e34948;
+  --l-other: #c5cad3;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --text: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  /* Every row on the page shares these columns, so names, numbers and text line up. */
+  --col-name: 236px;
+  --col-gap: 28px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #13161c;
+    --ink: #e6e9ef;
+    --ink-2: #a9b0bd;
+    --ink-3: #737b8a;
+    --rule: #2a2f39;
+    --wash: #1b1f26;
+    --add: #3fbf6a;
+    --del: #ec7a7c;
+    --act-build: #3987e5;
+    --act-review: #d95926;
+    --act-plan: #199e70;
+    --act-other: #5d6472;
+    --l1: #c98500;
+    --l2: #d55181;
+    --l3: #008300;
+    --l4: #9085e9;
+    --l5: #e66767;
+    --l-other: #4a505c;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #13161c;
+  --ink: #e6e9ef;
+  --ink-2: #a9b0bd;
+  --ink-3: #737b8a;
+  --rule: #2a2f39;
+  --wash: #1b1f26;
+  --add: #3fbf6a;
+  --del: #ec7a7c;
+  --act-build: #3987e5;
+  --act-review: #d95926;
+  --act-plan: #199e70;
+  --act-other: #5d6472;
+  --l1: #c98500;
+  --l2: #d55181;
+  --l3: #008300;
+  --l4: #9085e9;
+  --l5: #e66767;
+  --l-other: #4a505c;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 15px/1.55 var(--text);
+  padding: 0 20px 72px;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p, ul { margin: 0; }
+.num { font-variant-numeric: tabular-nums; }
+.add { color: var(--add); }
+.del { color: var(--del); }
+.muted { color: var(--ink-3); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
+.tip {
+  position: fixed; pointer-events: none; z-index: 10; background: var(--ink); color: var(--paper);
+  font-size: 13px; padding: 7px 10px; border-radius: 6px; max-width: 320px; line-height: 1.4;
+}
+.page { max-width: 1080px; margin: 0 auto; }
+
+/* Header */
+header { padding: 34px 0 26px; }
+.date { font: 700 clamp(30px, 5vw, 44px)/1.05 var(--display); letter-spacing: -0.02em; }
+.figs { display: flex; flex-wrap: nowrap; gap: 0 40px; margin-top: 18px; overflow-x: auto; white-space: nowrap; }
+.figs b { display: block; font: 600 30px/1.05 var(--display); letter-spacing: -0.02em; }
+.figs b .del { margin-left: 8px; }
+.figs .fig > span { font-size: 13px; color: var(--ink-2); }
+.langs { margin-top: 22px; max-width: 720px; }
+.langbar { display: flex; gap: 2px; height: 10px; }
+.langbar span:first-child { border-radius: 4px 0 0 4px; }
+.langbar span:last-child { border-radius: 0 4px 4px 0; }
+.legend { display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: 12.5px; color: var(--ink-2); margin-top: 7px; }
+.legend i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; }
+.legend i.tick { width: 2px; height: 11px; border-radius: 1px; background: var(--ink-2); vertical-align: -1px; margin: 0 7px 0 3px; }
+.legend .pct { color: var(--ink-3); margin-left: 3px; }
+
+/* Lanes */
+.hours { position: relative; height: 18px; font-size: 11.5px; color: var(--ink-3); }
+.hours span { position: absolute; transform: translateX(-50%); }
+.lane { position: relative; height: 14px; }
+.lane .grid { position: absolute; top: -4px; bottom: -4px; width: 1px; background: var(--rule); }
+.lane .bar { position: absolute; top: 0; bottom: 0; border-radius: 3px; min-width: 4px;
+  box-shadow: 0 0 0 1.5px var(--wash); }
+.lane .tick { position: absolute; top: 1px; bottom: 1px; width: 2px; margin-left: -1px;
+  background: var(--ink-2); border-radius: 1px; }
+
+/* Shared text pieces */
+.name { font: 600 17px/1.3 var(--display); letter-spacing: -0.01em; }
+.stats { font-size: 13px; color: var(--ink-3); white-space: nowrap; }
+.section-name { font: 600 13px var(--text); color: var(--ink-3); }
+.badge { display: inline-flex; align-items: center; gap: 5px; height: 20px; padding: 0 8px;
+  border: 1px solid var(--rule); border-radius: 999px; font: 500 12px/1 var(--text); color: var(--ink-2);
+  white-space: nowrap; }
+.badge.ticket { border-color: color-mix(in srgb, var(--ink-2) 45%, transparent); color: var(--ink); }
+/* Status badges carry an icon and a word, so the color is never the only cue. */
+.badge.status::before { font-size: 11px; }
+.badge.good { color: var(--add); border-color: color-mix(in srgb, var(--add) 45%, transparent); }
+.badge.good::before { content: "✓"; }
+.badge.open { color: var(--act-build); border-color: color-mix(in srgb, var(--act-build) 45%, transparent); }
+.badge.open::before { content: "◐"; }
+.badge.bad { color: var(--del); border-color: color-mix(in srgb, var(--del) 45%, transparent); }
+.badge.bad::before { content: "!"; font-weight: 700; }
+.badge.talk { color: var(--ink-2); }
+.badge.talk::before { content: "↔"; }
+.items { list-style: none; padding: 0; }
+.items li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; padding: 5px 0;
+  align-items: baseline; }
+.items li + li { border-top: 1px dashed color-mix(in srgb, var(--rule) 80%, transparent); }
+.items .what .badge { margin-right: 8px; vertical-align: 1px; }
+/* The day at a glance */
+.day { background: var(--wash); border-radius: 14px; padding: 16px 20px 14px; }
+.day .row { display: grid; grid-template-columns: var(--col-name) 1fr; gap: var(--col-gap);
+  align-items: center; padding: 5px 0; }
+.day .row .label { font: 600 14px var(--display); white-space: nowrap; }
+.day .row.section { padding: 10px 0 0; }
+.day .hours { margin-left: calc(var(--col-name) + var(--col-gap)); }
+
+/* Rows: name, numbers and content sit in three fixed columns under the timeline. */
+.rows { margin-top: 30px; }
+.rows .section-name { padding: 18px 0 6px; }
+.rows .item { display: grid; grid-template-columns: var(--col-name) 150px 1fr; gap: var(--col-gap);
+  padding: 12px 0; border-top: 1px solid var(--rule); align-items: baseline; }
+.rows .item .stats { text-align: right; }
+
+@media (max-width: 760px) {
+  :root { --col-name: 110px; --col-gap: 14px; }
+  .rows .item { grid-template-columns: 1fr; gap: 2px; }
+  .rows .item .stats { text-align: left; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .day .bar { animation: draw .5s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--at) * 0.5s);
+    transform-origin: left; }
+  @keyframes draw { from { transform: scaleX(0); opacity: 0; } }
+}
+</style>
+</head>
+<body>
+<main id="root" class="page"></main>
+<div class="tip" id="tip" hidden></div>
+<script>
+const RECAP = /*__RECAP__*/null;
+
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g,
+  (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const fmt = (n) => Number(n || 0).toLocaleString("en-US");
+const short = (n) => n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, "") + "k" : fmt(n);
+const minutes = (hhmm) => { const [h, m] = hhmm.split(":").map(Number); return h * 60 + m; };
+const plural = (n, word) => `${fmt(n)} ${word}${n === 1 ? "" : "s"}`;
+const titleOf = (s) => s.title;
+
+const ACTIVITY = {
+  build: {label: "Build", color: "var(--act-build)"},
+  review: {label: "Review", color: "var(--act-review)"},
+  plan: {label: "Plan & research", color: "var(--act-plan)"},
+  other: {label: "Other", color: "var(--act-other)"},
+};
+
+const groups = Object.values(RECAP.groupings)[0];
+const sessions = groups.flatMap((g) => g.sessions);
+const slack = RECAP.slack || [];
+for (const g of groups) {
+  g.added = g.sessions.reduce((a, s) => a + s.lines_added, 0);
+  g.removed = g.sessions.reduce((a, s) => a + s.lines_removed, 0);
+  g.commitCount = g.sessions.reduce((a, s) => a + s.commit_count, 0);
+}
+const totals = {
+  added: sessions.reduce((a, s) => a + s.lines_added, 0),
+  removed: sessions.reduce((a, s) => a + s.lines_removed, 0),
+  commits: sessions.reduce((a, s) => a + s.commit_count, 0),
+  first: sessions.map((s) => s.start).concat(slack.map((m) => m.time)).sort()[0],
+  last: sessions.map((s) => s.end).concat(slack.map((m) => m.time)).sort().at(-1),
+};
+const date = new Date(RECAP.date + "T12:00:00");
+const dateText = date.toLocaleDateString("en-US", {weekday: "long", month: "long", day: "numeric"});
+
+// The hour grid every lane shares, so lanes line up across groups.
+const startH = totals.first ? Math.floor(minutes(totals.first) / 60) : 8;
+const endH = totals.last ? Math.ceil((minutes(totals.last) + 1) / 60) : 18;
+const pos = (hhmm) => (minutes(hhmm) - startH * 60) / ((endH - startH) * 60) * 100;
+const hourList = Array.from({length: endH - startH + 1}, (_, i) => startH + i);
+const hourAt = (h) => `${String(h).padStart(2, "0")}:00`;
+
+// Runs of groups that share a section, in order: [[section, [group, ...]], ...].
+const runs = groups.reduce((acc, g) => {
+  if (!acc.length || acc.at(-1)[0] !== g.section) acc.push([g.section, []]);
+  acc.at(-1)[1].push(g);
+  return acc;
+}, []);
+
+function header() {
+  return `<header>
+    <h1 class="date">${esc(dateText)}</h1>
+    <div class="figs">
+      <div class="fig"><b class="num">${sessions.length}</b><span>Claude Code sessions</span></div>
+      <div class="fig"><b class="num">${esc(totals.first)}–${esc(totals.last)}</b><span>first to last activity</span></div>
+      <div class="fig"><b class="num"><span class="add">+${short(totals.added)}</span><span class="del">−${short(totals.removed)}</span></b><span>lines of code</span></div>
+      <div class="fig"><b class="num">${totals.commits}</b><span>commits</span></div>
+      ${slack.length ? `<div class="fig"><b class="num">${slack.length}</b><span>Slack messages</span></div>` : ""}
+    </div>
+    ${languages()}
+  </header>`;
+}
+
+// Lines changed per language as one stacked bar: five named slots, the rest folded into Other.
+function languages() {
+  const counts = {};
+  for (const [language, n] of sessions.flatMap((s) => Object.entries(s.languages))) {
+    counts[language] = (counts[language] || 0) + n;
+  }
+  const ranked = Object.entries(counts).filter(([, n]) => n > 0).sort((a, b) => b[1] - a[1]);
+  if (!ranked.length) return "";
+  const parts = ranked.slice(0, 5).map(([name, n], i) => ({name, n, color: `var(--l${i + 1})`}));
+  const rest = ranked.slice(5);
+  if (rest.length) {
+    parts.push({name: "Other", detail: rest.map(([l]) => l).join(", "),
+      n: rest.reduce((a, [, n]) => a + n, 0), color: "var(--l-other)"});
+  }
+  const total = parts.reduce((a, p) => a + p.n, 0);
+  const pct = (n) => Math.max(1, Math.round(n / total * 100));
+  return `<div class="langs">
+    <div class="langbar" role="img" aria-label="Lines changed by language">${parts.map((p) =>
+      `<span style="flex:${p.n};background:${p.color}" data-tip="${esc((p.detail || p.name) + ": " + fmt(p.n) + " lines")}"></span>`).join("")}</div>
+    <div class="legend">${parts.map((p) => `<span><i style="background:${p.color}"></i>${esc(p.name)}<span class="pct num">${pct(p.n)}%</span></span>`).join("")}</div>
+  </div>`;
+}
+
+const grid = () => hourList.map((h) => `<span class="grid" style="left:${pos(hourAt(h))}%"></span>`).join("");
+
+// A group's lane: its sessions as bars, or for the Slack group the messages as ticks.
+function lane(g) {
+  const span = (endH - startH) * 60;
+  const marks = g.slack
+    ? slack.map((m) => `<span class="tick" tabindex="0" style="left:${pos(m.time)}%"
+        data-tip="${esc(`${m.time} in ${m.channel}${m.topic ? ": " + m.topic : ""}`)}"></span>`)
+    : g.sessions.map((s) => {
+      const left = pos(s.start), width = Math.max(pos(s.end) - left, 0.4);
+      const tip = `${titleOf(s)}${s.summary ? " — " + s.summary : ""} (${s.start}–${s.end}, ${ACTIVITY[s.activity].label})`;
+      return `<span class="bar" tabindex="0" style="left:${left}%;width:${width}%;background:${ACTIVITY[s.activity].color};--at:${(minutes(s.start) - startH * 60) / span}"
+        data-tip="${esc(tip)}"></span>`;
+    });
+  return `<div class="lane">${grid()}${marks.join("")}</div>`;
+}
+
+const hours = () => `<div class="hours">${hourList.map((h) =>
+  `<span style="left:${pos(hourAt(h))}%">${h}h</span>`).join("")}</div>`;
+
+function key() {
+  const used = Object.keys(ACTIVITY).filter((a) => sessions.some((s) => s.activity === a));
+  return `<div class="legend" style="margin-top:12px">${used.map((a) =>
+    `<span><i style="background:${ACTIVITY[a].color}"></i>${ACTIVITY[a].label}</span>`).join("")}
+    ${slack.length ? `<span><i class="tick"></i>Slack message</span>` : ""}</div>`;
+}
+
+function stats(g) {
+  if (g.slack) return `<span class="stats num">${plural(slack.length, "message")}</span>`;
+  const bits = [];
+  if (g.added || g.removed) bits.push(`<span class="add">+${short(g.added)}</span> <span class="del">−${short(g.removed)}</span>`);
+  if (g.commitCount) bits.push(plural(g.commitCount, "commit"));
+  return `<span class="stats num">${bits.join(", ")}</span>`;
+}
+
+const STATUS_KIND = {merged: "good", approved: "good", done: "good", "in review": "open",
+  "in progress": "open", blocked: "bad", discussed: "talk"};
+const ticketBadges = (list) => (list || []).map((t) => `<span class="badge ticket">${esc(t)}</span>`).join("");
+const statusBadge = (status) => status
+  ? `<span class="badge status ${STATUS_KIND[status]}">${esc(status[0].toUpperCase() + status.slice(1))}</span>` : "";
+
+// One line per piece of work: ticket badges, what was done, and its status.
+function items(g) {
+  return `<ul class="items">${g.items.map((it) => `<li>
+    <span class="what">${ticketBadges(it.tickets)}<span>${esc(it.text)}</span></span>${statusBadge(it.status)}</li>`).join("")}</ul>`;
+}
+
+function dayRows() {
+  return runs.map(([section, list]) =>
+    (section ? `<div class="row section"><span class="section-name">${esc(section)}</span></div>` : "") +
+    list.map((g) => `<div class="row"><span class="label">${esc(g.name)}</span>${lane(g)}</div>`).join("")).join("");
+}
+
+function page() {
+  return `${header()}
+    <section class="day" aria-label="The day">${hours()}${dayRows()}${key()}</section>
+    <section class="rows">${runs.map(([section, list]) => `
+      ${section ? `<h2 class="section-name">${esc(section)}</h2>` : ""}
+      ${list.map((g) => `<article class="item">
+        <h3 class="name">${esc(g.name)}</h3>${stats(g)}${items(g)}
+      </article>`).join("")}`).join("")}
+    </section>`;
+}
+
+document.getElementById("root").innerHTML = sessions.length || slack.length
+  ? page()
+  : `<header><h1 class="date">${esc(dateText)}</h1><p class="muted" style="margin-top:8px">No Claude Code sessions or Slack messages on this day.</p></header>`;
+
+const tip = document.getElementById("tip");
+const showTip = (el, x, y) => {
+  tip.textContent = el.dataset.tip;
+  tip.hidden = false;
+  tip.style.left = Math.min(x + 12, innerWidth - tip.offsetWidth - 8) + "px";
+  tip.style.top = (y + 14) + "px";
+};
+document.addEventListener("pointermove", (e) => {
+  const el = e.target.closest("[data-tip]");
+  if (el) showTip(el, e.clientX, e.clientY); else tip.hidden = true;
+});
+document.addEventListener("focusin", (e) => {
+  const el = e.target.closest("[data-tip]");
+  if (!el) return;
+  const r = el.getBoundingClientRect();
+  showTip(el, r.left, r.bottom);
+});
+document.addEventListener("focusout", () => { tip.hidden = true; });
+
+document.title = `${dateText} · daily recap`;
+</script>
+</body>
+</html>
