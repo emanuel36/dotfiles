@@ -7,3 +7,14 @@ group = "git"
 url   = "*/"
 run   = "git"
 group = "git"
+
+[opener]
+browser = [
+	{ run = 'xdg-open "$@"', orphan = true, desc = "Default app", for = "linux" },
+]
+
+[open]
+prepend_rules = [
+	{ mime = "text/html", use = "browser" },
+	{ url = "*.{html,htm,xhtml}", use = "browser" },
+]
