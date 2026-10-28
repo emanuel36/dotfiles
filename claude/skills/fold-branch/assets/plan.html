@@ -72,6 +72,12 @@ main { max-width: 1120px; margin: 0 auto; padding: 40px 24px 120px; }
 .drawer pre { font-family: var(--mono); font-size: 13.5px; white-space: pre-wrap; margin: 6px 0 0; }
 .drawer .why { color: var(--graphite); font-size: 14px; margin: 10px 0 0; }
 .drawer .by { color: var(--graphite); font-size: 13px; margin: 4px 0 0; }
+.files { font-family: var(--mono); font-size: 12.5px; margin: 12px 0 0; border-collapse: collapse; }
+.files td { padding: 1px 12px 1px 0; color: var(--graphite); }
+.files td.path { color: var(--ink); }
+.files .added { color: var(--accent); }
+.files .deleted { color: var(--warn); }
+.files .n { text-align: right; font-variant-numeric: tabular-nums; }
 .tools { display: flex; gap: 16px; margin-top: 12px; align-items: baseline; }
 .ok { font-size: 13.5px; color: var(--graphite); }
 .ok.on { color: var(--accent); font-weight: 500; }
@@ -182,6 +188,7 @@ function render() {
       ${open.body ? `<pre>${esc(open.body)}</pre>` : ''}
       ${open.author ? `<p class="by">Author: ${esc(open.author)}${open.method ? ', ' + esc(open.method) : ''}</p>` : ''}
       ${open.why ? `<p class="why">${esc(open.why)}</p>` : ''}
+      ${files(open)}
       <div class="tools">
         <button class="ok ${s.v === 'ok' ? 'on' : ''}" data-mark="ok">${s.v === 'ok' ? 'Approved' : 'Approve'}</button>
         <button class="quiet change ${s.v === 'change' ? 'on' : ''}" data-mark="change">Needs changes</button>
@@ -207,6 +214,16 @@ function render() {
   };
   document.getElementById('c-overall').oninput = e => { state.overall = e.target.value; save(); };
   requestAnimationFrame(() => wires(v, open.id));
+}
+
+function files(c) {
+  if (!(c.files || []).length) return '';
+  const tone = s => s === 'A' ? 'added' : s === 'D' ? 'deleted' : '';
+  return `<table class="files">${c.files.map(f => `<tr>
+    <td class="${tone(f.status)}">${esc(f.status)}</td>
+    <td class="path">${esc(f.path)}</td>
+    <td class="n added">+${esc(f.added)}</td><td class="n deleted">−${esc(f.deleted)}</td>
+  </tr>`).join('')}</table>`;
 }
 
 function legend(v) {
