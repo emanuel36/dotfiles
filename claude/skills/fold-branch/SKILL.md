@@ -143,11 +143,14 @@ stacked branches, verification and undo. Read it before step 6.
 Write the plan as JSON and render it:
 
 ```bash
-python3 <skill-dir>/scripts/render_plan.py <scratch>/plan.json ./fold-plan-<branch>.html
-xdg-open ./fold-plan-<branch>.html
+python3 <skill-dir>/scripts/render_plan.py <scratch>/plan.json <scratch>/fold-plan-<branch>.html
+xdg-open <scratch>/fold-plan-<branch>.html
 ```
 
-Save the page in the current working directory (the user's convention) and open it right away.
+`<scratch>` is the session's temporary directory (the scratchpad, or `mktemp -d` when there is
+none), never the repository or the working directory: the page is for viewing in the browser,
+not a file to keep. Open it right away and delete it once the plan is approved, or when a
+plan-only review ends.
 Plan JSON:
 
 ```json

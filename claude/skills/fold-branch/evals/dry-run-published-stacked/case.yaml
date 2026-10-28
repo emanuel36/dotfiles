@@ -1,6 +1,6 @@
 schema_version: "1.1"
 name: dry-run-published-stacked
 expected_outcome: |
-  No ref changes in the repository. A plan page fold-plan-*.html is written to the working directory, proposing to fold the median fix and the spread review fix into their commits, and the response warns that the branch is published (force-push) and that feature/PRJ-8-report is stacked on it.
+  No ref changes in the repository. A plan page fold-plan-*.html is rendered outside the repository and the working directory (a temporary directory) and opened, proposing to fold the median fix and the spread review fix into their commits, and the response warns that the branch is published (force-push) and that feature/PRJ-8-report is stacked on it.
 context:
   scaffold_script: setup.sh
