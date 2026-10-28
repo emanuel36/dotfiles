@@ -291,7 +291,8 @@
     "slack@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
     "cctabs@generativereality": true,
-    "diagram-design@diagram-design": true
+    "diagram-design@diagram-design": true,
+    "humanizer@humanizer": true
   },
   "extraKnownMarketplaces": {
     "generativereality": {
@@ -304,6 +305,12 @@
       "source": {
         "source": "github",
         "repo": "cathrynlavery/diagram-design"
+      }
+    },
+    "humanizer": {
+      "source": {
+        "source": "github",
+        "repo": "blader/humanizer"
       }
     }
   },
