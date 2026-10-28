@@ -168,7 +168,12 @@ Plan JSON:
     {"id": "N2", "subject": "VP-589 Consolidate the speed and odometer of PSVI messages",
      "body": "- Read speed and odometer from one source, as LTA does\n- ...",
      "author": "Emanuel Pereira", "from": ["2253223", "b943290", "7cea060"],
-     "method": "fixup", "why": "One behavior: every PSVI message reads the same values"}
+     "method": "fixup", "why": "One behavior: every PSVI message reads the same values",
+     "files": [
+       {"path": "app/src/main/java/psvi/PsviMessage.kt", "status": "M", "added": 42, "deleted": 7},
+       {"path": "app/src/test/java/psvi/PsviMessageTest.kt", "status": "A", "added": 88,
+        "deleted": 0}
+     ]}
   ]
 }
 ```
@@ -178,9 +183,15 @@ lists the new commits, oldest first. Put anything the user must decide or know i
 a published branch, dependent branches, `base-fix` commits, ambiguous targets, commits by other
 people.
 
+`files` lists what each new commit will change: `status` is `A`, `M`, `D` or `R`, and `added`
+and `deleted` count lines. Derive it from the `files` of the old commits in `from` (in the
+analysis JSON), netting out what they cancel: a file created and later deleted on the branch
+disappears, and a file created on the branch stays `A` even when later commits modify it. For
+`rebuild` and `split` commits, take it from the planned diff, not from the old commits.
+
 The page shows the current history on the left and the proposed one on the right, joined by
 lines from each old commit to the new commit it goes into; clicking a new commit shows its full
-message, author and reason below, with Approve, Needs changes and Comment.
+message, author, reason and changed files below, with Approve, Needs changes and Comment.
 
 **Several groupings:** replace the top-level `before`/`after` with a `variants` list. The page
 shows a switch between them at the top and an "Approve <name>" button for the one on screen:
