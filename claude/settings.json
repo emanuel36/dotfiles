@@ -108,11 +108,169 @@
   "hooks": {
     "SessionStart": [
       {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh",
+            "args": [
+              "-c",
+              "/usr/bin/gjs -m \"$0\" 2>/dev/null; exit 0",
+              "/home/epereir/.local/share/gnome-shell/extensions/away-mode@emanuel36/hook.js"
+            ],
+            "timeout": 10
+          }
+        ]
+      },
+      {
         "matcher": "startup",
         "hooks": [
           {
             "type": "command",
             "command": "bash \"$HOME/.claude/skills/daily-recap/scripts/catch_up.sh\" 2>/dev/null || true",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh",
+            "args": [
+              "-c",
+              "/usr/bin/gjs -m \"$0\" 2>/dev/null; exit 0",
+              "/home/epereir/.local/share/gnome-shell/extensions/away-mode@emanuel36/hook.js"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh",
+            "args": [
+              "-c",
+              "/usr/bin/gjs -m \"$0\" 2>/dev/null; exit 0",
+              "/home/epereir/.local/share/gnome-shell/extensions/away-mode@emanuel36/hook.js"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh",
+            "args": [
+              "-c",
+              "/usr/bin/gjs -m \"$0\" 2>/dev/null; exit 0",
+              "/home/epereir/.local/share/gnome-shell/extensions/away-mode@emanuel36/hook.js"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh",
+            "args": [
+              "-c",
+              "/usr/bin/gjs -m \"$0\" 2>/dev/null; exit 0",
+              "/home/epereir/.local/share/gnome-shell/extensions/away-mode@emanuel36/hook.js"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh",
+            "args": [
+              "-c",
+              "/usr/bin/gjs -m \"$0\" 2>/dev/null; exit 0",
+              "/home/epereir/.local/share/gnome-shell/extensions/away-mode@emanuel36/hook.js"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh",
+            "args": [
+              "-c",
+              "/usr/bin/gjs -m \"$0\" 2>/dev/null; exit 0",
+              "/home/epereir/.local/share/gnome-shell/extensions/away-mode@emanuel36/hook.js"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh",
+            "args": [
+              "-c",
+              "/usr/bin/gjs -m \"$0\" 2>/dev/null; exit 0",
+              "/home/epereir/.local/share/gnome-shell/extensions/away-mode@emanuel36/hook.js"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh",
+            "args": [
+              "-c",
+              "/usr/bin/gjs -m \"$0\" 2>/dev/null; exit 0",
+              "/home/epereir/.local/share/gnome-shell/extensions/away-mode@emanuel36/hook.js"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh",
+            "args": [
+              "-c",
+              "/usr/bin/gjs -m \"$0\" 2>/dev/null; exit 0",
+              "/home/epereir/.local/share/gnome-shell/extensions/away-mode@emanuel36/hook.js"
+            ],
             "timeout": 10
           }
         ]
