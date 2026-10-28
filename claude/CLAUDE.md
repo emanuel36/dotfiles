@@ -7,6 +7,8 @@
   side by side — for UI, one HTML file with a switcher — and let me choose before refining.
 - **No artifacts unless asked:** never publish an Artifact (Artifact tool) on your own
   initiative; for HTML/markdown deliverables, save a local file and tell me the path.
+- **Open HTML automatically:** after saving an HTML file (mockups, variants, reports), open it
+  in the default browser right away with `xdg-open`, without asking.
 - **Location:** save generated files (reports, markdown, HTML, scripts) in the current working
   directory unless I name another place.
 
@@ -23,8 +25,13 @@
   Prefer tables for evidence; reference Jira tickets rather than commit hashes or code detail.
 - **Audience:** write for what the reader knows — drop internal app names, acronyms and detail
   that an external team or non-developer would not recognize.
-- **Draft first:** write a markdown draft in the current directory for my review; post to the
-  external service only after I approve it. For Slack, create a draft — never send directly.
+- **Draft first:** never create a markdown draft file unless the rule below calls for one.
+  - **Jira ticket comments:** write a markdown draft in the current directory for my review;
+    post only after I approve it.
+  - **Slack:** show the message in the chat; after I approve it, save it as a Slack draft
+    (`slack_send_message_draft`) — never send directly.
+  - **Everything else** (Confluence, PR descriptions/comments, emails, reports): show the text in
+    the chat; post only after I approve it.
 
 **Project docs:**
 - **README:** written for users, not developers.
@@ -47,6 +54,11 @@
 - Body as one line bullet points: an objective overview of what changed and why, no implementation detail
 - A repository's own convention (README, AGENTS.md, CLAUDE.md) takes precedence where it differs
 - Never commit secrets, API keys, or credentials — use gitignored `.env` files and env vars
+
+**Before opening a pull request:**
+- Run `/code-review` on the pull request's own commits, on its branch
+- Fix the findings that hold; report the rejected ones to me with the reason
+- Run it again before pushing substantial changes to an open pull request
 
 **Branches & remotes:**
 - Never merge or close/delete a branch unless I ask
