@@ -3,8 +3,9 @@ name: daily-recap
 description: >-
   Build an overview of one day of work from the user's Claude Code sessions and their own Slack
   messages: what each initiative delivered, split into work and own projects, with tickets,
-  statuses, lines of code, commits and a timeline of the day, saved as an HTML page in
-  ~/Documents/diario and ready to read out at the daily standup. Use this whenever the user asks
+  statuses, lines of code, commits and a timeline of the day, added to a searchable work diary
+  page in ~/Documents/diario and ready to read out at the daily standup. Also runs unattended
+  from a session-start hook to catch up on missing days. Use this whenever the user asks
   what they did today, yesterday or on a given date, wants a daily summary, diary, journal, recap
   or log of their work or of their Claude sessions, or wants material for their daily report
   ("o que eu fiz hoje", "resumo do dia", "resumo de ontem", "meu diário", "o que falo na daily",
@@ -24,12 +25,17 @@ Write the page content in **English**. Talk to the user in their own language.
 
 ## Inputs and outputs
 
-- **Day**: today unless the user names another ("ontem", "sexta", "2026-10-20"). Resolve it to
-  `YYYY-MM-DD` in local time.
-- **Folder**: `~/Documents/diario/` keeps `<day>.notes.json` (your notes) and `<day>.html` (the
-  page). Re-running a day overwrites them.
+- **Days**: today unless the user names others ("ontem", "sexta", "2026-10-20", "a semana
+  passada"). Resolve each to `YYYY-MM-DD` in local time and run steps 1-4 for each, oldest first.
+  Skip a day with no Claude Code sessions and no Slack messages: nothing gets written for it.
+- **Diary folder**: `~/Documents/diario/` keeps, per day, `<day>.notes.json` (your notes) and
+  `<day>.recap.json` (what the page shows), plus `index.html`, the one page with every day.
+  Re-running a day overwrites its files.
 - **Digest**: `/tmp/daily-recap/<day>.json`. It holds the raw prompts, which can contain pasted
   passwords or tokens, so it stays out of the diary folder. Never copy a secret into the notes.
+- **Unattended runs**: when the request says it comes from the session-start hook, nobody is
+  there to answer. Ask nothing, decide ambiguous cases with the rules below, and do not open the
+  browser.
 
 ## 1. Extract the sessions
 
@@ -113,9 +119,10 @@ is tooling, not a review, even when it happened while reviewing.
 For each group write `items`: one entry per piece of work, as the user would say it at the
 standup. Fold reruns and retries of the same task into one item. Say what was reviewed or built,
 not only its ticket: "Reviewed the VTP Runner changes; 5 comments drafted", not "Reviewed
-VP-649". Each item is one line on the page: at most 64 characters (ticket badges not counted),
-and group names at most 24. The renderer rejects longer ones; shorten them rather than cutting
-words. Put the ticket keys in `tickets` (shown as badges) and always a `status`:
+VP-649". Each item is one line on the page: at most 64 characters, counting 9 for each ticket
+badge, and group names at most 24. The renderer rejects longer ones and says by how much;
+shorten them rather than cutting words. Put the ticket keys in `tickets` (shown as badges) and
+always a `status`:
 - `merged`: merged into its target branch, even if only locally
 - `approved`: the PR was approved and is not merged yet
 - `in review`: a PR is open and waiting for review
@@ -134,17 +141,20 @@ outcome is unclear (the session ended mid-task), use `in progress` instead of gu
 
 ```bash
 python3 <skill-dir>/scripts/render_recap.py /tmp/daily-recap/<day>.json \
-  ~/Documents/diario/<day>.notes.json ~/Documents/diario/<day>.html
-xdg-open ~/Documents/diario/<day>.html
+  ~/Documents/diario/<day>.notes.json ~/Documents/diario
 ```
 
-If the renderer rejects the notes, fix what it lists and run it again.
+It writes `<day>.recap.json` and rebuilds `index.html` from every day in the folder. If it rejects
+the notes, fix what it lists and run it again. When the run is not unattended, open the last day
+rendered: `xdg-open "file://$HOME/Documents/diario/index.html#<day>"`.
 
-The page shows the day's figures (Claude Code sessions, first to last activity, lines, commits,
+The page lists the days on the left, newest first, with a search box over all of them, and shows
+one day at a time: its figures (Claude Code sessions, first to last activity, lines, commits,
 Slack messages), lines per language, a timeline with one row per group coloured by activity, and
 one row per group with its numbers and its items.
 
 ## 5. Reply
 
-Give the page's path and, in two or three lines, the shape of the day (the main outcomes, nothing
-more). Mention anything skipped, such as Slack being unavailable.
+Give the page's path and, in two or three lines per day, the shape of the day (the main
+outcomes, nothing more). Mention anything skipped, such as a day with no activity or Slack being
+unavailable.

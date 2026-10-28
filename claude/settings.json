@@ -105,6 +105,20 @@
     "defaultMode": "default"
   },
   "model": "opus",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$HOME/.claude/skills/daily-recap/scripts/catch_up.sh\" 2>/dev/null || true",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh"
