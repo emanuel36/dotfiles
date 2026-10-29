@@ -21,6 +21,7 @@ Personal Linux (Ubuntu + GNOME) configuration. Each top-level directory groups o
 |---|---|---|
 | 1 | [`daily-recap`](https://github.com/emanuel36/dotfiles/tree/master/claude/skills/daily-recap) | Daily work summary for the standup |
 | 2 | [`fold-branch`](https://github.com/emanuel36/dotfiles/tree/master/claude/skills/fold-branch) | Folds a branch's fixes into clean commits |
+| 3 | [`jira-comment`](https://github.com/emanuel36/dotfiles/tree/master/claude/skills/jira-comment) | Drafts a Jira comment in three formats to edit and approve before posting |
 
 ## New machine
 
