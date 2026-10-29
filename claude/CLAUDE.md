@@ -29,8 +29,7 @@
 - **Audience:** write for what the reader knows — drop internal app names, acronyms and detail
   that an external team or non-developer would not recognize.
 - **Draft first:** never create a markdown draft file unless the rule below calls for one.
-  - **Jira ticket comments:** write a markdown draft in the current directory for my review;
-    post only after I approve it.
+  - **Jira ticket comments:** use the `jira-comment` skill; post only after I approve it.
   - **Slack:** show the message in the chat; after I approve it, save it as a Slack draft
     (`slack_send_message_draft`) — never send directly.
   - **Everything else** (Confluence, PR descriptions/comments, emails, reports): show the text in

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jira comment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/turndown/7.1.2/turndown.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/turndown-plugin-gfm@1.0.2/dist/turndown-plugin-gfm.js"></script>
+<style>
+:root {
+  --paper: #fcfcfb; --ink: #1b1d1f; --graphite: #6b7075; --faint: #a3a7ab; --rule: #e7e8e6;
+  --accent: #1d6b4f; --accent-soft: #e4f0ea; --warn: #9a5b14;
+  --card: #ffffff; --jira-link: #0c66e4; --jira-head: #f1f2f4; --code: #f4f5f7;
+  --sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #16181a; --ink: #e8e9e7; --graphite: #9a9fa4; --faint: #61666b; --rule: #2a2d30;
+    --accent: #5cc49a; --accent-soft: #1b3229; --warn: #e0a656;
+    --card: #1d2023; --jira-link: #579dff; --jira-head: #25292d; --code: #25292d;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 15px/1.55 var(--sans); }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+main { max-width: 960px; margin: 0 auto; padding: 32px 24px 64px; }
+
+.head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;
+  flex-wrap: wrap; margin-bottom: 20px; }
+.key { font-family: var(--mono); font-size: 14px; color: var(--graphite); margin: 0 0 4px; }
+.key a { color: inherit; }
+h1 { font-size: 26px; line-height: 1.2; font-weight: 500; letter-spacing: -0.01em; margin: 0; }
+.purpose { color: var(--graphite); font-size: 14px; margin: 6px 0 0; }
+.actions { display: flex; gap: 8px; align-items: center; }
+.btn { padding: 7px 14px; border-radius: 7px; border: 1px solid var(--rule); font-size: 14px; }
+.btn.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.status { font-size: 13px; color: var(--accent); min-width: 120px; text-align: right; }
+
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.tab { text-align: left; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--rule);
+  min-width: 200px; max-width: 360px; flex: 1; }
+.tab.on { border-color: var(--accent); background: var(--accent-soft); }
+.tab .name { font-weight: 500; }
+.tab .letter { font-family: var(--mono); color: var(--faint); margin-right: 6px; }
+.tab .detail { font-size: 12px; color: var(--graphite); border: 1px solid var(--rule);
+  border-radius: 99px; padding: 0 8px; margin-left: 6px; }
+.tab .why { display: block; font-size: 13px; color: var(--graphite); margin-top: 2px; }
+.tab .edited { font-size: 12px; color: var(--warn); margin-left: 6px; }
+
+.pane h2 { font-size: 13px; font-weight: 500; color: var(--graphite); margin: 0 0 8px;
+  display: flex; justify-content: space-between; }
+
+/* Approximates how Jira renders a comment. */
+.jira:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+.jira { min-height: 60vh; padding: 16px 18px; border-radius: 8px; border: 1px solid var(--rule);
+  background: var(--card); font: 14px/1.6 -apple-system, "Segoe UI", Roboto, sans-serif;
+  overflow-x: auto; }
+.jira > :first-child { margin-top: 0; }
+.jira h1, .jira h2, .jira h3, .jira h4 { font-weight: 600; line-height: 1.3; margin: 1.2em 0 .4em; }
+.jira h1 { font-size: 1.6em; } .jira h2 { font-size: 1.35em; } .jira h3 { font-size: 1.15em; }
+.jira p { margin: .6em 0; }
+.jira ul, .jira ol { padding-left: 1.6em; margin: .4em 0; }
+.jira a { color: var(--jira-link); text-decoration: none; }
+.jira code { font-family: var(--mono); font-size: .9em; background: var(--code);
+  padding: 1px 4px; border-radius: 3px; }
+.jira pre { background: var(--code); padding: 10px 12px; border-radius: 4px; overflow-x: auto; }
+.jira pre code { background: none; padding: 0; }
+.jira table { border-collapse: collapse; margin: .8em 0; }
+.jira th, .jira td { border: 1px solid var(--rule); padding: 6px 10px; text-align: left;
+  vertical-align: top; }
+.jira th { background: var(--jira-head); font-weight: 600; }
+.jira blockquote { border-left: 2px solid var(--rule); margin: .6em 0; padding-left: 12px;
+  color: var(--graphite); }
+.jira .raw { white-space: pre-wrap; font-family: var(--mono); font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="head">
+    <div>
+      <p class="key" id="key"></p>
+      <h1 id="title"></h1>
+      <p class="purpose" id="purpose"></p>
+    </div>
+    <div class="actions">
+      <span class="status" id="status" aria-live="polite"></span>
+      <button class="btn" id="reset" type="button">Reset</button>
+      <button class="btn" id="copy" type="button">Copy</button>
+      <button class="btn primary" id="save" type="button">Save .md</button>
+    </div>
+  </div>
+  <div class="tabs" id="tabs" role="tablist"></div>
+  <section class="pane">
+    <h2><span>As it will look in Jira · click to edit</span><span id="count"></span></h2>
+    <div class="jira" id="preview" contenteditable="true" spellcheck="true"
+      aria-label="Comment, editable"></div>
+  </section>
+</main>
+<script>
+const DATA = /*__DATA__*/null;
+const $ = (id) => document.getElementById(id);
+const storeKey = (i) => `jira-comment:${DATA.key}:${DATA.generated_at}:${i}`;
+// Edited HTML per variant; null while the variant is untouched.
+const edits = DATA.variants.map((v, i) => {
+  try { return localStorage.getItem(storeKey(i)); } catch { return null; }
+});
+let current = 0;
+
+function render(text) {
+  if (window.marked) return marked.parse(text, { gfm: true, breaks: false });
+  const pre = document.createElement("div");
+  pre.className = "raw";
+  pre.textContent = text;
+  return pre.outerHTML;
+}
+
+// An untouched variant keeps its exact markdown; an edited one is converted back from HTML.
+function markdownOf(i) {
+  if (edits[i] === null) return DATA.variants[i].markdown;
+  const service = new TurndownService({ headingStyle: "atx", bulletListMarker: "*",
+    codeBlockStyle: "fenced", emDelimiter: "_" });
+  service.use(turndownPluginGfm.gfm);
+  return service.turndown(edits[i]);
+}
+
+function flash(message) {
+  $("status").textContent = message;
+  clearTimeout(flash.timer);
+  flash.timer = setTimeout(() => { $("status").textContent = ""; }, 2500);
+}
+
+function drawTabs() {
+  $("tabs").innerHTML = "";
+  DATA.variants.forEach((v, i) => {
+    const tab = document.createElement("button");
+    tab.type = "button";
+    tab.role = "tab";
+    tab.className = "tab" + (i === current ? " on" : "");
+    tab.setAttribute("aria-selected", i === current);
+    const edited = edits[i] !== null ? '<span class="edited">edited</span>' : "";
+    const detail = v.detail ? `<span class="detail"></span>` : "";
+    tab.innerHTML = `<span class="letter">${String.fromCharCode(65 + i)}</span>` +
+      `<span class="name"></span>${detail}${edited}<span class="why"></span>`;
+    tab.querySelector(".name").textContent = v.name;
+    if (v.detail) tab.querySelector(".detail").textContent = v.detail;
+    tab.querySelector(".why").textContent = v.why || "";
+    tab.onclick = () => select(i);
+    $("tabs").appendChild(tab);
+  });
+}
+
+function count() {
+  const text = $("preview").innerText.trim();
+  $("count").textContent = `${text ? text.split(/\s+/).length : 0} words`;
+}
+
+function select(i) {
+  current = i;
+  $("preview").innerHTML = edits[i] ?? render(DATA.variants[i].markdown);
+  drawTabs();
+  count();
+}
+
+$("preview").addEventListener("input", () => {
+  const first = edits[current] === null;
+  edits[current] = $("preview").innerHTML;
+  try { localStorage.setItem(storeKey(current), edits[current]); } catch {}
+  if (first) drawTabs();
+  count();
+});
+
+$("reset").onclick = () => {
+  edits[current] = null;
+  try { localStorage.removeItem(storeKey(current)); } catch {}
+  select(current);
+  flash("Variant restored");
+};
+
+$("copy").onclick = async () => {
+  try { await navigator.clipboard.writeText(markdownOf(current)); flash("Copied"); }
+  catch { flash("Copy failed"); }
+};
+
+$("save").onclick = () => {
+  const blob = new Blob([markdownOf(current).trimEnd() + "\n"], { type: "text/markdown" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `${DATA.key}-comment.md`;
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+  flash(`Saved variant ${String.fromCharCode(65 + current)}`);
+};
+
+document.title = `${DATA.key} comment`;
+$("key").innerHTML = DATA.url ? `<a></a>` : "";
+if (DATA.url) { $("key").firstChild.href = DATA.url; $("key").firstChild.textContent = DATA.key; }
+else $("key").textContent = DATA.key;
+$("title").textContent = DATA.title || "";
+$("purpose").textContent = DATA.purpose || "";
+select(0);
+</script>
+</body>
+</html>
