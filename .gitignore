@@ -1,3 +1,6 @@
 # age private key must never be committed
 *.key
 key.txt
+
+# work diary: recaps hold work content
+/diary/
