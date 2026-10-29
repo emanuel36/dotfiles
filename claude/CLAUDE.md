@@ -9,8 +9,11 @@
   initiative; for HTML/markdown deliverables, save a local file and tell me the path.
 - **Open HTML automatically:** after saving an HTML file (mockups, variants, reports), open it
   in the default browser right away with `xdg-open`, without asking.
-- **Location:** save generated files (reports, markdown, HTML, scripts) in the current working
-  directory unless I name another place.
+- **Disposable files:** write throwaway files (mockups, design variants, previews, example
+  pages, one-off scripts) under `/tmp`, never in the working directory, so the system discards
+  them. Delete them yourself once I have chosen or dropped them.
+- **Location:** save deliverables I asked to keep (reports, markdown, HTML, scripts) in the
+  current working directory unless I name another place.
 
 ## Code
 - 100-char line length
