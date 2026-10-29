@@ -13,7 +13,7 @@ set -euo pipefail
 [[ -n "${DAILY_RECAP_RUN:-}" ]] && exit 0
 
 skill="$HOME/.claude/skills/daily-recap"
-diary="$HOME/Documents/diario"
+diary="$HOME/.dotfiles/diary"
 state="${XDG_STATE_HOME:-$HOME/.local/state}/daily-recap"
 workdir=/tmp/daily-recap
 today=$(date +%F)
@@ -42,9 +42,11 @@ command=(
     "Skill(daily-recap)" "Read" "ToolSearch"
     "Bash(python3 $skill/scripts/extract_day.py *)"
     "Bash(python3 $skill/scripts/render_recap.py *)"
-    "Edit(~/Documents/diario/**)" "Edit(/tmp/daily-recap/**)"
+    "Edit(~/.dotfiles/diary/**)" "Edit(/tmp/daily-recap/**)"
     "mcp__plugin_slack_slack__slack_search_public_and_private"
     "mcp__plugin_slack_slack__slack_read_thread"
+    "mcp__claude_ai_Slack__slack_search_public_and_private"
+    "mcp__claude_ai_Slack__slack_read_thread"
 )
 
 if [[ -n "$dry" ]]; then

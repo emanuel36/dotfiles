@@ -4,7 +4,7 @@ description: >-
   Build an overview of one day of work from the user's Claude Code sessions and their own Slack
   messages: what each initiative delivered, split into work and own projects, with tickets,
   statuses, lines of code, commits and a timeline of the day, added to a searchable work diary
-  page in ~/Documents/diario and ready to read out at the daily standup. Also runs unattended
+  page in ~/.dotfiles/diary and ready to read out at the daily standup. Also runs unattended
   from a session-start hook to catch up on missing days. Use this whenever the user asks
   what they did today, yesterday or on a given date, wants a daily summary, diary, journal, recap
   or log of their work or of their Claude sessions, or wants material for their daily report
@@ -28,7 +28,7 @@ Write the page content in **English**. Talk to the user in their own language.
 - **Days**: today unless the user names others ("ontem", "sexta", "2026-10-20", "a semana
   passada"). Resolve each to `YYYY-MM-DD` in local time and run steps 1-4 for each, oldest first.
   Skip a day with no Claude Code sessions and no Slack messages: nothing gets written for it.
-- **Diary folder**: `~/Documents/diario/` keeps, per day, `<day>.notes.json` (your notes) and
+- **Diary folder**: `~/.dotfiles/diary/` keeps, per day, `<day>.notes.json` (your notes) and
   `<day>.recap.json` (what the page shows), plus `index.html`, the one page with every day.
   Re-running a day overwrites its files.
 - **Digest**: `/tmp/daily-recap/<day>.json`. It holds the raw prompts, which can contain pasted
@@ -79,7 +79,7 @@ people. If the Slack tools are unavailable, skip this step and say so in your re
 
 ## 3. Write the notes
 
-Write `~/Documents/diario/<day>.notes.json`. Its schema is in the docstring of
+Write `~/.dotfiles/diary/<day>.notes.json`. Its schema is in the docstring of
 `scripts/render_recap.py`; the renderer rejects notes that leave a visible session ungrouped,
 group it twice, or use an unknown activity or status.
 
@@ -141,12 +141,12 @@ outcome is unclear (the session ended mid-task), use `in progress` instead of gu
 
 ```bash
 python3 <skill-dir>/scripts/render_recap.py /tmp/daily-recap/<day>.json \
-  ~/Documents/diario/<day>.notes.json ~/Documents/diario
+  ~/.dotfiles/diary/<day>.notes.json ~/.dotfiles/diary
 ```
 
 It writes `<day>.recap.json` and rebuilds `index.html` from every day in the folder. If it rejects
 the notes, fix what it lists and run it again. When the run is not unattended, open the last day
-rendered: `xdg-open "file://$HOME/Documents/diario/index.html#<day>"`.
+rendered: `xdg-open "file://$HOME/.dotfiles/diary/index.html#<day>"`.
 
 The page lists the days on the left, newest first, with a search box over all of them, and shows
 one day at a time: its figures (Claude Code sessions, first to last activity, lines, commits,
