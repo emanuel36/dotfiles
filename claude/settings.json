@@ -1,6 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "awsAuthRefresh": "aws sts get-caller-identity --profile aws-bedrock 2>/dev/null || aws sso login --profile aws-bedrock",
   "cleanupPeriodDays": 365,
   "env": {
     "DISABLE_TELEMETRY": "1",
@@ -17,28 +16,6 @@
       "WebSearch",
       "WebFetch",
       "Bash",
-      "Bash(git log:*)",
-      "Bash(git diff:*)",
-      "Bash(git status:*)",
-      "Bash(git branch:*)",
-      "Bash(git show:*)",
-      "Bash(git blame:*)",
-      "Bash(git stash list:*)",
-      "Bash(git stash show:*)",
-      "Bash(git add .)",
-      "Bash(git commit:*)",
-      "Bash(git checkout -b:*)",
-      "Bash(git fetch --dry-run:*)",
-      "Bash(build-lta tests:*)",
-      "Bash(build-lta tests coverage:*)",
-      "Bash(gh pr list:*)",
-      "Bash(gh pr view:*)",
-      "Bash(gh pr diff:*)",
-      "Bash(gh pr checks:*)",
-      "Bash(gh issue list:*)",
-      "Bash(gh issue view:*)",
-      "Bash(gh run list:*)",
-      "Bash(gh run view:*)",
       "mcp__claude-in-chrome",
       "mcp__plugin_atlassian_atlassian__discover",
       "mcp__plugin_atlassian_atlassian__executeRead",
@@ -51,7 +28,6 @@
       "mcp__plugin_atlassian_atlassian__atlassianUserInfo",
       "mcp__plugin_atlassian_atlassian__getGraphContext",
       "mcp__plugin_atlassian_atlassian__getGraphObject",
-      "mcp__plugin_atlassian_atlassian__getLoomVideo",
       "mcp__claude_ai_Atlassian_Rovo__atlassianUserInfo",
       "mcp__claude_ai_Atlassian_Rovo__getAccessibleAtlassianResources",
       "mcp__claude_ai_Atlassian_Rovo__fetch",
@@ -101,8 +77,7 @@
       "Bash(git push -f:*)",
       "Bash(chmod:*)",
       "Bash(chown:*)"
-    ],
-    "defaultMode": "default"
+    ]
   },
   "model": "opus",
   "hooks": {
@@ -294,9 +269,6 @@
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true,
-    "github@claude-plugins-official": false,
-    "document-skills@anthropic-agent-skills": false,
-    "clangd-lsp@claude-plugins-official": true,
     "atlassian@claude-plugins-official": true,
     "slack@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
@@ -324,31 +296,11 @@
       }
     }
   },
-  "sandbox": {
-    "enabled": false,
-    "filesystem": {
-      "allowWrite": [
-        "~/.config/gh"
-      ]
-    }
-  },
   "alwaysThinkingEnabled": true,
   "effortLevel": "medium",
   "modelSettings": {
-    "claude-opus-5": {
-      "effortLevel": "medium"
-    },
-    "claude-sonnet-5": {
-      "effortLevel": "medium"
-    },
-    "claude-fable-5-1": {
-      "effortLevel": "medium"
-    },
     "claude-opus-5-5": {
-      "effortLevel": "medium"
-    },
-    "claude-sonnet-5-5": {
-      "effortLevel": "medium"
+      "effortLevel": "low"
     }
   },
   "autoUpdatesChannel": "stable",
