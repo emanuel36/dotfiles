@@ -58,7 +58,7 @@ Machine- and work-specific config lives outside the repo and is sourced if prese
 
 - `~/.zshrc.local`: work aliases, VPN, proxy CA bundle, cloud project
 - `~/.gitconfig.local`: `[user]` identity
-- Claude Code skills installed by other tools (`graphify`) or synced from claude.ai (`synced/`)
+- Claude Code skills synced from claude.ai (`synced/`)
 
 ## Shell history
 
