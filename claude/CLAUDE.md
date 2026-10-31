@@ -9,8 +9,9 @@
 
 ## Files
 - **Preview before applying:** anything you show me before it takes effect — drafts, plans,
-  file or config changes, layouts, diagrams — goes in an HTML preview under `/tmp`, opened
-  with `xdg-open` without asking. Skip it for small edits I spelled out myself.
+  file or config changes, layouts, diagrams — goes in one HTML preview per topic under `/tmp`,
+  updated in place on each round and opened with `xdg-open` without asking. Skip it for small
+  edits I spelled out myself.
 - **Disposable:** previews, mockups, variants and one-off scripts go under `/tmp`, never in the
   working directory; delete them once I approve, reject or drop them.
 - **Kept files:** files I will reuse — reports, docs, scripts — go in the current working
