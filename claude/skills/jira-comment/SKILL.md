@@ -77,7 +77,8 @@ saved, or to request changes, and regenerate the page when they ask for new vari
 
 1. Read the newest `~/Downloads/<KEY>-comment*.md` (the browser appends ` (1)` when the name is
    taken). Ignore files older than the page.
-2. Show the text in the chat and ask for approval. Post nothing without an explicit yes.
+2. Ask for approval of the saved text; the page is the preview, so do not repeat it in the chat.
+   Post nothing without an explicit yes.
 3. Post exactly that text with `addOrEditJiraIssueComment` (`contentFormat: markdown`); to update
    a comment, pass its `commentId`.
 4. Give the user the ticket link, then delete the `/tmp/jira-comment-<KEY>.*` files and the
