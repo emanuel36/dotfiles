@@ -284,7 +284,10 @@
     "code-simplifier@claude-plugins-official": true,
     "cctabs@generativereality": true,
     "diagram-design@diagram-design": true,
-    "humanizer@humanizer": true
+    "humanizer@humanizer": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "code-review@anthropic-plugin-directory": true,
+    "ponytail@ponytail": true
   },
   "extraKnownMarketplaces": {
     "generativereality": {
@@ -303,6 +306,12 @@
       "source": {
         "source": "github",
         "repo": "blader/humanizer"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
       }
     }
   },
