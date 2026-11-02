@@ -115,6 +115,15 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/epereir/.local/bin/cs hook",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "UserPromptSubmit": [
@@ -128,6 +137,15 @@
               "/usr/bin/gjs -m \"$0\" 2>/dev/null; exit 0",
               "/home/epereir/.local/share/gnome-shell/extensions/away-mode@emanuel36/hook.js"
             ],
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/epereir/.local/bin/cs hook",
             "timeout": 10
           }
         ]
@@ -157,6 +175,15 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/epereir/.local/bin/cs hook",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "PostToolUse": [
@@ -170,6 +197,15 @@
               "/usr/bin/gjs -m \"$0\" 2>/dev/null; exit 0",
               "/home/epereir/.local/share/gnome-shell/extensions/away-mode@emanuel36/hook.js"
             ],
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/epereir/.local/bin/cs hook",
             "timeout": 10
           }
         ]
@@ -189,6 +225,15 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/epereir/.local/bin/cs hook",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "PermissionRequest": [
@@ -202,6 +247,15 @@
               "/usr/bin/gjs -m \"$0\" 2>/dev/null; exit 0",
               "/home/epereir/.local/share/gnome-shell/extensions/away-mode@emanuel36/hook.js"
             ],
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/epereir/.local/bin/cs hook",
             "timeout": 10
           }
         ]
@@ -221,6 +275,15 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/epereir/.local/bin/cs hook",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "Stop": [
@@ -234,6 +297,15 @@
               "/usr/bin/gjs -m \"$0\" 2>/dev/null; exit 0",
               "/home/epereir/.local/share/gnome-shell/extensions/away-mode@emanuel36/hook.js"
             ],
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/epereir/.local/bin/cs hook",
             "timeout": 10
           }
         ]
@@ -253,6 +325,15 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/epereir/.local/bin/cs hook",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "SessionEnd": [
@@ -269,12 +350,32 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/epereir/.local/bin/cs hook",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/epereir/.local/bin/cs hook",
+            "timeout": 10
+          }
+        ]
       }
     ]
   },
   "statusLine": {
     "type": "command",
-    "command": "~/.claude/statusline.sh"
+    "command": "/home/epereir/.local/bin/cs statusline"
   },
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true,
