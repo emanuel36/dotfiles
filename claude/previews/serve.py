@@ -1,19 +1,27 @@
 """Serves /tmp/previews at localhost:8765 and saves POST /choice/<topic>.
 
-Every served page follows the latest preview: it reloads when its own file changes and
-navigates to another preview when that one is written. `/` redirects to the latest preview.
+Every served page follows the latest preview: it reloads when its own file changes and moves
+to another preview when that one is written. A written preview opens a window on the secondary
+monitor when none is open, and a saved choice closes it. `/` redirects to the latest preview.
 """
 
 import json
 import os
 import re
+import subprocess
+import threading
 import time
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
 ROOT = "/tmp/previews"
-FOLLOW = (b"<script>new EventSource('/events').onmessage=e=>{const p='/'+e.data;"
-          b"location.pathname===p?location.reload():location.assign(p)}</script>")
+URL = "http://localhost:8765/"
+FOLLOW = (b"<script>new EventSource('/events').onmessage=e=>{if(e.data==='close')"
+          b"return window.close();const p='/'+e.data;"
+          b"location.pathname===p?location.reload():location.replace(p)}</script>")
 WAITING = b"<title>Previews</title><p style='font:16px sans-serif'>No preview yet.</p>"
+MONITOR = re.compile(r"(\d+)/\d+x(\d+)/\d+\+(\d+)\+(\d+)")
+
+closes = 0  # Incremented on every saved choice; each open page closes when it changes.
 
 
 def latest():
@@ -26,6 +34,57 @@ def latest():
             except FileNotFoundError:
                 pass
     return max(pages, default=(0, None))
+
+
+def windows():
+    found = subprocess.run(["xdotool", "search", "--classname", "^localhost"],
+                           capture_output=True, text=True)
+    return found.stdout.split()
+
+
+def place(x, y, w, h):
+    """Moves the new window onto the monitor at x,y of size w,h once the window manager has
+    placed it, retrying until it lands there."""
+    for _ in range(20):
+        time.sleep(0.5)
+        for win in windows():
+            subprocess.run(["xdotool", "windowmove", win, str(x), str(y),
+                            "windowsize", win, str(w), str(h)])
+            time.sleep(0.3)
+            geometry = subprocess.run(["xdotool", "getwindowgeometry", win],
+                                      capture_output=True, text=True).stdout
+            m = re.search(r"Position: (-?\d+),", geometry)
+            if m and x <= int(m.group(1)) < x + w:
+                return
+
+
+def open_window():
+    """Opens the preview window on the first non-primary monitor, or wherever Chrome likes."""
+    monitors = subprocess.run(["xrandr", "--listmonitors"], capture_output=True, text=True)
+    secondary = [line.split()[2] for line in monitors.stdout.splitlines()[1:]
+                 if "*" not in line.split()[1]]
+    m = MONITOR.fullmatch(secondary[0]) if secondary else None
+    subprocess.Popen(["google-chrome", f"--app={URL}"], stdout=subprocess.DEVNULL,
+                     stderr=subprocess.DEVNULL, start_new_session=True)
+    if m:
+        w, h, x, y = map(int, m.groups())
+        # Chrome ignores --window-position when it is already running, so move the window.
+        threading.Thread(target=place, args=(x, y, w, h), daemon=True).start()
+
+
+def watch():
+    """Opens a window whenever a preview is written and no window is open."""
+    seen = latest()
+    while True:
+        time.sleep(0.5)
+        now = latest()
+        if now != seen and now[1] and os.environ.get("DISPLAY"):
+            try:
+                if not windows():
+                    open_window()
+            except OSError:
+                pass  # A missing tool must not stop the watcher; the next write retries.
+        seen = now
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -50,10 +109,14 @@ class Handler(SimpleHTTPRequestHandler):
             self.send_header("Content-Type", "text/event-stream")
             self.send_header("Cache-Control", "no-cache")
             self.end_headers()
-            seen = latest()
+            seen, seen_closes = latest(), closes
             try:
                 while True:
                     time.sleep(0.5)
+                    if closes != seen_closes:
+                        self.wfile.write(b"data: close\n\n")
+                        self.wfile.flush()
+                        return
                     now = latest()
                     if now != seen and now[1]:
                         self.wfile.write(f"data: {now[1]}\n\n".encode())
@@ -80,6 +143,7 @@ class Handler(SimpleHTTPRequestHandler):
         super().do_GET()
 
     def do_POST(self):
+        global closes
         m = re.fullmatch(r"/choice/([A-Za-z0-9_-]+)", self.path)
         if not m:
             self.send_error(404)
@@ -89,8 +153,10 @@ class Handler(SimpleHTTPRequestHandler):
             json.dump(data, f, indent=2, ensure_ascii=False)
         self.send_response(200)
         self.end_headers()
+        closes += 1
 
 
 if __name__ == "__main__":
     os.makedirs(ROOT, exist_ok=True)
+    threading.Thread(target=watch, daemon=True).start()
     ThreadingHTTPServer(("127.0.0.1", 8765), Handler).serve_forever()

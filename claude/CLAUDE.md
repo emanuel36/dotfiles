@@ -12,9 +12,10 @@
   file or config changes, layouts, diagrams — goes in one HTML preview per topic under
   `/tmp/previews`, updated in place. Skip it for small edits I spelled out and for short plans.
 - **Preview window:** a SessionStart hook runs `claude/previews/open.sh` from the dotfiles. It
-  serves `/tmp/previews` at `localhost:8765` and opens one window on the secondary monitor
-  that follows the latest written preview; it saves `POST /choice/<topic>` to
-  `<topic>.choice.json`. Writing the file is enough — never run a command to open a preview.
+  serves `/tmp/previews` at `localhost:8765`; writing a preview shows it in the open window,
+  or opens one on the secondary monitor when none is open. `POST /choice/<topic>` saves
+  `<topic>.choice.json` and closes the window. Writing the file is enough — never run a
+  command to open a preview.
 - **My choices:** option previews have a Confirm button; wait for `<topic>.choice.json` in the
   background, then read it.
 - **Designs:** design docs stay as Markdown in superpowers' default directory
