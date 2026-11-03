@@ -42,7 +42,8 @@ command=(
     "Skill(daily-recap)" "Read" "ToolSearch"
     "Bash(python3 $skill/scripts/extract_day.py *)"
     "Bash(python3 $skill/scripts/render_recap.py *)"
-    "Edit(~/.dotfiles/diary/**)" "Edit(/tmp/daily-recap/**)"
+    # "//" makes the path absolute: "/tmp/..." would be relative to the project root.
+    "Edit(~/.dotfiles/diary/**)" "Edit(//tmp/daily-recap/**)"
     "mcp__plugin_slack_slack__slack_search_public_and_private"
     "mcp__plugin_slack_slack__slack_read_thread"
     "mcp__claude_ai_Slack__slack_search_public_and_private"
