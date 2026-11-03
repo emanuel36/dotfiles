@@ -79,7 +79,6 @@
       "Bash(chown:*)"
     ]
   },
-  "model": "opus",
   "hooks": {
     "SessionStart": [
       {
@@ -396,13 +395,9 @@
     "superpowers@claude-plugins-official": true,
     "atlassian@claude-plugins-official": true,
     "slack@claude-plugins-official": true,
-    "code-simplifier@claude-plugins-official": true,
-    "cctabs@generativereality": true,
-    "diagram-design@diagram-design": true,
     "humanizer@humanizer": true,
-    "rust-analyzer-lsp@claude-plugins-official": true,
     "code-review@anthropic-plugin-directory": true,
-    "ponytail@ponytail": true
+    "rust-analyzer-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "generativereality": {
@@ -422,19 +417,6 @@
         "source": "github",
         "repo": "blader/humanizer"
       }
-    },
-    "ponytail": {
-      "source": {
-        "source": "github",
-        "repo": "DietrichGebert/ponytail"
-      }
-    }
-  },
-  "alwaysThinkingEnabled": true,
-  "effortLevel": "medium",
-  "modelSettings": {
-    "claude-opus-5-5": {
-      "effortLevel": "low"
     }
   },
   "autoUpdatesChannel": "stable",

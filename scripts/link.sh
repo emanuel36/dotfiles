@@ -36,3 +36,7 @@ mkdir -p "$HOME/.claude/skills"
 for skill in "$repo"/claude/skills/*/; do
     ln -sfn "${skill%/}" "$HOME/.claude/skills/$(basename "$skill")"
 done
+
+# Keep the model and effort picked in Claude Code out of the committed settings
+git -C "$repo" config filter.claude-settings.clean \
+    'jq --indent 2 "del(.model, .effortLevel, .modelSettings, .alwaysThinkingEnabled)"'
