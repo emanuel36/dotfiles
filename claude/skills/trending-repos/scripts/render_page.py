@@ -49,10 +49,15 @@ def workdir():
 
 def check(summaries, names):
     """Lists the ways the summaries do not fit the fetched repositories."""
+    if not isinstance(summaries, dict):
+        return ["the summaries file must be an object keyed by owner/repo"]
     problems = []
     for name, summary in summaries.items():
         if name not in names:
             problems.append(f"{name} is not in the fetched repositories")
+            continue
+        if not isinstance(summary, dict):
+            problems.append(f"{name}: the summary must be an object")
             continue
         problems += [f"{name}: '{field}' must be a non-empty string" for field in TEXT_FIELDS
                      if not isinstance(summary.get(field), str) or not summary[field].strip()]
@@ -94,8 +99,9 @@ def write_page(page):
     directory = workdir()
     directory.mkdir(parents=True, exist_ok=True)
     (directory / "today.json").write_text(json.dumps(page, ensure_ascii=False, indent=1))
-    # Keep "</script>" inside README-derived strings from closing the page's script tag.
-    data = json.dumps(page, ensure_ascii=False).replace("</", "<\\/")
+    # No "<" at all in the injected data: "</script>" would close the page's script tag and
+    # "<!--<script" would keep the real closing tag from ending it.
+    data = json.dumps(page, ensure_ascii=False).replace("<", "\\u003c")
     path = directory / "today.html"
     path.write_text(TEMPLATE.read_text().replace("/*__DATA__*/null", data))
     return path

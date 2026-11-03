@@ -20,9 +20,9 @@
   .tag.noimg { color:var(--bad); border-color:#f8514966 }
   .stars { color:var(--star) } .up { color:var(--up) }
   .meta { color:var(--mute); font-size:12px }
-  .thumb { background:#21262d center/cover no-repeat; border-radius:6px; display:flex;
-           align-items:center; justify-content:center; color:var(--mute); font-size:11px;
-           text-align:center }
+  .thumb { background:#21262d; border-radius:6px; display:flex; align-items:center;
+           justify-content:center; color:var(--mute); font-size:11px; text-align:center }
+  img.thumb { display:block; width:100%; object-fit:cover }
   .cols { display:grid; grid-template-columns:36px 64px 1fr 90px 130px 90px; gap:12px;
           align-items:center }
   .head { padding:0 14px 6px; color:var(--mute); font-size:12px }
@@ -77,7 +77,8 @@ function sourceLabel(r) {
 
 function thumb(r) {
   const url = safeUrl(r.image);
-  return url ? `<div class="thumb" style="background-image:url('${esc(encodeURI(url))}')"></div>`
+  // An <img> attribute, unlike a CSS url(), takes the URL as it is, safely escaped.
+  return url ? `<img class="thumb" src="${esc(url)}" alt="" loading="lazy">`
     : `<div class="thumb">sem imagens</div>`;
 }
 
@@ -94,7 +95,8 @@ function row(r, i) {
   const s = r.summary;
   const what = s ? s.what : (r.description || "Sem resumo.");
   const first = what.match(/^.*?[.!?](\s|$)/)?.[0] || what;
-  const link = `<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.name)}</a>`;
+  const link = `<a href="https://github.com/${esc(r.name)}" target="_blank" rel="noopener">`
+    + `${esc(r.name)}</a>`;
   const home = safeUrl(r.homepage);
   const meta = [r.language, r.license, `criado ${day(r.created)}`,
                 `último commit ${day(r.pushed)}`, `${short(r.forks)} forks`,

@@ -58,7 +58,7 @@ class MergeTest(unittest.TestCase):
 
     def test_rejects_unknown_repo_and_bad_maturity(self):
         for summaries in ({"x/x": SUMMARY}, {"a/a": {**SUMMARY, "maturity": "alpha"}},
-                          {"a/a": {**SUMMARY, "what": ""}}):
+                          {"a/a": {**SUMMARY, "what": ""}}, {"a/a": "texto"}, ["a/a"]):
             with self.subTest(summaries=summaries), self.assertRaises(SystemExit):
                 render_page.merge([repo("a/a")], summaries, TODAY, None)
 
@@ -95,7 +95,14 @@ class MainTest(unittest.TestCase):
         self.run_main()
         html = self.page.read_text()
         self.assertEqual(html.count("</script>"), 1)
-        self.assertIn('"<\\/script><img', html)
+        self.assertIn('"\\u003c/script>\\u003cimg', html)
+
+    def test_comment_opener_cannot_swallow_the_script_end(self):
+        self.write([repo("a/a", description="<!--<script> parser")], {})
+        self.run_main()
+        html = self.page.read_text()
+        self.assertNotIn("<!--", html)
+        self.assertNotIn("<script> parser", html)
 
     def test_chrome_failure_writes_page_but_marks_nothing(self):
         with self.assertRaises(SystemExit):

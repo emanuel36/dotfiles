@@ -23,6 +23,12 @@ dry="${TRENDING_DRY_RUN:-}"
 
 run() {
     local repos="$workdir/repos.json" summaries="$workdir/summaries.json" prompt
+    # The page can only open on a display; without one, fetching and summarizing would be paid
+    # for nothing.
+    if [[ -z "${DISPLAY:-}${WAYLAND_DISPLAY:-}" ]]; then
+        echo "== $(date -Is) no display, retrying later"
+        return 0
+    fi
     python3 "$skill/scripts/trending.py" fetch > "$repos"
     if [[ "$(jq '.repos | length' "$repos")" -eq 0 ]]; then
         echo "== $(date -Is) nothing new: $(jq -c .failed "$repos")"
@@ -41,7 +47,8 @@ python3 $skill/scripts/render_page.py $repos $summaries"
         --permission-mode dontAsk
         --allowedTools
         "Skill(trending-repos)"
-        "Read($workdir/**)" "Write($workdir/**)" "Edit($workdir/**)"
+        # "//" makes the path absolute; Edit rules also cover the Write tool.
+        "Read(/$workdir/**)" "Edit(/$workdir/**)"
         "Bash(python3 $skill/scripts/render_page.py $repos $summaries)"
     )
     if [[ -n "$dry" ]]; then

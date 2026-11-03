@@ -20,6 +20,7 @@ mark-seen also writes the day to last-run there, which tells the session-start h
 """
 
 import datetime
+import functools
 import json
 import os
 import re
@@ -48,8 +49,9 @@ NOT_OWNERS = {"orgs", "sponsors", "features", "topics", "collections", "marketpl
 README_CHARS = 8000
 # Markdown and HTML images, in the order they appear.
 IMAGE = re.compile(r"!\[[^\]]*\]\(\s*<?([^)\s>]+)|<img\b[^>]*?\bsrc=[\"']([^\"']+)", re.IGNORECASE)
-# Most READMEs open with status badges, which make a useless thumbnail.
-BADGE_HOSTS = {"img.shields.io", "shields.io", "badgen.net", "badge.fury.io", "codecov.io"}
+# Most READMEs open with status badges or star charts, which make a useless thumbnail.
+BADGE_HOSTS = {"img.shields.io", "shields.io", "badgen.net", "badge.fury.io", "codecov.io",
+               "api.star-history.com", "starchart.cc"}
 BLOB_URL = re.compile(r"^https?://github\.com/([\w.-]+/[\w.-]+)/blob/")
 
 
@@ -101,6 +103,7 @@ def show_hn():
     return repos
 
 
+@functools.cache
 def github_token():
     token = os.environ.get("GITHUB_TOKEN")
     if token:
@@ -156,13 +159,16 @@ def first_image(readme, name):
     """
     for match in IMAGE.finditer(readme):
         url = match[1] or match[2]
-        host = urllib.parse.urlparse(url).netloc.lower()
-        path = urllib.parse.urlparse(url).path.lower()
-        if host in BADGE_HOSTS or "badge" in url.lower() or path.endswith(".svg"):
+        parts = urllib.parse.urlparse(url)
+        host, file = parts.netloc.lower(), parts.path.lower().rsplit("/", 1)[-1]
+        # Only the file name: a repo named "badger" must keep its images.
+        if host in BADGE_HOSTS or "badge" in file or file.endswith(".svg"):
             continue
+        if url.startswith("//"):
+            return f"https:{url}"
         if host:
             return BLOB_URL.sub(r"https://raw.githubusercontent.com/\1/", url)
-        if url.startswith(("data:", "#", "//")):
+        if url.startswith(("data:", "#")):
             continue
         return f"https://raw.githubusercontent.com/{name}/HEAD/{url.removeprefix('./').lstrip('/')}"
     return None
@@ -235,6 +241,8 @@ def fetch():
          "left_for_later": len(repos[MAX_TABS:]), "failed": failed},
         sys.stdout,
         indent=2,
+        # Escaped, a Chinese README takes six times the characters Claude has to read.
+        ensure_ascii=False,
     )
     print()
 

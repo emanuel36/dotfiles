@@ -49,6 +49,20 @@ class FirstImageTest(unittest.TestCase):
         self.assertEqual(trending.first_image(readme, "o/r"),
                          "https://raw.githubusercontent.com/o/r/main/shot.png")
 
+    def test_first_image_skips_star_history_charts(self):
+        readme = ("![chart](https://api.star-history.com/chart?repos=o/r)\n"
+                  "![shot](shot.png)")
+        self.assertEqual(trending.first_image(readme, "o/r"),
+                         "https://raw.githubusercontent.com/o/r/HEAD/shot.png")
+
+    def test_first_image_keeps_repos_named_like_badges(self):
+        url = "https://raw.githubusercontent.com/dgraph-io/badger/main/shot.png"
+        self.assertEqual(trending.first_image(f"![shot]({url})", "dgraph-io/badger"), url)
+
+    def test_first_image_completes_protocol_relative_urls(self):
+        self.assertEqual(trending.first_image('<img src="//cdn.example.com/shot.png">', "o/r"),
+                         "https://cdn.example.com/shot.png")
+
     def test_first_image_none_without_images(self):
         self.assertIsNone(trending.first_image("# Title\nText only.", "o/r"))
 
@@ -72,6 +86,31 @@ class EnrichTest(unittest.TestCase):
         self.assertIsNone(repo["stars"])
         self.assertIsNone(repo["image"])
         self.assertEqual(repo["readme"], "")
+
+
+class GithubTokenTest(unittest.TestCase):
+    @mock.patch.dict("os.environ", {}, clear=True)
+    @mock.patch("subprocess.run")
+    def test_gh_runs_once_per_fetch(self, run):
+        trending.github_token.cache_clear()
+        self.addCleanup(trending.github_token.cache_clear)
+        run.return_value.stdout = "token\n"
+        for _ in range(3):
+            trending.github_headers()
+        self.assertEqual(run.call_count, 1)
+
+
+class FetchTest(unittest.TestCase):
+    @mock.patch("trending.load_seen", return_value={})
+    @mock.patch("trending.enrich", side_effect=lambda repo: {**repo, "readme": "生成高清短视频"})
+    @mock.patch("trending.show_hn", return_value=[])
+    @mock.patch("trending.new_on_github", return_value=[])
+    @mock.patch("trending.trendshift", return_value=[{"name": "o/r", "source": "trendshift"}])
+    def test_fetch_keeps_non_ascii_readable(self, *_):
+        out = io.StringIO()
+        with mock.patch("sys.stdout", out):
+            trending.fetch()
+        self.assertIn("生成高清短视频", out.getvalue())
 
 
 if __name__ == "__main__":
