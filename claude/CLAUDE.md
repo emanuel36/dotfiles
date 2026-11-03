@@ -11,9 +11,10 @@
 - **Preview before applying:** anything you show me before it takes effect — drafts, plans,
   file or config changes, layouts, diagrams — goes in one HTML preview per topic under
   `/tmp/previews`, updated in place. Skip it for small edits I spelled out and for short plans.
-- **Preview server:** serve `/tmp/previews` at `localhost:8765` with a stdlib Python server you
-  write there; it live-reloads pages and saves `POST /choice/<topic>` to `<topic>.choice.json`.
-  Open new previews with `google-chrome --app=<url>`.
+- **Preview window:** a SessionStart hook runs `claude/previews/open.sh` from the dotfiles. It
+  serves `/tmp/previews` at `localhost:8765` and opens one window on the secondary monitor
+  that follows the latest written preview; it saves `POST /choice/<topic>` to
+  `<topic>.choice.json`. Writing the file is enough — never run a command to open a preview.
 - **My choices:** option previews have a Confirm button; wait for `<topic>.choice.json` in the
   background, then read it.
 - **Designs:** design docs stay as Markdown in superpowers' default directory
@@ -43,7 +44,9 @@
 - **Draft first:** the preview mimics the target platform's look (Jira, Slack, Confluence,
   GitHub, email) and is editable in place; post only after I approve it.
   - **Jira:** use the `jira-comment` skill.
-  - **Slack:** save as a draft with `slack_send_message_draft` — never send.
+  - **Slack:** the draft goes in the chat, not in an HTML preview. Once I approve it, save it
+    with `slack_send_message_draft` — never send. When I ask to update a saved draft, I have
+    already deleted the old one: save the new draft without asking me to delete anything.
 
 **README:** for users, not developers — what it is, how it's organized, how to use it; tree,
 table or list; no code; link to remote repos, never local paths.
