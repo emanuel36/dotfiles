@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-# SessionStart hook: once a day, open the trending repositories not seen yet in a Chrome tab group.
+# SessionStart hook: once a day, open a page summarizing the trending repositories not seen yet.
 #
-# In the background, collects the repositories with trending.py and hands them to an unattended
-# `claude -p --chrome` run of the trending-repos skill, which opens them and marks them as seen.
-# The day only counts as done once that run marks them (it writes $state/last-run), or when no
-# source failed and none had anything new, so a day when the network, Chrome or the extension was
+# In the background, collects the repositories with trending.py into $workdir/repos.json and
+# hands them to an unattended `claude -p` run of the trending-repos skill, which summarizes them
+# and runs render_page.py to build the page, open it in Chrome and mark the repos as seen. The
+# day only counts as done once render_page.py marks them (it writes $state/last-run), or when no
+# source failed and none had anything new, so a day when the network, Claude or the display was
 # down is retried at the next session start, at most every 30 minutes. Returns at once and prints
 # nothing. The run's log is in $state/run.log.
 #
@@ -21,38 +22,41 @@ today=$(date +%F)
 dry="${TRENDING_DRY_RUN:-}"
 
 run() {
-    local repos prompt
-    repos=$(python3 "$skill/scripts/trending.py" fetch)
-    if [[ "$(jq '.repos | length' <<< "$repos")" -eq 0 ]]; then
-        echo "== $(date -Is) nothing new: $(jq -c .failed <<< "$repos")"
-        [[ -z "$dry" && "$(jq '.failed | length' <<< "$repos")" -eq 0 ]] \
+    local repos="$workdir/repos.json" summaries="$workdir/summaries.json" prompt
+    # The page can only open on a display; without one, fetching and summarizing would be paid
+    # for nothing.
+    if [[ -z "${DISPLAY:-}${WAYLAND_DISPLAY:-}" ]]; then
+        echo "== $(date -Is) no display, retrying later"
+        return 0
+    fi
+    python3 "$skill/scripts/trending.py" fetch > "$repos"
+    if [[ "$(jq '.repos | length' "$repos")" -eq 0 ]]; then
+        echo "== $(date -Is) nothing new: $(jq -c .failed "$repos")"
+        [[ -z "$dry" && "$(jq '.failed | length' "$repos")" -eq 0 ]] \
             && echo "$today" > "$state/last-run"
         return 0
     fi
+    rm -f "$summaries"
 
     prompt="Use the trending-repos skill. This is an unattended run from the session-start hook: \
-open these repositories, then mark the opened ones as seen with exactly this command: \
-python3 $skill/scripts/trending.py mark-seen <owner/repo> ...
-
-$repos"
+the repositories are already fetched in $repos. Write their summaries to $summaries, then build \
+the page with exactly this command: \
+python3 $skill/scripts/render_page.py $repos $summaries"
     local command=(
         claude -p "$prompt"
-        --chrome
         --permission-mode dontAsk
         --allowedTools
-        "Skill(trending-repos)" "ToolSearch"
-        "Bash(python3 $skill/scripts/trending.py mark-seen *)"
-        "mcp__claude-in-chrome__tabs_context_mcp"
-        "mcp__claude-in-chrome__tabs_create_mcp"
-        "mcp__claude-in-chrome__navigate"
-        "mcp__claude-in-chrome__browser_batch"
+        "Skill(trending-repos)"
+        # "//" makes the path absolute; Edit rules also cover the Write tool.
+        "Read(/$workdir/**)" "Edit(/$workdir/**)"
+        "Bash(python3 $skill/scripts/render_page.py $repos $summaries)"
     )
     if [[ -n "$dry" ]]; then
         printf '%q ' "${command[@]}"
         echo
         return 0
     fi
-    echo "== $(date -Is) opening $(jq '.repos | length' <<< "$repos") repositories"
+    echo "== $(date -Is) summarizing $(jq '.repos | length' "$repos") repositories"
     cd "$workdir"
     TRENDING_RUN=1 "${command[@]}" < /dev/null
 }

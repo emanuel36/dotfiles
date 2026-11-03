@@ -36,7 +36,7 @@ in place show up in the repository right away.
 | 1 | [`daily-recap`](https://github.com/emanuel36/dotfiles/tree/master/claude/skills/daily-recap) | Daily work summary for the standup, kept in a local work diary |
 | 2 | [`fold-branch`](https://github.com/emanuel36/dotfiles/tree/master/claude/skills/fold-branch) | Folds a branch's fixes into clean commits |
 | 3 | [`jira-comment`](https://github.com/emanuel36/dotfiles/tree/master/claude/skills/jira-comment) | Drafts a Jira comment in three formats to edit and approve before posting |
-| 4 | [`trending-repos`](https://github.com/emanuel36/dotfiles/tree/master/claude/skills/trending-repos) | Opens the GitHub repositories trending today that were not seen yet |
+| 4 | [`trending-repos`](https://github.com/emanuel36/dotfiles/tree/master/claude/skills/trending-repos) | Writes a page summarizing the GitHub repositories trending today that were not seen yet |
 
 ## New machine
 

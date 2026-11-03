@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Em alta hoje</title>
+<style>
+  :root { --bg:#0d1117; --panel:#161b22; --line:#30363d; --fg:#e6edf3; --mute:#8b949e;
+          --acc:#58a6ff; --star:#e3b341; --up:#3fb950; --warn:#d29922; --bad:#f85149; }
+  * { box-sizing:border-box }
+  body { margin:0; background:var(--bg); color:var(--fg); font:14px/1.5 system-ui, sans-serif }
+  main { max-width:1200px; margin:0 auto; padding:24px 16px 60px }
+  h1 { font-size:20px; margin:0 0 4px }
+  .sub { color:var(--mute); margin-bottom:20px }
+  a { color:var(--acc); text-decoration:none } a:hover { text-decoration:underline }
+  .tag { display:inline-block; font-size:12px; padding:1px 8px; border-radius:999px;
+         border:1px solid var(--line); color:var(--mute); margin:0 4px 4px 0 }
+  .tag.src { color:var(--acc); border-color:#1f6feb66 }
+  .tag.zh { color:var(--warn); border-color:#d2992266 }
+  .tag.noimg { color:var(--bad); border-color:#f8514966 }
+  .stars { color:var(--star) } .up { color:var(--up) }
+  .meta { color:var(--mute); font-size:12px }
+  .thumb { background:#21262d; border-radius:6px; display:flex; align-items:center;
+           justify-content:center; color:var(--mute); font-size:11px; text-align:center }
+  img.thumb { display:block; width:100%; object-fit:cover }
+  .cols { display:grid; grid-template-columns:36px 64px 1fr 90px 130px 90px; gap:12px;
+          align-items:center }
+  .head { padding:0 14px 6px; color:var(--mute); font-size:12px }
+  details { background:var(--panel); border:1px solid var(--line); border-radius:8px;
+            margin-bottom:8px }
+  summary { list-style:none; cursor:pointer; padding:10px 14px }
+  summary::-webkit-details-marker { display:none }
+  summary .rank { color:var(--mute); font-weight:600 }
+  summary .thumb { width:64px; height:40px }
+  .more { padding:0 14px 14px 126px; display:grid; grid-template-columns:1fr 1fr; gap:16px }
+  .more .thumb { height:160px }
+  .more p { margin:8px 0 }
+  dl { margin:6px 0 0; display:grid; grid-template-columns:max-content 1fr; gap:2px 10px }
+  dt { color:var(--mute) } dd { margin:0 }
+  @media (max-width:800px) {
+    .cols { grid-template-columns:28px 1fr 80px }
+    .cols > :nth-child(2), .cols > :nth-child(5), .cols > :nth-child(6) { display:none }
+    .more { padding-left:14px; grid-template-columns:1fr }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1 id="title"></h1>
+  <div class="sub" id="sub"></div>
+  <div class="cols head"><span>#</span><span></span><span>Repositório</span>
+    <span>Estrelas</span><span>Cresceu</span><span>Origem</span></div>
+  <div id="list"></div>
+</main>
+<script>
+const PAGE = /*__DATA__*/null;
+
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g,
+  (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const short = (n) => n == null ? "—"
+  : n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, "") + "k" : String(n);
+const day = (iso) => iso ? iso.slice(8, 10) + "/" + iso.slice(5, 7) : "—";
+const safeUrl = (u) => /^https?:\/\//i.test(u || "") ? u : null;
+const SOURCE = {trendshift: "Trendshift", show_hn: "Show HN", new: "Novo no GitHub"};
+
+function growth(r) {
+  if (r.source === "trendshift") return r.gained == null ? "—" : `+${short(r.gained)} hoje`;
+  if (r.source === "show_hn") return `${r.points} pts`;
+  return `${short(r.gained)} desde ${day(r.created)}`;
+}
+
+function sourceLabel(r) {
+  if (r.source === "trendshift") return `Trendshift #${r.rank}`;
+  if (r.source === "show_hn") return `Show HN · ${r.points} pts`;
+  return SOURCE.new;
+}
+
+function thumb(r) {
+  const url = safeUrl(r.image);
+  // An <img> attribute, unlike a CSS url(), takes the URL as it is, safely escaped.
+  return url ? `<img class="thumb" src="${esc(url)}" alt="" loading="lazy">`
+    : `<div class="thumb">sem imagens</div>`;
+}
+
+function tags(r) {
+  const s = r.summary;
+  return `<span class="tag src">${esc(sourceLabel(r))}</span>`
+    + (s && s.translated_from
+      ? `<span class="tag zh">README em ${esc(s.translated_from)} · traduzido</span>` : "")
+    + (r.image ? "" : `<span class="tag noimg">sem imagens</span>`)
+    + (s ? `<span class="tag">${esc(s.maturity)}</span>` : "");
+}
+
+function row(r, i) {
+  const s = r.summary;
+  const what = s ? s.what : (r.description || "Sem resumo.");
+  const first = what.match(/^.*?[.!?](\s|$)/)?.[0] || what;
+  const link = `<a href="https://github.com/${esc(r.name)}" target="_blank" rel="noopener">`
+    + `${esc(r.name)}</a>`;
+  const home = safeUrl(r.homepage);
+  const meta = [r.language, r.license, `criado ${day(r.created)}`,
+                `último commit ${day(r.pushed)}`, `${short(r.forks)} forks`,
+                `${short(r.issues)} issues`].filter(Boolean).map(esc).join(" · ");
+  const facts = s ? `<dl><dt>Para quem</dt><dd>${esc(s.who)}</dd>`
+    + (s.alternatives ? `<dt>Alternativas</dt><dd>${esc(s.alternatives)}</dd>` : "")
+    + `</dl>` : "";
+  return `<details${i ? "" : " open"}><summary class="cols">
+      <span class="rank">${i + 1}</span>${thumb(r)}
+      <span><b>${link}</b><br><span class="meta">${esc(first)}</span></span>
+      <span class="stars">★ ${short(r.stars)}</span><span class="up">${esc(growth(r))}</span>
+      <span class="meta">${esc(SOURCE[r.source] || "")}</span>
+    </summary><div class="more">
+      <div><div>${tags(r)}</div><p>${esc(what)}</p>${facts}
+        ${home ? `<p><a href="${esc(home)}" target="_blank" rel="noopener">${esc(home)}</a></p>`
+          : ""}</div>
+      <div>${thumb(r)}<div class="meta" style="margin-top:8px">${meta}</div></div>
+    </div></details>`;
+}
+
+const date = new Date(PAGE.date + "T12:00:00");
+document.getElementById("title").textContent = "Em alta hoje · "
+  + date.toLocaleDateString("pt-BR", {day: "numeric", month: "long"});
+const counts = {};
+PAGE.repos.forEach((r) => counts[r.source] = (counts[r.source] || 0) + 1);
+document.getElementById("sub").textContent = [`${PAGE.repos.length} repositórios`,
+  ...Object.keys(SOURCE).filter((k) => counts[k]).map((k) => `${counts[k]} ${SOURCE[k]}`)]
+  .join(" · ");
+document.getElementById("list").innerHTML = PAGE.repos.map(row).join("");
+</script>
+</body>
+</html>
