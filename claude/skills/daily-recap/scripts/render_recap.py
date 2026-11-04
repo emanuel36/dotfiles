@@ -121,6 +121,7 @@ def public(session):
         "activity": session["activity"],
         "start": session["start"],
         "end": session["end"],
+        "segments": session.get("segments") or [[session["start"], session["end"]]],
         "lines_added": session["lines_added"],
         "lines_removed": session["lines_removed"],
         "commit_count": len(session["commits"]),

@@ -36,6 +36,8 @@ from collections import Counter, defaultdict
 from datetime import date, datetime, timedelta, timezone
 from functools import lru_cache
 
+# A pause longer than this ends a stretch of activity in a session's timeline bar.
+IDLE_GAP = timedelta(minutes=90)
 PROMPT_CHARS = 400
 REPLY_CHARS = 600
 MAX_PROMPTS = 40
@@ -299,6 +301,7 @@ class Session:
         self.cwd = None
         self.branches = set()
         self.first = self.last = None
+        self.stamps = []
         self.prompts = []
         self.last_reply = None
         self.files = defaultdict(lambda: [0, 0])
@@ -313,6 +316,7 @@ class Session:
         self.documents = set()
 
     def touch(self, ts):
+        self.stamps.append(ts)
         self.first = ts if self.first is None or ts < self.first else self.first
         self.last = ts if self.last is None or ts > self.last else self.last
 
@@ -425,6 +429,16 @@ class Session:
         commit = self.commits.setdefault(sha[:7], {"sha": sha[:7]})
         commit.update({key: value for key, value in facts.items() if value})
 
+    def segments(self):
+        """Returns the [start, end] spans of activity, split at gaps longer than IDLE_GAP."""
+        spans = []
+        for ts in sorted(self.stamps):
+            if spans and ts - spans[-1][1] <= IDLE_GAP:
+                spans[-1][1] = ts
+            else:
+                spans.append([ts, ts])
+        return [[local_hhmm(a), local_hhmm(b)] for a, b in spans]
+
     def to_json(self):
         prompts = self.prompts
         if len(prompts) > MAX_PROMPTS:
@@ -436,6 +450,7 @@ class Session:
             "title": self.title,
             "start": local_hhmm(self.first),
             "end": local_hhmm(self.last),
+            "segments": self.segments(),
             "branches": sorted(self.branches),
             "prompt_count": len(self.prompts),
             "prompts": prompts,

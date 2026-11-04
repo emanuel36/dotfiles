@@ -327,11 +327,13 @@ function dayPage(recap) {
     const marks = g.slack
       ? slack.map((m) => `<span class="tick" tabindex="0" style="left:${pos(m.time)}%"
           data-tip="${esc(`${m.time} in ${m.channel}${m.topic ? ": " + m.topic : ""}`)}"></span>`)
-      : g.sessions.map((s) => {
-        const left = pos(s.start), width = Math.max(pos(s.end) - left, 0.4);
+      : g.sessions.flatMap((s) => {
         const tip = `${s.title}${s.summary ? " — " + s.summary : ""} (${s.start}–${s.end}, ${ACTIVITY[s.activity].label})`;
-        return `<span class="bar" tabindex="0" style="left:${left}%;width:${width}%;background:${ACTIVITY[s.activity].color};--at:${(minutes(s.start) - startH * 60) / span}"
+        return (s.segments || [[s.start, s.end]]).map(([from, to]) => {
+          const left = pos(from), width = Math.max(pos(to) - left, 0.4);
+          return `<span class="bar" tabindex="0" style="left:${left}%;width:${width}%;background:${ACTIVITY[s.activity].color};--at:${(minutes(from) - startH * 60) / span}"
           data-tip="${esc(tip)}"></span>`;
+        });
       });
     return `<div class="lane">${grid()}${marks.join("")}</div>`;
   }
