@@ -15,8 +15,8 @@ keybind = ctrl+alt+arrow_up=unbind
 keybind = ctrl+alt+arrow_down=unbind
 keybind = ctrl+alt+arrow_left=unbind
 keybind = ctrl+alt+arrow_right=unbind
-keybind = alt+up=goto_split:up
-keybind = alt+down=goto_split:down
+keybind = performable:alt+up=goto_split:up
+keybind = performable:alt+down=goto_split:down
 # Sem split do Ghostty naquele lado, Alt+←→ passam para o programa (o tmux troca de aba)
 keybind = performable:alt+left=goto_split:left
 keybind = performable:alt+right=goto_split:right
