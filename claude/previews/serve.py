@@ -73,18 +73,21 @@ def open_window():
 
 
 def watch():
-    """Opens a window whenever a preview is written and no window is open."""
+    """Opens a window whenever a preview is written and no window is open, ignoring deletions."""
     seen = latest()
     while True:
         time.sleep(0.5)
         now = latest()
-        if now != seen and now[1] and os.environ.get("DISPLAY"):
+        # Deleting a preview leaves an older one as the latest, which is not a new write.
+        if now[0] <= seen[0]:
+            continue
+        seen = now
+        if os.environ.get("DISPLAY"):
             try:
                 if not windows():
                     open_window()
             except OSError:
                 pass  # A missing tool must not stop the watcher; the next write retries.
-        seen = now
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -118,7 +121,7 @@ class Handler(SimpleHTTPRequestHandler):
                         self.wfile.flush()
                         return
                     now = latest()
-                    if now != seen and now[1]:
+                    if now[0] > seen[0]:
                         self.wfile.write(f"data: {now[1]}\n\n".encode())
                         self.wfile.flush()
                         return
