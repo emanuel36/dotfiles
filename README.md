@@ -13,7 +13,7 @@ in place show up in the repository right away.
 | `vim`, `tmux`, `ghostty` | editor and terminal configs |
 | `yazi` | file manager config; plugins and flavor pinned in `package.toml` |
 | `devin` | Devin IDE settings and keybindings (VS Code format) |
-| `claude` | Claude Code: global instructions, settings, status line, hooks, preview server, skills |
+| `claude` | Claude Code: global instructions, settings, status line, hooks, preview server, skills, agents |
 | `scripts` | install, linking, and shell history backup and restore |
 | `packages` | the apt packages chosen for this machine, for reference |
 | `secrets` | encrypted shell history and the age public key |
@@ -23,7 +23,8 @@ in place show up in the repository right away.
 
 | Part | What it does |
 |---|---|
-| `CLAUDE.md` | Global instructions: language, previews, code style, writing and git rules |
+| `CLAUDE.md` | Global instructions: language, previews, subagents, code style, writing and git rules |
+| `agents` | Subagents; `browser` runs multi-step Chrome tasks and reports back in writing |
 | `settings.json` | Permissions, hooks and plugins; the model and effort picked in a session stay local |
 | `statusline.sh` | Status line with model, effort, context use, cost, prompts, duration, lines changed and folder |
 | `hooks` | Blocks commit messages that break the commit rules |

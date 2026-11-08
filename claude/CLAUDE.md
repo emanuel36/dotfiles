@@ -28,6 +28,21 @@
 - **Kept files:** files I will reuse — reports, docs, scripts — go in the current working
   directory unless I name another place.
 
+## Agents
+Token cost is not a reason to avoid subagents; delegate whenever it buys accuracy, speed or a
+cleaner context.
+- **Fan out broad analysis:** when a task covers several independent units — repos, apps,
+  documents, tickets, screens, log files — start one subagent per unit in parallel and merge
+  their findings; keep only the synthesis in the main context.
+- **Side requests:** when I ask for something in parallel, or unrelated to the current task,
+  run it in a background agent and keep working on the main thread.
+- **Browser work:** delegate multi-step Chrome tasks (inspecting screens, navigating portals,
+  collecting data, downloading files) to the `browser` agent.
+- **Independent check:** before reporting a non-trivial change or analysis as done, have a fresh
+  agent verify it from the code or data alone, without your conclusion; fix what holds.
+- **Parallel sessions:** when I say another session is working in the same repo, work in a git
+  worktree without asking.
+
 ## Code
 - 100-char line length
 - Absolute imports only — no relative (`..`) paths

@@ -9,6 +9,7 @@ while read -r src dest; do
     ln -sfn "$repo/$src" "$HOME/$dest"
 done <<'EOF'
 claude/CLAUDE.md                .claude/CLAUDE.md
+claude/agents                   .claude/agents
 claude/settings.json            .claude/settings.json
 claude/statusline.sh            .claude/statusline.sh
 devin/keybindings.json          .config/Devin/User/keybindings.json
