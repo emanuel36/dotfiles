@@ -6,6 +6,9 @@
 - **Show options:** for design, layout, or format decisions, present three variants in one
   HTML file with a switcher and let me choose before refining.
 - **No artifacts unless asked:** never publish an Artifact unless I ask.
+- **Tables in chat:** at most 3 columns and cells of about 40 characters; my terminal is
+  narrow and Claude Code turns a table that does not fit into a broken list. Put long text in
+  bullets with a bold lead-in instead.
 
 ## Files
 - **Preview before applying:** anything you show me before it takes effect — drafts, plans,
@@ -24,6 +27,21 @@
   working directory; delete them once I approve, reject or drop them.
 - **Kept files:** files I will reuse — reports, docs, scripts — go in the current working
   directory unless I name another place.
+
+## Agents
+Token cost is not a reason to avoid subagents; delegate whenever it buys accuracy, speed or a
+cleaner context.
+- **Fan out broad analysis:** when a task covers several independent units — repos, apps,
+  documents, tickets, screens, log files — start one subagent per unit in parallel and merge
+  their findings; keep only the synthesis in the main context.
+- **Side requests:** when I ask for something in parallel, or unrelated to the current task,
+  run it in a background agent and keep working on the main thread.
+- **Browser work:** delegate multi-step Chrome tasks (inspecting screens, navigating portals,
+  collecting data, downloading files) to the `browser` agent.
+- **Independent check:** before reporting a non-trivial change or analysis as done, have a fresh
+  agent verify it from the code or data alone, without your conclusion; fix what holds.
+- **Parallel sessions:** when I say another session is working in the same repo, work in a git
+  worktree without asking.
 
 ## Code
 - 100-char line length
@@ -45,7 +63,9 @@
 - **Draft first:** the preview mimics the target platform's look (Jira, Slack, Confluence,
   GitHub, email) and is editable in place; post only after I approve it.
   - **Jira:** use the `jira-comment` skill.
-  - **Slack:** the draft goes in the chat, not in an HTML preview. Once I approve it, save it
+  - **Slack:** before drafting, read my recent messages in that channel and write in the same
+    language and tone, objectively; this overrides the Language rule above. The draft goes in the
+    chat, not in an HTML preview. Once I approve it, save it
     with `slack_send_message_draft` — never send. When I ask to update a saved draft, I have
     already deleted the old one: save the new draft without asking me to delete anything.
 
