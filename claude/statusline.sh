@@ -9,7 +9,7 @@ IFS=$'\x1f' read -r model effort ctx_pct cwd transcript duration_ms lines_added 
     .context_window.used_percentage // "",
     .cwd // "",
     .transcript_path // "",
-    .cost.total_duration_ms // "",
+    .cost.total_api_duration_ms // "",
     .cost.total_lines_added // 0,
     .cost.total_lines_removed // 0,
     .cost.total_cost_usd // ""
