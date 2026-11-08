@@ -6,6 +6,9 @@
 - **Show options:** for design, layout, or format decisions, present three variants in one
   HTML file with a switcher and let me choose before refining.
 - **No artifacts unless asked:** never publish an Artifact unless I ask.
+- **Tables in chat:** at most 3 columns and cells of about 40 characters; my terminal is
+  narrow and Claude Code turns a table that does not fit into a broken list. Put long text in
+  bullets with a bold lead-in instead.
 
 ## Files
 - **Preview before applying:** anything you show me before it takes effect — drafts, plans,
@@ -45,7 +48,9 @@
 - **Draft first:** the preview mimics the target platform's look (Jira, Slack, Confluence,
   GitHub, email) and is editable in place; post only after I approve it.
   - **Jira:** use the `jira-comment` skill.
-  - **Slack:** the draft goes in the chat, not in an HTML preview. Once I approve it, save it
+  - **Slack:** before drafting, read my recent messages in that channel and write in the same
+    language and tone, objectively; this overrides the Language rule above. The draft goes in the
+    chat, not in an HTML preview. Once I approve it, save it
     with `slack_send_message_draft` — never send. When I ask to update a saved draft, I have
     already deleted the old one: save the new draft without asking me to delete anything.
 
