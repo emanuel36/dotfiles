@@ -1,8 +1,9 @@
 """Serves /tmp/previews at localhost:8765 and saves POST /choice/<topic>.
 
-Every served page follows the latest preview: it reloads when its own file changes and moves
-to another preview when that one is written. A written preview opens a window on the secondary
-monitor when none is open, and a saved choice closes it. `/` redirects to the latest preview.
+Each preview has its own window, so previews written by different sessions do not replace each
+other. A written preview opens a window on the secondary monitor when none shows it, the page
+reloads when its own file changes, and a saved choice closes only the windows of that preview.
+`/` redirects to the latest preview.
 """
 
 import json
@@ -12,82 +13,117 @@ import subprocess
 import threading
 import time
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import parse_qs, quote, unquote, urlsplit
 
 ROOT = "/tmp/previews"
 URL = "http://localhost:8765/"
-FOLLOW = (b"<script>new EventSource('/events').onmessage=e=>{if(e.data==='close')"
-          b"return window.close();const p='/'+e.data;"
-          b"location.pathname===p?location.reload():location.replace(p)}</script>")
+FOLLOW = ("<script>new EventSource('/events?page={page}&mtime={mtime}')"
+          ".onmessage=e=>e.data==='close'?window.close():location.reload()</script>")
 WAITING = b"<title>Previews</title><p style='font:16px sans-serif'>No preview yet.</p>"
 MONITOR = re.compile(r"(\d+)/\d+x(\d+)/\d+\+(\d+)\+(\d+)")
+CONNECT_GRACE = 15  # Seconds a new window has to connect before its preview may open another.
 
-closes = 0  # Incremented on every saved choice; each open page closes when it changes.
+lock = threading.Lock()
+viewers = {}  # Preview name -> number of open pages showing it.
+opened = {}  # Preview name -> time its window was last opened.
+closes = {}  # Preview name -> number of choices saved from it; its pages close when it changes.
+claimed = set()  # Windows already moved to the secondary monitor by a place() thread.
 
 
-def latest():
-    """Returns the (mtime, name) of the most recently written preview, or (0, None)."""
-    pages = []
+def mtimes():
+    """Returns {name: mtime} of every preview in ROOT."""
+    pages = {}
     for name in os.listdir(ROOT):
         if name.endswith(".html"):
             try:
-                pages.append((os.stat(os.path.join(ROOT, name)).st_mtime, name))
+                pages[name] = os.stat(os.path.join(ROOT, name)).st_mtime
             except FileNotFoundError:
                 pass
-    return max(pages, default=(0, None))
+    return pages
+
+
+def mtime(name):
+    """Returns the mtime of preview `name`, or None when it does not exist."""
+    try:
+        return os.stat(os.path.join(ROOT, name)).st_mtime
+    except (FileNotFoundError, NotADirectoryError):
+        return None
+
+
+def latest():
+    """Returns the name of the most recently written preview, or None."""
+    pages = mtimes()
+    return max(pages, key=pages.get, default=None)
 
 
 def windows():
     found = subprocess.run(["xdotool", "search", "--classname", "^localhost"],
                            capture_output=True, text=True)
-    return found.stdout.split()
+    return set(found.stdout.split())
 
 
-def place(x, y, w, h):
-    """Moves the new window onto the monitor at x,y of size w,h once the window manager has
-    placed it, retrying until it lands there."""
+def place(before, x, y, w, h):
+    """Moves the first window that was not in `before` and that no other place() claimed onto
+    the monitor at x,y of size w,h once the window manager has placed it, retrying until it
+    lands there."""
+    win = None
     for _ in range(20):
         time.sleep(0.5)
-        for win in windows():
-            subprocess.run(["xdotool", "windowmove", win, str(x), str(y),
-                            "windowsize", win, str(w), str(h)])
-            time.sleep(0.3)
-            geometry = subprocess.run(["xdotool", "getwindowgeometry", win],
-                                      capture_output=True, text=True).stdout
-            m = re.search(r"Position: (-?\d+),", geometry)
-            if m and x <= int(m.group(1)) < x + w:
-                return
+        if win is None:
+            with lock:
+                new = sorted(windows() - before - claimed)
+                if not new:
+                    continue
+                win = new[0]
+                claimed.add(win)
+        subprocess.run(["xdotool", "windowmove", win, str(x), str(y),
+                        "windowsize", win, str(w), str(h)])
+        time.sleep(0.3)
+        geometry = subprocess.run(["xdotool", "getwindowgeometry", win],
+                                  capture_output=True, text=True).stdout
+        m = re.search(r"Position: (-?\d+),", geometry)
+        if m and x <= int(m.group(1)) < x + w:
+            return
 
 
-def open_window():
-    """Opens the preview window on the first non-primary monitor, or wherever Chrome likes."""
+def open_window(name):
+    """Opens a window for preview `name` on the first non-primary monitor, or wherever Chrome
+    likes."""
     monitors = subprocess.run(["xrandr", "--listmonitors"], capture_output=True, text=True)
     secondary = [line.split()[2] for line in monitors.stdout.splitlines()[1:]
                  if "*" not in line.split()[1]]
     m = MONITOR.fullmatch(secondary[0]) if secondary else None
-    subprocess.Popen(["google-chrome", f"--app={URL}"], stdout=subprocess.DEVNULL,
+    before = windows()
+    subprocess.Popen(["google-chrome", f"--app={URL}{quote(name)}"], stdout=subprocess.DEVNULL,
                      stderr=subprocess.DEVNULL, start_new_session=True)
     if m:
         w, h, x, y = map(int, m.groups())
         # Chrome ignores --window-position when it is already running, so move the window.
-        threading.Thread(target=place, args=(x, y, w, h), daemon=True).start()
+        threading.Thread(target=place, args=(before, x, y, w, h), daemon=True).start()
 
 
 def watch():
-    """Opens a window whenever a preview is written and no window is open, ignoring deletions."""
-    seen = latest()
+    """Opens a window for every written preview that no open page shows, ignoring deletions."""
+    seen = mtimes()
     while True:
         time.sleep(0.5)
-        now = latest()
-        # Deleting a preview leaves an older one as the latest, which is not a new write.
-        if now[0] <= seen[0]:
-            continue
+        now = mtimes()
+        written = [name for name, mtime in now.items() if mtime > seen.get(name, 0)]
         seen = now
-        if os.environ.get("DISPLAY"):
+        if not os.environ.get("DISPLAY"):
+            continue
+        for name in written:
+            with lock:
+                # A page that is open reloads by itself; a window just opened is still loading.
+                if viewers.get(name) or time.time() - opened.get(name, 0) < CONNECT_GRACE:
+                    continue
+                opened[name] = time.time()
             try:
-                if not windows():
-                    open_window()
+                open_window(name)
             except OSError:
-                pass  # A missing tool must not stop the watcher; the next write retries.
+                # A missing tool must not stop the watcher; the next write retries.
+                with lock:
+                    opened.pop(name, None)
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -97,8 +133,8 @@ class Handler(SimpleHTTPRequestHandler):
     def log_message(self, *args):
         pass
 
-    def send_page(self, body):
-        body += FOLLOW
+    def send_page(self, body, name="", served=None):
+        body += FOLLOW.format(page=quote(name, safe=""), mtime=served).encode()
         self.send_response(200)
         self.send_header("Content-Type", "text/html; charset=utf-8")
         self.send_header("Cache-Control", "no-store")
@@ -106,57 +142,80 @@ class Handler(SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
-    def do_GET(self):
-        if self.path == "/events":
-            self.send_response(200)
-            self.send_header("Content-Type", "text/event-stream")
-            self.send_header("Cache-Control", "no-cache")
-            self.end_headers()
-            seen, seen_closes = latest(), closes
-            try:
-                while True:
-                    time.sleep(0.5)
-                    if closes != seen_closes:
-                        self.wfile.write(b"data: close\n\n")
-                        self.wfile.flush()
-                        return
-                    now = latest()
-                    if now[0] > seen[0]:
-                        self.wfile.write(f"data: {now[1]}\n\n".encode())
-                        self.wfile.flush()
-                        return
-                    self.wfile.write(b": ping\n\n")
+    def events(self, name, served):
+        """Streams `reload` when preview `name` differs from the version served at mtime
+        `served` and `close` when a choice is saved from it. The page with no preview closes
+        once one is written, since the watcher opens a window for it."""
+        self.send_response(200)
+        self.send_header("Content-Type", "text/event-stream")
+        self.send_header("Cache-Control", "no-cache")
+        self.end_headers()
+        with lock:
+            viewers[name] = viewers.get(name, 0) + 1
+            opened.pop(name, None)
+            seen_closes = closes.get(name, 0)
+        try:
+            while True:
+                time.sleep(0.5)
+                if closes.get(name, 0) != seen_closes or (not name and latest()):
+                    self.wfile.write(b"data: close\n\n")
                     self.wfile.flush()
-            except (BrokenPipeError, ConnectionResetError):
-                return
-        if self.path == "/":
-            name = latest()[1]
+                    return
+                now = mtime(name) if name else None
+                if now and str(now) != served:
+                    self.wfile.write(b"data: reload\n\n")
+                    self.wfile.flush()
+                    with lock:
+                        # The page reconnects after reloading; until then it still shows.
+                        opened[name] = time.time()
+                    return
+                self.wfile.write(b": ping\n\n")
+                self.wfile.flush()
+        except (BrokenPipeError, ConnectionResetError):
+            return
+        finally:
+            with lock:
+                viewers[name] -= 1
+
+    def do_GET(self):
+        url = urlsplit(self.path)
+        if url.path == "/events":
+            query = parse_qs(url.query)
+            self.events(query.get("page", [""])[0], query.get("mtime", [""])[0])
+            return
+        if url.path == "/":
+            name = latest()
             if not name:
                 self.send_page(WAITING)
                 return
             self.send_response(302)
-            self.send_header("Location", f"/{name}")
+            self.send_header("Location", f"/{quote(name)}")
             self.end_headers()
             return
-        path = self.translate_path(self.path.split("?")[0])
+        path = self.translate_path(url.path)
         if path.endswith(".html") and os.path.isfile(path):
             with open(path, "rb") as f:
-                self.send_page(f.read())
+                self.send_page(f.read(), os.path.relpath(path, ROOT), os.fstat(f.fileno()).st_mtime)
             return
         super().do_GET()
 
     def do_POST(self):
-        global closes
         m = re.fullmatch(r"/choice/([A-Za-z0-9_-]+)", self.path)
         if not m:
             self.send_error(404)
             return
+        topic = m.group(1)
         data = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))) or b"{}")
-        with open(os.path.join(ROOT, f"{m.group(1)}.choice.json"), "w") as f:
+        with open(os.path.join(ROOT, f"{topic}.choice.json"), "w") as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
         self.send_response(200)
         self.end_headers()
-        closes += 1
+        # Close the page that posted, even when its file name differs from the topic.
+        referer = unquote(urlsplit(self.headers.get("Referer", "")).path)
+        pages = {f"{topic}.html", os.path.basename(referer)}
+        with lock:
+            for name in pages - {""}:
+                closes[name] = closes.get(name, 0) + 1
 
 
 if __name__ == "__main__":
