@@ -3,8 +3,8 @@ name: fold-branch
 description: >-
   Rewrite the current git branch's history into clean, logical commits: fold course corrections,
   fixups, review fixes, reverts and mid-branch redesigns into the commits they belong to, so the
-  history reads as if the final decisions were made from the start. Plans first (an HTML
-  before/after map for approval), then rewrites with backup, stash, per-commit build/tests and an
+  history reads as if the final decisions were made from the start. Plans first (a before/after
+  map in the terminal for approval), then rewrites with backup, stash, per-commit build/tests and an
   identical final tree. Use this whenever the user wants to organize, clean up, tidy, squash,
   fold or reorganize the commits of a branch, rewrite branch history, says the commits got messy
   ("ficou desorganizado", "organiza os commits", "reescreve o histórico", "junta os fixes nos
@@ -25,7 +25,7 @@ The guiding rule: **tell the final story**. A fix to something created earlier o
 branch is not a separate event for the reader; it belongs inside the commit that created the
 thing. Only changes to code that existed before the branch are events in their own right.
 
-Write the plan page, the commit messages and the final report in **English**. Talk to the user
+Write the plan, the commit messages and the final report in **English**. Talk to the user
 in their own language.
 
 ## Modes
@@ -92,14 +92,14 @@ resolves each conflict in the commit where it belongs.
   model, then each behavior, then wiring (DI, modules, configuration), then docs. A commit must
   never use something introduced by a later one.
 - **Granularity is the user's call, so offer options.** The right size depends on the project,
-  the reviewers and the change, so when more than one grouping is reasonable, put each one in the
+  the reviewers and the change, so when more than one grouping is reasonable, print each one in the
   plan as a variant (step 4) and let the user pick. Typical pair:
   - **Compact:** small related commits (under ~30 lines of production code, or not meaningful
     alone) merge into their neighbor.
   - **Granular:** one commit per observable change, however small.
-  Mark the one you would pick as `recommended` and say why in its `summary`. If only one grouping
+  Mark the one you would pick as recommended and say why. If only one grouping
   makes sense (e.g. two clearly separate features), a single plan is fine. In every variant, each
-  commit carries a one-line `why` explaining why it stands alone.
+  commit gets a one-line reason explaining why it stands alone.
 - **Tests** go in the same commit as the code they test; there is no "add tests" commit.
 - **Each commit builds and passes its tests.** If an intermediate state cannot build (for
   example, a caller and a callee changed together), they belong in the same commit.
@@ -126,7 +126,7 @@ resolves each conflict in the commit where it belongs.
 
 ### Strategy (hybrid)
 
-Decide per segment of the history and record it in each new commit's `method`:
+Decide per segment of the history and note it in each new commit's detail line:
 
 - **`fixup`** (default): every old commit maps cleanly to one target. Reorder and fold with a
   generated rebase todo list. Cheap, keeps authorship, and conflicts are rare when fixes only
@@ -140,84 +140,59 @@ stacked branches, verification and undo. Read it before step 6.
 
 ## 4. Present the plan
 
-Write the plan as JSON and render it:
+Show the plan in the chat as a **flow map** inside one code block; no HTML page, file or browser
+window. Old commits on the left, new commits on the right, joined by lines, so the user sees where
+each fix went:
 
-```bash
-python3 <skill-dir>/scripts/render_plan.py <scratch>/plan.json <scratch>/fold-plan-<branch>.html
-xdg-open <scratch>/fold-plan-<branch>.html
+```
+feature/VP-589-psvi-reports on develop-k265   9 → 3   hybrid
+
+BEFORE                           AFTER
+● 2253223 Add PSVI message model ──┐
+● b943290 Shared unit conversion ──┴──▶ ◆ N1 Add PSVI message model  fixup · 2 commits
+
+● 7cea060 Save last CAN odometer ──┐
+● e41d9a2 Fix speed rounding     ──┼──▶ ◆ N2 Consolidate speed and odometer
+● c0f3b18 Review: rename cache   ──┘      fixup · 3 commits · +co-author
+
+● a5eaff1 Ignition on a timer    ──┐
+● d8830be Report on change       ──┴──▶ ◆ N3 Send ignitionReport on change
+                                          rebuild · redesign
+● f19c7d4 Debug log              ──✕ dropped
+● 9b02e66 Revert debug log       ──✕ dropped
+
+⚠ published: force-push needed (you push)   ⚠ stacked: feature/VP-590-...
+Compact (3) ★ recommended: mode() is 4 lines, only useful with mean/median
+Granular (5): one commit per function
+Which do I apply?
 ```
 
-`<scratch>` is the session's temporary directory (the scratchpad, or `mktemp -d` when there is
-none), never the repository or the working directory: the page is for viewing in the browser,
-not a file to keep. Open it right away and delete it once the plan is approved, or when a
-plan-only review ends.
-Plan JSON:
+- **Header:** branch, base, commit count before → after, strategy.
+- **Left column:** every current commit, oldest first, `● <sha> <subject>`. A commit that is
+  dropped ends in `──✕ dropped` instead of joining a group.
+- **Right column:** each new commit `◆ N<k> <subject>` on the middle row of its group, then one
+  detail line with `method · what it absorbed · co-author` when relevant (it may follow the
+  subject on the same row when the group has two commits).
+- **Alignment:** pad the left column to the longest subject so the connectors form one column;
+  keep every line within the terminal width (shorten subjects with `…` if needed).
+- **Warnings:** one line at the end for anything the user must decide or know: a published
+  branch, dependent branches, `base-fix` commits, ambiguous targets, commits by other people.
 
-```json
-{
-  "repo": "ps-go-vehicle-android",
-  "branch": "feature/VP-589-psvi-reports",
-  "base": "develop-k265",
-  "strategy": "hybrid: fixup for N1-N3, rebuild for N4-N5",
-  "published": false,
-  "dependents": ["feature/VP-590-operational-analysis"],
-  "warnings": ["N4 rebuild: OpAnalysisInputs changes design between a5eaff1 and b943290"],
-  "before": [
-    {"sha": "7cea060", "subject": "VP-589 Save the last CAN odometer once the bus goes quiet",
-     "author": "Emanuel Pereira", "class": "fold", "to": ["N2"],
-     "note": "Fixes the odometer cache from 2253223"}
-  ],
-  "after": [
-    {"id": "N2", "subject": "VP-589 Consolidate the speed and odometer of PSVI messages",
-     "body": "- Read speed and odometer from one source, as LTA does\n- ...",
-     "author": "Emanuel Pereira", "from": ["2253223", "b943290", "7cea060"],
-     "method": "fixup", "why": "One behavior: every PSVI message reads the same values",
-     "files": [
-       {"path": "app/src/main/java/psvi/PsviMessage.kt", "status": "M", "added": 42, "deleted": 7},
-       {"path": "app/src/test/java/psvi/PsviMessageTest.kt", "status": "A", "added": 88,
-        "deleted": 0}
-     ]}
-  ]
-}
-```
+Below the map, list for each new commit the full message (subject and body bullets), author, why
+it stands alone and its changed files (`M path +42 -7`), in a second code block. Derive
+the files from the `files` of the old commits it absorbs (in the analysis JSON), netting out what
+they cancel: a file created and later deleted on the branch disappears, and a file created on the
+branch stays `A` even when later commits modify it. For `rebuild` and `split` commits, take it
+from the planned diff, not from the old commits.
 
-`before` lists every current commit, oldest first, and `to` is empty for dropped commits. `after`
-lists the new commits, oldest first. Put anything the user must decide or know in `warnings`:
-a published branch, dependent branches, `base-fix` commits, ambiguous targets, commits by other
-people.
+**Several groupings:** print one map per grouping under its name (for example **Compact** and
+**Granular**), mark the recommended one with the reason, and ask which to apply.
 
-`files` lists what each new commit will change: `status` is `A`, `M`, `D` or `R`, and `added`
-and `deleted` count lines. Derive it from the `files` of the old commits in `from` (in the
-analysis JSON), netting out what they cancel: a file created and later deleted on the branch
-disappears, and a file created on the branch stays `A` even when later commits modify it. For
-`rebuild` and `split` commits, take it from the planned diff, not from the old commits.
+The user approves in chat, or comments per commit (`N3: merge into N2`). Apply the comments,
+print the plan again and repeat until they approve. In plan-only mode, stop here.
 
-The page shows the current history on the left and the proposed one on the right, joined by
-lines from each old commit to the new commit it goes into; clicking a new commit shows its full
-message, author, reason and changed files below, with Approve, Needs changes and Comment.
-
-**Several groupings:** replace the top-level `before`/`after` with a `variants` list. The page
-shows a switch between them at the top and an "Approve <name>" button for the one on screen:
-
-```json
-"variants": [
-  {"name": "Compact", "recommended": true,
-   "summary": "mode() is 4 lines and only makes sense next to mean/median",
-   "strategy": "fixup", "warnings": [], "before": [...], "after": [...]},
-  {"name": "Granular", "summary": "One commit per function", "before": [...], "after": [...]}
-]
-```
-
-Then tell the user, in a few lines: the commit count before → after (per variant), the strategy,
-the warnings, and that they can approve in chat or comment per commit and use **Export
-feedback**, which saves `fold-plan-feedback-<branch>.json` to their Downloads folder
-(`chosen_option` and `approved` say which grouping they approved, `commits` holds per-commit
-decisions and comments, `overall` a note on the whole plan). When they say they are done, read the newest such file (the browser may add
-` (1)` to the name) or the JSON they paste. Apply the comments, re-render the same file and
-repeat until they approve. In plan-only mode, stop here.
-
-If the user approved in advance ("já aprovo o plano", "pode executar direto"), still write the
-page, then execute the recommended variant without waiting, and name the alternatives in the
+If the user approved in advance ("já aprovo o plano", "pode executar direto"), still print the
+plan, then execute the recommended variant without waiting, and name the alternatives in the
 report so they can ask for a different grouping (the backup makes that cheap).
 
 ## 5. Safety before rewriting
