@@ -100,11 +100,48 @@ class GithubTokenTest(unittest.TestCase):
         self.assertEqual(run.call_count, 1)
 
 
+# A row of github.com/trending as served, with the markup the parser must skip over.
+TRENDING_ROW = """<article class="Box-row">
+  <h2 class="h3 lh-condensed">
+    <a data-hydro-click="{{&quot;event_type&quot;:&quot;explore.click&quot;}}" href="/{name}"
+       data-view-component="true" class="Link"><svg aria-hidden="true" class="octicon">
+    <path d="M2 2.5A2.5"></path></svg><span class="text-normal">{owner} /</span> {repo}</a>
+  </h2>
+  <span class="d-inline-block float-sm-right">{gained}</span>
+</article>"""
+
+
+def trending_row(name, gained):
+    owner, repo = name.split("/")
+    return TRENDING_ROW.format(name=name, owner=owner, repo=repo, gained=gained)
+
+
+class GithubTrendingTest(unittest.TestCase):
+    def test_reads_names_ranks_and_stars_gained(self):
+        page = "<html>" + "".join(trending_row(name, gained) for name, gained in (
+            ("a/one", "1,234 stars today"), ("b/two", "1 star today"), ("c/three", "")))
+        with mock.patch("trending.get", return_value=page):
+            self.assertEqual(trending.github_trending(), [
+                {"name": "a/one", "source": "github", "rank": 1, "gained": 1234},
+                {"name": "b/two", "source": "github", "rank": 2, "gained": 1},
+                {"name": "c/three", "source": "github", "rank": 3, "gained": None},
+            ])
+
+    def test_ranks_skip_rows_without_a_repository(self):
+        page = '<article class="Box-row"><p>ad</p></article>' + trending_row("a/one", "")
+        with mock.patch("trending.get", return_value=page):
+            self.assertEqual(trending.github_trending()[0]["rank"], 1)
+
+    def test_fails_when_page_format_changes(self):
+        with mock.patch("trending.get", return_value="<html></html>"), \
+                self.assertRaises(ValueError):
+            trending.github_trending()
+
+
 class FetchTest(unittest.TestCase):
     @mock.patch("trending.load_seen", return_value={})
     @mock.patch("trending.enrich", side_effect=lambda repo: {**repo, "readme": "生成高清短视频"})
-    @mock.patch("trending.show_hn", return_value=[])
-    @mock.patch("trending.new_on_github", return_value=[])
+    @mock.patch("trending.github_trending", return_value=[])
     @mock.patch("trending.trendshift", return_value=[{"name": "o/r", "source": "trendshift"}])
     def test_fetch_keeps_non_ascii_readable(self, *_):
         out = io.StringIO()

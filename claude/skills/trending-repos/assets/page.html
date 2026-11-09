@@ -61,19 +61,12 @@ const short = (n) => n == null ? "—"
   : n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, "") + "k" : String(n);
 const day = (iso) => iso ? iso.slice(8, 10) + "/" + iso.slice(5, 7) : "—";
 const safeUrl = (u) => /^https?:\/\//i.test(u || "") ? u : null;
-const SOURCE = {trendshift: "Trendshift", show_hn: "Show HN", new: "Novo no GitHub"};
+// Show HN and Novo no GitHub were dropped as sources, but today's page may still hold them.
+const SOURCE = {trendshift: "Trendshift", github: "GitHub Trending", show_hn: "Show HN",
+                new: "Novo no GitHub"};
 
-function growth(r) {
-  if (r.source === "trendshift") return r.gained == null ? "—" : `+${short(r.gained)} hoje`;
-  if (r.source === "show_hn") return `${r.points} pts`;
-  return `${short(r.gained)} desde ${day(r.created)}`;
-}
-
-function sourceLabel(r) {
-  if (r.source === "trendshift") return `Trendshift #${r.rank}`;
-  if (r.source === "show_hn") return `Show HN · ${r.points} pts`;
-  return SOURCE.new;
-}
+const growth = (r) => r.gained == null ? "—" : `+${short(r.gained)} hoje`;
+const sourceLabel = (r) => (SOURCE[r.source] || r.source) + (r.rank == null ? "" : ` #${r.rank}`);
 
 function thumb(r) {
   const url = safeUrl(r.image);

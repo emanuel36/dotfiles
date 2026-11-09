@@ -18,8 +18,8 @@ SUMMARY = {"what": "Faz algo. Muito bem.", "who": "Devs.", "alternatives": None,
 
 
 def repo(name, stars=100, description="A tool"):
-    return {"name": name, "url": f"https://github.com/{name}", "source": "new", "rank": None,
-            "gained": stars, "points": None, "description": description, "homepage": None,
+    return {"name": name, "url": f"https://github.com/{name}", "source": "github", "rank": 1,
+            "gained": stars, "description": description, "homepage": None,
             "stars": stars, "forks": 1, "issues": 0, "language": "Go", "license": "MIT",
             "created": "2026-11-01", "pushed": "2026-11-03", "image": None, "readme": "# R"}
 
