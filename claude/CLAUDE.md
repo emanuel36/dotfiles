@@ -19,8 +19,9 @@
   the secondary monitor when the file is written and reloads when it changes.
   `POST /choice/<topic>` saves `<topic>.choice.json` and closes that preview's window. Writing
   the file is enough — never run a command to open a preview.
-- **My choices:** option previews have a Confirm button; wait for `<topic>.choice.json` in the
-  background, then read it.
+- **My choices:** option previews have a Confirm button. After showing one, end the turn —
+  never wait for the choice with a background command or monitor. A UserPromptSubmit hook adds
+  the confirmed `<topic>.choice.json` to my next message.
 - **Designs:** design docs stay as Markdown in superpowers' default directory
   (`docs/superpowers/specs/`); no HTML preview for them.
 - **Disposable:** previews, mockups, variants and one-off scripts go under `/tmp`, never in the
