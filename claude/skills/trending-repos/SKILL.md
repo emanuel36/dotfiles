@@ -1,17 +1,16 @@
 ---
 name: trending-repos
 description: >-
-  Write and open in Chrome a page summarizing the GitHub repositories that are trending or newly
-  launched today and that the user has not seen yet: the Trendshift daily ranking, Show HN posts
-  that link a GitHub repo, and repositories created this week that already gathered stars. Each
-  repo gets its GitHub numbers and a Portuguese summary of its README, whatever its language.
-  Remembers every repo it listed so a repo trending for several days shows up only once. Runs
-  unattended once a day from a session-start hook. Use this whenever the user wants to see what
-  is trending on GitHub, catch up on new repositories or open-source projects, see today's
-  trending repos, or asks about the trending list or the seen history ("o que está em alta
-  hoje", "abre os repos em alta", "repos novos", "trending do GitHub", "Trendshift", "já vi esse
-  repo?"), even if they do not name the skill. Not for searching GitHub for a specific library,
-  reviewing a repo's code, or managing the user's own repositories or stars.
+  Write and open in Chrome a page summarizing the GitHub repositories that are trending today and
+  that the user has not seen yet: the Trendshift daily ranking and the GitHub Trending daily
+  ranking, whatever the repo's age. Each repo gets its GitHub numbers and a Portuguese summary of
+  its README, whatever its language. Remembers every repo it listed so a repo trending for several
+  days shows up only once. Runs unattended once a day from a session-start hook. Use this whenever
+  the user wants to see what is trending on GitHub, catch up on new repositories or open-source
+  projects, see today's trending repos, or asks about the trending list or the seen history ("o que
+  está em alta hoje", "abre os repos em alta", "repos novos", "trending do GitHub", "Trendshift",
+  "já vi esse repo?"), even if they do not name the skill. Not for searching GitHub for a specific
+  library, reviewing a repo's code, or managing the user's own repositories or stars.
 ---
 
 # Trending repositories
@@ -24,7 +23,7 @@ GitHub only what looks interesting. A repo is listed once and never comes back.
 ## Tools
 
 - `scripts/trending.py fetch` prints `{"repos": [...], "left_for_later": N, "failed": [...]}`:
-  the unseen repos (Trendshift, Show HN, new on GitHub; capped at 30 by `TRENDING_MAX_TABS`),
+  the unseen repos (Trendshift, then GitHub Trending; capped at 30 by `TRENDING_MAX_TABS`),
   each with its GitHub numbers, first README image and up to 8000 characters of README.
   Fetching records nothing.
 - `scripts/render_page.py REPOS_JSON SUMMARIES_JSON` validates the summaries, writes
