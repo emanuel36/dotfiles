@@ -9,6 +9,7 @@
     "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "64000"
   },
   "permissions": {
+    "defaultMode": "default",
     "allow": [
       "Read",
       "Glob",
