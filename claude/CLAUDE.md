@@ -4,7 +4,7 @@
 - **Chat language:** reply in Portuguese, objective and concise.
 - **Ask, don't assume:** when there are multiple valid options, ask.
 - **Show options:** for design, layout, or format decisions, present three variants in one
-  HTML file with a switcher and let me choose before refining.
+  HTML preview (see My choices) and let me choose before refining.
 - **No artifacts unless asked:** never publish an Artifact unless I ask.
 - **Tables in chat:** at most 3 columns and cells of about 40 characters; my terminal is
   narrow and Claude Code turns a table that does not fit into a broken list. Put long text in
@@ -13,15 +13,23 @@
 ## Files
 - **Preview before applying:** anything you show me before it takes effect — drafts, plans,
   file or config changes, layouts, diagrams — goes in one HTML preview per topic under
-  `/tmp/previews`, updated in place. Skip it for small edits I spelled out and for short plans.
+  `/tmp/previews`, rewritten for each round. Skip it for small edits I spelled out and for short
+  plans.
 - **Preview window:** a SessionStart hook runs `claude/previews/open.sh` from the dotfiles. It
   serves `/tmp/previews` at `localhost:8765`; each preview has its own window, which opens on
-  the secondary monitor when the file is written and reloads when it changes.
-  `POST /choice/<topic>` saves `<topic>.choice.json` and closes that preview's window. Writing
-  the file is enough — never run a command to open a preview.
-- **My choices:** option previews have a Confirm button. After showing one, end the turn —
-  never wait for the choice with a background command or monitor. A UserPromptSubmit hook adds
-  the confirmed `<topic>.choice.json` to my next message.
+  the secondary monitor when the file is written and reloads when it changes. Writing the file
+  is enough — never run a command to open a preview.
+- **Topics:** name the file `<topic>.html` (letters, digits, `-`, `_`) and give each decision
+  its own topic; never reuse the topic of another decision or session. The server keeps every
+  version, so rewriting the file for a new round loses nothing.
+- **My choices:** wrap each variant in an element with `data-variant="<id>"` and
+  `data-title="<short name>"`; a draft or plan to approve is a single `data-variant`. The server
+  adds the switcher, version list, notes field and Confirm button, and sends the variant, my
+  notes and the values of named form fields. Never write your own switcher, Confirm button or
+  `fetch`; for other data define `window.previewData = variant => ({...})`.
+- **Receiving choices:** after showing an option preview, end the turn — never wait for the
+  choice with a background command or monitor. A UserPromptSubmit hook adds the choice to my
+  next message, with the version it refers to; if that is not the latest, say so before acting.
 - **Designs:** design docs stay as Markdown in superpowers' default directory
   (`docs/superpowers/specs/`); no HTML preview for them.
 - **Disposable:** previews, mockups, variants and one-off scripts go under `/tmp`, never in the

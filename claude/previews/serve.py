@@ -4,6 +4,9 @@ Each preview has its own window, so previews written by different sessions do no
 other. A written preview opens a window on the secondary monitor when none shows it, the page
 reloads when its own file changes, and a saved choice closes only the windows of that preview.
 `/` redirects to the latest preview.
+
+Every written version of a preview is kept, and previews that mark variants with `data-variant`
+get a choice bar (bar.html) that switches variants, lists versions and confirms the choice.
 """
 
 import json
@@ -15,13 +18,18 @@ import time
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, quote, unquote, urlsplit
 
-ROOT = "/tmp/previews"
+import store
+
+ROOT = store.ROOT
 URL = "http://localhost:8765/"
+BAR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "bar.html")
+OLD_VERSION = re.compile(r"\.history/([A-Za-z0-9_-]+)/(\d+)\.html")
 FOLLOW = ("<script>new EventSource('/events?page={page}&mtime={mtime}')"
           ".onmessage=e=>e.data==='close'?window.close():location.reload()</script>")
 WAITING = b"<title>Previews</title><p style='font:16px sans-serif'>No preview yet.</p>"
 MONITOR = re.compile(r"(\d+)/\d+x(\d+)/\d+\+(\d+)\+(\d+)")
 CONNECT_GRACE = 15  # Seconds a new window has to connect before its preview may open another.
+SETTLE = 1.0  # Seconds a preview must stay unchanged before it is saved as a version.
 
 lock = threading.Lock()
 viewers = {}  # Preview name -> number of open pages showing it.
@@ -103,13 +111,21 @@ def open_window(name):
 
 
 def watch():
-    """Opens a window for every written preview that no open page shows, ignoring deletions."""
+    """Saves every written preview as a version once it settles and opens a window for every
+    written preview that no open page shows, ignoring deletions."""
     seen = mtimes()
+    saved = {}  # Preview name -> mtime last saved as a version.
     while True:
         time.sleep(0.5)
         now = mtimes()
         written = [name for name, mtime in now.items() if mtime > seen.get(name, 0)]
         seen = now
+        for name, mtime in now.items():
+            topic = name.removesuffix(".html")
+            if saved.get(name) != mtime and store.TOPIC.fullmatch(topic):
+                with lock:
+                    if store.snapshot(topic, SETTLE) is not None:
+                        saved[name] = mtime
         if not os.environ.get("DISPLAY"):
             continue
         for name in written:
@@ -126,6 +142,29 @@ def watch():
                     opened.pop(name, None)
 
 
+def with_bar(body, name):
+    """Returns page `body` with the choice bar when `name` is a preview or one of its saved
+    versions; the bar shows itself only on pages that need it."""
+    topic = name.removesuffix(".html")
+    if name.endswith(".html") and store.TOPIC.fullmatch(topic):
+        # A file still being written has no version yet; the choice gets one when posted.
+        with lock:
+            version = store.snapshot(topic, SETTLE)
+        current = True
+    elif m := OLD_VERSION.fullmatch(name):
+        topic, version = m.group(1), int(m.group(2))
+        current = False
+    else:
+        return body
+    saved = store.versions(topic)
+    config = {"topic": topic, "version": version, "versions": saved,
+              "current": current or bool(saved) and version == saved[-1]}
+    with open(BAR, "rb") as f:
+        bar = (f"<script>window.__preview={json.dumps(config)}</script>").encode() + f.read()
+    end = body.lower().rfind(b"</body>")
+    return body[:end] + bar + body[end:] if end >= 0 else body + bar
+
+
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=ROOT, **kwargs)
@@ -134,7 +173,8 @@ class Handler(SimpleHTTPRequestHandler):
         pass
 
     def send_page(self, body, name="", served=None):
-        body += FOLLOW.format(page=quote(name, safe=""), mtime=served).encode()
+        body = with_bar(body, name) + FOLLOW.format(page=quote(name, safe=""),
+                                                    mtime=served).encode()
         self.send_response(200)
         self.send_header("Content-Type", "text/html; charset=utf-8")
         self.send_header("Cache-Control", "no-store")
@@ -205,7 +245,15 @@ class Handler(SimpleHTTPRequestHandler):
             self.send_error(404)
             return
         topic = m.group(1)
+        if not os.path.isfile(os.path.join(ROOT, f"{topic}.html")):
+            self.send_error(404, f"No preview {topic}.html")
+            return
         data = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))) or b"{}")
+        if not isinstance(data, dict):
+            data = {"data": data}
+        if store.valid_version(topic, data.get("version")) is None:
+            with lock:
+                data["version"] = store.snapshot(topic)
         with open(os.path.join(ROOT, f"{topic}.choice.json"), "w") as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
         self.send_response(200)

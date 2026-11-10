@@ -232,6 +232,16 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); case \"$input\" in *'/tmp/previews'*) printf '%s' \"$input\" | python3 \"$HOME/.dotfiles/claude/previews/own.py\";; esac; exit 0",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "PostToolUseFailure": [

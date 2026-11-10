@@ -1,58 +1,67 @@
 #!/usr/bin/env python3
 """UserPromptSubmit hook: hand the session the choices confirmed in its previews.
 
-A choice belongs to the session whose transcript mentions the preview's file, so a session
-never receives another session's choice. Each choice is delivered once per version; stdout
-becomes context for the prompt.
+A choice belongs to the session that last wrote the preview (see own.py); previews written
+before ownership was recorded fall back to the session whose transcript names the file. A
+delivered choice moves to the preview's history, so it is delivered once and never mistaken
+for a later round's choice. stdout becomes context for the prompt.
 """
 
 import json
 import os
 import sys
 
-ROOT = "/tmp/previews"
-SEEN = os.path.join(ROOT, ".seen")
+import store
+
+
+def mentioned(transcript, topic):
+    try:
+        with open(transcript, encoding="utf-8", errors="replace") as f:
+            return f"{store.ROOT}/{topic}.html" in f.read()
+    except (OSError, TypeError):
+        return False
+
+
+def deliver(topic):
+    """Moves the pending choice of `topic` to its history and returns the text to hand over."""
+    path = os.path.join(store.ROOT, f"{topic}.choice.json")
+    with open(path, encoding="utf-8") as f:
+        text = f.read().strip()
+    try:
+        version = store.valid_version(topic, json.loads(text).get("version"))
+    except (ValueError, AttributeError):
+        version = None
+    saved = store.versions(topic)
+    folder = store.history(topic)
+    os.makedirs(folder, exist_ok=True)
+    stamp = int(os.stat(path).st_mtime * 1000)
+    os.replace(path, os.path.join(folder, f"{version or 'unversioned'}-{stamp}.choice.json"))
+    if version and saved and version != saved[-1]:
+        state = f"for version {version}; the preview is now at version {saved[-1]}"
+    else:
+        state = f"for version {version}" if version else "unversioned"
+    return f"Choice confirmed in preview `{topic}` ({state}):\n{text}"
 
 
 def main():
     hook = json.load(sys.stdin)
     session, transcript = hook.get("session_id"), hook.get("transcript_path")
-    if not session or not transcript or not os.path.isdir(ROOT):
+    if not session or not os.path.isdir(store.ROOT):
         return
-    try:
-        with open(transcript, encoding="utf-8", errors="replace") as f:
-            history = f.read()
-    except OSError:
-        return
-    seen_path = os.path.join(SEEN, session)
-    try:
-        with open(seen_path) as f:
-            seen = json.load(f)
-    except (OSError, ValueError):
-        seen = {}
-
     delivered = []
-    for name in sorted(os.listdir(ROOT)):
-        if not name.endswith(".choice.json"):
-            continue
+    for name in sorted(os.listdir(store.ROOT)):
         topic = name.removesuffix(".choice.json")
-        path = os.path.join(ROOT, name)
+        if not name.endswith(".choice.json") or not store.TOPIC.fullmatch(topic):
+            continue
+        owner = store.owner(topic)
+        if owner != session and (owner or not mentioned(transcript, topic)):
+            continue
         try:
-            mtime = os.stat(path).st_mtime
-            if seen.get(name) == mtime or f"{ROOT}/{topic}.html" not in history:
-                continue
-            with open(path, encoding="utf-8") as f:
-                choice = f.read().strip()
+            delivered.append(deliver(topic))
         except OSError:
             continue
-        seen[name] = mtime
-        delivered.append(f"Choice confirmed in preview `{topic}` ({path}):\n{choice}")
-
     if delivered:
         print("\n\n".join(delivered))
-        os.makedirs(SEEN, exist_ok=True)
-        with open(seen_path, "w") as f:
-            json.dump(seen, f)
 
 
 if __name__ == "__main__":
