@@ -9,6 +9,7 @@
     "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "64000"
   },
   "permissions": {
+    "defaultMode": "default",
     "allow": [
       "Read",
       "Glob",
@@ -228,6 +229,16 @@
           {
             "type": "command",
             "command": "/home/epereir/.local/bin/cst hook",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); case \"$input\" in *'/tmp/previews'*) printf '%s' \"$input\" | python3 \"$HOME/.dotfiles/claude/previews/own.py\";; esac; exit 0",
             "timeout": 10
           }
         ]

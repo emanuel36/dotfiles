@@ -1,0 +1,136 @@
+<script>
+// Choice bar injected by serve.py into previews that mark variants with data-variant. It shows
+// one variant at a time, lists the preview's versions and posts the choice to the server.
+(() => {
+  const cfg = window.__preview;
+  const variants = [...document.querySelectorAll('[data-variant]')];
+  if (!variants.length && cfg.versions.length < 2) return;
+
+  const key = `preview:${cfg.topic}`;
+  const label = v => v.dataset.title || v.dataset.variant;
+  let current = 0;
+  try {
+    const saved = variants.findIndex(v => v.dataset.variant === sessionStorage.getItem(key));
+    if (saved >= 0) current = saved;
+  } catch (e) {}
+
+  const host = document.createElement('div');
+  const root = host.attachShadow({mode: 'open'});
+  root.innerHTML = `<style>
+    :host { all: initial; }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 2147483647;
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 16px;
+      background: #1f2328; color: #e6edf3; font: 14px system-ui, sans-serif;
+      box-shadow: 0 -2px 10px rgba(0,0,0,.35); }
+    .tabs { display: flex; flex-wrap: wrap; gap: 4px; }
+    button, select { font: inherit; color: inherit; background: #30363d; border: 1px solid #484f58;
+      border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+    .tabs button[aria-pressed=true] { background: #1f6feb; border-color: #1f6feb; }
+    textarea { flex: 1 1 240px; min-width: 0; height: 32px; resize: vertical; font: inherit;
+      color: inherit; background: #0d1117; border: 1px solid #484f58; border-radius: 6px;
+      padding: 5px 8px; }
+    .confirm { background: #238636; border-color: #238636; font-weight: 600; }
+    .confirm:disabled { opacity: .5; cursor: default; }
+    .status { opacity: .8; }
+  </style>
+  <div class="bar">
+    <div class="tabs"></div>
+    <select class="versions" title="Versions"></select>
+    <textarea placeholder="Notes"></textarea>
+    <button class="confirm">Confirm</button>
+    <span class="status"></span>
+  </div>`;
+
+  const tabs = root.querySelector('.tabs');
+  const confirm = root.querySelector('.confirm');
+  const status = root.querySelector('.status');
+  const notes = root.querySelector('textarea');
+
+  const show = i => {
+    current = i;
+    variants.forEach((v, j) => { v.hidden = j !== i; });
+    [...tabs.children].forEach((b, j) => b.setAttribute('aria-pressed', j === i));
+    try { sessionStorage.setItem(key, variants[i].dataset.variant); } catch (e) {}
+  };
+  if (variants.length > 1) {
+    variants.forEach((v, i) => {
+      const b = document.createElement('button');
+      b.textContent = `${i + 1}. ${label(v)}`;
+      b.onclick = () => show(i);
+      tabs.append(b);
+    });
+  }
+
+  const versions = root.querySelector('.versions');
+  if (cfg.versions.length < 2) versions.hidden = true;
+  for (const n of [...cfg.versions].reverse()) {
+    const latest = n === cfg.versions[cfg.versions.length - 1];
+    versions.add(new Option(`v${n}${latest ? ' (current)' : ''}`, n, false, n === cfg.version));
+  }
+  versions.onchange = () => {
+    const n = Number(versions.value);
+    location.href = n === cfg.versions[cfg.versions.length - 1]
+      ? `/${cfg.topic}.html` : `/.history/${cfg.topic}/${n}.html`;
+  };
+
+  if (!variants.length || !cfg.current) {
+    confirm.disabled = true;
+    if (!cfg.current) status.textContent = 'Old version: choose from the current one';
+  }
+
+  // Values of named form fields outside the hidden variants; checkboxes collect checked values.
+  const fields = () => {
+    const out = {};
+    for (const el of document.querySelectorAll('input[name], select[name], textarea[name]')) {
+      if (el.closest('[data-variant][hidden]')) continue;
+      if (el.type === 'checkbox') {
+        (out[el.name] ||= []);
+        if (el.checked) out[el.name].push(el.value === 'on' ? true : el.value);
+      } else if (el.type === 'radio') {
+        if (el.checked) out[el.name] = el.value;
+      } else {
+        out[el.name] = el.value;
+      }
+    }
+    return out;
+  };
+
+  confirm.onclick = async () => {
+    const v = variants[current];
+    const choice = {version: cfg.version, variant: v.dataset.variant, title: label(v),
+                    notes: notes.value.trim(), fields: fields()};
+    if (typeof window.previewData === 'function') choice.data = window.previewData(v);
+    confirm.disabled = true;
+    status.textContent = 'Sending…';
+    try {
+      const r = await fetch(`/choice/${cfg.topic}`, {method: 'POST', body: JSON.stringify(choice)});
+      if (!r.ok) throw new Error(r.status);
+      status.textContent = 'Sent: the agent receives it with your next message';
+    } catch (e) {
+      confirm.disabled = false;
+      status.textContent = `Failed (${e.message}); try again`;
+    }
+  };
+
+  document.addEventListener('keydown', e => {
+    const target = e.composedPath()[0];
+    if (variants.length < 2 || target.closest?.('input, textarea, select, [contenteditable]')) {
+      return;
+    }
+    if (e.key === 'ArrowRight') show((current + 1) % variants.length);
+    if (e.key === 'ArrowLeft') show((current + variants.length - 1) % variants.length);
+  });
+
+  // The page's own CSS must not show hidden variants, and the bar must not cover the page.
+  const style = document.createElement('style');
+  style.textContent = '[data-variant][hidden] { display: none !important; }';
+  document.head.append(style);
+  document.body.append(host);
+  const padding = parseFloat(getComputedStyle(document.body).paddingBottom) || 0;
+  const bar = root.querySelector('.bar');
+  new ResizeObserver(() => {
+    document.body.style.paddingBottom = `${padding + bar.offsetHeight}px`;
+  }).observe(bar);
+  if (variants.length) show(current);
+})();
+</script>
