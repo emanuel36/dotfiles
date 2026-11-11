@@ -9,7 +9,7 @@ in place show up in the repository right away.
 | Directory | Contents |
 |---|---|
 | `zsh` | `.zshrc` and its modules: environment and PATH, p10k theme, tools, functions |
-| `git` | global git config and ignore list |
+| `git` | global git config, ignore list, personal identity and pre-push check |
 | `vim`, `tmux`, `ghostty` | editor and terminal configs |
 | `yazi` | file manager config; plugins and flavor pinned in `package.toml` |
 | `devin` | Devin IDE settings and keybindings (VS Code format) |
@@ -17,7 +17,7 @@ in place show up in the repository right away.
 | `scripts` | install, linking, and shell history backup and restore |
 | `packages` | the apt packages chosen for this machine, for reference |
 | `secrets` | encrypted shell history and the age public key |
-| `previous-jobs` | archived configs from past jobs (not linked) |
+| `previous-jobs` | encrypted shell history from past jobs (not linked) |
 
 ## Claude Code
 
@@ -66,7 +66,7 @@ in place show up in the repository right away.
 | Item | Where it lives |
 |---|---|
 | Work aliases, VPN, proxy CA bundle, cloud project | `~/.zshrc.local`, sourced if present |
-| Git identity | `~/.gitconfig.local` |
+| Work git email and email domains blocked on push | `~/.gitconfig.local` |
 | Claude Code model, effort and thinking choice | Removed from `settings.json` on commit by a git filter that `scripts/link.sh` sets up |
 | Work diary written by `daily-recap` | `diary/`, gitignored |
 | Claude Code skills synced from claude.ai | `synced/` |
@@ -80,5 +80,15 @@ gitignored and kept in 1Password.
 
 ## Previous jobs
 
-`previous-jobs/` archives configs from past jobs (Motorola, Samsung); nothing there is linked.
-Each `zsh_history.age` there uses the same key as above and can be decrypted with age. Motorola's
+`previous-jobs/` archives the shell history of past jobs (Motorola, Samsung); nothing there is
+linked. Each `zsh_history.age` uses the same key as above and can be decrypted with age. Only
+these encrypted files are versioned: the plain configs and scripts kept next to them stay local.
+
+## Git identity
+
+There is no default commit email. Repositories under `github.com/emanuel36` get the personal
+noreply email and SSH key from `git/personal.gitconfig`; work remotes get the work email from
+`~/.gitconfig.local`; any other repository refuses to commit until one of these applies.
+
+In personal repositories a pre-push check refuses commits with a work email or a secret found by
+gitleaks, then runs the repository's own hooks. `git push --no-verify` skips it.

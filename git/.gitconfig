@@ -1,4 +1,19 @@
-# Identity lives in ~/.gitconfig.local (not versioned)
+# No default email: a commit fails until a remote rule below sets one. ~/.gitconfig.local (not
+# versioned) holds the work email rules and the domains blocked by git/hooks/pre-push; it comes
+# last so a work repo that also has a personal remote keeps the work identity.
+[user]
+	name = Emanuel Pereira
+	useConfigOnly = true
+[includeIf "hasconfig:remote.*.url:git@github.com:emanuel36/**"]
+	path = ~/.dotfiles/git/personal.gitconfig
+[includeIf "hasconfig:remote.*.url:git@github.com-emanuel36:emanuel36/**"]
+	path = ~/.dotfiles/git/personal.gitconfig
+[includeIf "hasconfig:remote.*.url:ssh://git@github.com/emanuel36/**"]
+	path = ~/.dotfiles/git/personal.gitconfig
+[includeIf "hasconfig:remote.*.url:https://github.com/emanuel36/**"]
+	path = ~/.dotfiles/git/personal.gitconfig
+[includeIf "hasconfig:remote.*.url:https://*@github.com/emanuel36/**"]
+	path = ~/.dotfiles/git/personal.gitconfig
 [include]
 	path = ~/.gitconfig.local
 [push]

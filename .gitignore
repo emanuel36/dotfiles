@@ -5,6 +5,11 @@ key.txt
 # work diary: recaps hold work content
 /diary/
 
+# past jobs: only the encrypted histories are versioned
+/previous-jobs/**
+!/previous-jobs/**/
+!/previous-jobs/**/*.age
+
 # python caches
 __pycache__/
 *.py[cod]

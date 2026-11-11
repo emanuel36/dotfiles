@@ -1,0 +1,6 @@
+# Repos whose remote is under github.com/emanuel36
+[user]
+	email = 18536741+emanuel36@users.noreply.github.com
+[core]
+	sshCommand = ssh -i ~/.ssh/id_emanuel36 -o IdentitiesOnly=yes
+	hooksPath = ~/.dotfiles/git/hooks

@@ -97,4 +97,6 @@ table or list; no code; link to remote repos, never local paths.
 **Branches & remotes:**
 - Never merge or close/delete a branch unless I ask; always merge with `--no-ff`
 - Never push to remote
-- Repos under `github.com/emanuel36` are personal: use the `~/.ssh/id_emanuel36` key
+- Repos under `github.com/emanuel36` are personal and public: git sets their noreply email and
+  `~/.ssh/id_emanuel36` key from the remote; never set a work email there or commit employer
+  files (shell histories, scripts, bookmarks, internal hosts)

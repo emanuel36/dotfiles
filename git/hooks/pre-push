@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# Pre-push guard for personal repos. When pushing to github.com/emanuel36, refuses the push if an
+# outgoing commit has an author or committer email from a domain in `guard.blockedDomain` (set in
+# ~/.gitconfig.local), or if gitleaks finds a secret in the outgoing commits. Then runs the repo's
+# own pre-push hook. Skip it on purpose with `git push --no-verify`.
+set -euo pipefail
+
+remote=$1
+url=$2
+updates=$(cat)
+failed=0
+
+guard() {
+    local local_oid=$1 remote_oid=$2 range sha author committer email domain log
+    local -a domains
+    mapfile -t domains < <(git config --get-all guard.blockedDomain || true)
+
+    # A remote tip missing locally (force push without fetch) cannot bound the range, so check
+    # every commit the remote-tracking refs do not already have.
+    if [[ $remote_oid =~ ^0+$ ]] || ! git cat-file -e "$remote_oid^{commit}" 2>/dev/null; then
+        range=("$local_oid" --not "--remotes=$remote")
+    else
+        range=("$remote_oid..$local_oid")
+    fi
+
+    log=$(git log --format='%h %ae %ce' "${range[@]}")
+    while read -r sha author committer; do
+        [[ -z $sha ]] && continue
+        for email in "${author,,}" "${committer,,}"; do
+            for domain in "${domains[@]}"; do
+                domain=${domain,,}
+                if [[ $email == *@"$domain" || $email == *."$domain" ]]; then
+                    echo "pre-push: $sha uses blocked email $email" >&2
+                    failed=1
+                    continue 3
+                fi
+            done
+        done
+    done <<<"$log"
+
+    if ! gitleaks git --no-banner --redact --verbose --log-opts="${range[*]}" . >&2; then
+        failed=1
+    fi
+}
+
+if [[ ${url,,} =~ (^|[:/])emanuel36/ ]]; then
+    if ! command -v gitleaks >/dev/null; then
+        echo "pre-push: gitleaks is not installed; install it or push with --no-verify" >&2
+        exit 1
+    fi
+    while read -r _ local_oid _ remote_oid; do
+        [[ -z $local_oid || $local_oid =~ ^0+$ ]] && continue
+        guard "$local_oid" "$remote_oid"
+    done <<<"$updates"
+fi
+
+if ((failed)); then
+    echo "pre-push: push refused; fix the commits above or push with --no-verify" >&2
+    exit 1
+fi
+
+hook="$(git rev-parse --git-common-dir)/hooks/pre-push"
+if [[ -x $hook && $(readlink -f "$hook") != "$(readlink -f "$0")" ]]; then
+    "$hook" "$@" <<<"$updates"
+fi

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# core.hooksPath hides a repo's own hooks; each hook name here links to this script, which runs
+# the repo's hook of the same name when it exists and is not a link back to this directory.
+hook="$(git rev-parse --git-common-dir)/hooks/$(basename "$0")"
+[[ -x $hook && $(readlink -f "$hook") != "$(readlink -f "$0")" ]] || exit 0
+exec "$hook" "$@"
