@@ -175,11 +175,6 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"$HOME/.dotfiles/claude/hooks/check_commit_msg.py\"",
-            "timeout": 10
-          },
-          {
-            "type": "command",
             "command": "python3 \"$HOME/.dotfiles/claude/previews/block_open.py\"",
             "timeout": 10
           }
